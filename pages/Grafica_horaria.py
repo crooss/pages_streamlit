@@ -115,13 +115,13 @@ def Grafica_horaria():
             va='center', 
             rotation=rotation, 
             rotation_mode="anchor") 
-        logo = plt.imread(r"C:\Users\croos\OneDrive\Escritorio\Logos\Logo Corrosion 2019\logo solo circulo CPI Nuevo2.png")
+        logo = plt.imread(r"images/logo solo circulo CPI Nuevo2.png")
         imagebox = OffsetImage(logo, zoom=0.6)
         ab = AnnotationBbox(imagebox, (-.05,1.11), frameon=False, xycoords='axes fraction')
         ax.add_artist(ab)
         ax.fill_between(np.linspace(0, 2 * np.pi, 100), 6, 7, color='lightgray', alpha=1, zorder=-2)
         plt.gcf().canvas.draw()
-        plt.savefig('images\\fig.png')  # Save the figure as an image
+        plt.savefig('images/fig.png')  # Save the figure as an image
         plt.close()
         print('Figure saved')
         return 'images/fig.png'
