@@ -121,7 +121,7 @@ def Grafica_horaria():
         ax.add_artist(ab)
         ax.fill_between(np.linspace(0, 2 * np.pi, 100), 6, 7, color='lightgray', alpha=1, zorder=-2)
         plt.gcf().canvas.draw()
-        plt.savefig('images\\fig.png')  # Save the figure as an image
+        plt.savefig('images/fig.png')  # Save the figure as an image
         plt.close()
         print('Figure saved')
         return 'images/fig.png'
