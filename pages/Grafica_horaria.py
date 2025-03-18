@@ -2,8 +2,7 @@ import streamlit as st
 import matplotlib
 import numpy as np
 import matplotlib.pyplot as plt
-from matplotlib.offsetbox import OffsetImage, AnnotationBbox
-
+from matplotlib.offsetbox import OffsetImage, AnnotationBbo
 import math
 matplotlib.use('agg')
 # plt.rcParams['font.family'] = 'Century Gothic'
