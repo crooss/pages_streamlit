@@ -115,7 +115,7 @@ def Grafica_horaria():
             va='center', 
             rotation=rotation, 
             rotation_mode="anchor") 
-        logo = plt.imread(r"C:\Users\croos\OneDrive\Escritorio\Logos\Logo Corrosion 2019\logo solo circulo CPI Nuevo2.png")
+        logo = plt.imread(r"images\logo solo circulo CPI Nuevo2.png")
         imagebox = OffsetImage(logo, zoom=0.6)
         ab = AnnotationBbox(imagebox, (-.05,1.11), frameon=False, xycoords='axes fraction')
         ax.add_artist(ab)
