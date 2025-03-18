@@ -6,7 +6,7 @@ def page2():
     st.write("Here you can add different components and functionalities tailored to this page.")
     
     # Example components
-    st.header("Interactive Widget Example")
+    st.header("Interactive Widget Ejemplo")
     user_input = st.text_input("Enter some text:")
     if user_input:
         st.write(f"You entered: {user_input}")
