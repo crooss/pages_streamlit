@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 import math
 matplotlib.use('agg')
-plt.rcParams['font.family'] = 'Century Gothic'
+# plt.rcParams['font.family'] = 'Century Gothic'
 
 def Grafica_horaria():
     st.title("Welcome to Page 1")
