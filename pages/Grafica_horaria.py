@@ -1,6 +1,5 @@
 import streamlit as st
 
-from flask import Flask, render_template
 import matplotlib
 import numpy as np
 import matplotlib.pyplot as plt
