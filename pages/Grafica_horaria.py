@@ -1,14 +1,12 @@
 import streamlit as st
-
-from flask import Flask, render_template
 import matplotlib
 import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.offsetbox import OffsetImage, AnnotationBbox
-from flask import request
+
 import math
 matplotlib.use('agg')
-plt.rcParams['font.family'] = 'Century Gothic'
+# plt.rcParams['font.family'] = 'Century Gothic'
 
 def Grafica_horaria():
     st.title("Welcome to Page 1")
