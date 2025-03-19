@@ -8,7 +8,7 @@ def main():
     # Navigation options
     pages = {
         "Grafica Horaria": "pages/Grafica_horaria",
-        "Pagina 2": "pages/page2.py",
+        "Conductancia específica": "pages/Conductancia_específica.py",
         "Pagina 3": "pages/page3.py"
     }
     
@@ -20,8 +20,9 @@ def main():
         import pages.Grafica_horaria as page
         print(page)
         page.Grafica_horaria()
-    elif selection == "Page 2":
-        import pages.page2 as page
+    elif selection == "Conductancia específica":
+        import pages.Conductancia_específica as page
+        page.Conductancia_específica()
     elif selection == "Page 3":
         import pages.page3 as page
     

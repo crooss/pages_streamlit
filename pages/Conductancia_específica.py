@@ -2,7 +2,7 @@ import streamlit as st
 from funciones import grafica_conductancia, tuberias_largas, tuberias_distribucion
 import numpy as np
 
-def page2():
+def Conductancia_específica():
     st.title("Calculo de conductancia específica de recubrimiento")
     # st.write("Welcome to the second page of the Streamlit application!")
     # st.write("Here you can add different components and functionalities tailored to this page.")
@@ -143,4 +143,4 @@ def page2():
                             
 
 if __name__ == "__main__":
-    page2()
+    Conductancia_específica()
