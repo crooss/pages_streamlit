@@ -14,6 +14,8 @@ def page2():
     c1, c2 = st.columns([1, 1])
     with c1:
         resistencia1, d1 = st.number_input("resistencia #1:"), st.number_input("Distancia #1 [cm]:")
+    with c2:
+        resistencia2, d2 = st.number_input("resistencia #2:"), st.number_input("Distancia #2 [cm]:")
     valor_conductancia=st.number_input("Conductancia:")
     
     tipo_coating=st.selectbox('Tipo de Coating', 
