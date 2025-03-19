@@ -11,6 +11,8 @@ def page2():
     if user_input:
         st.write(f"You entered: {user_input}")
 
+    resistencia1, d1 = st.number_input("resistencia #1:"), st.number_input("Distancia #1 [cm]:")
+
     st.header("Data Visualization Example")
     st.line_chart([1, 2, 3, 4, 5])  # Simple line chart
 
