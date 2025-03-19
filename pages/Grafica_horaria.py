@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 import math
-from functions import graficar, texto, radianes_a_horas
+from funciones import graficar, texto, radianes_a_horas
 matplotlib.use('agg')
 
 

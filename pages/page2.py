@@ -1,5 +1,5 @@
 import streamlit as st
-from functions import grafica_conductancia, tuberias_largas, tuberias_distribucion
+from funciones import grafica_conductancia, tuberias_largas, tuberias_distribucion
 import numpy as np
 
 def page2():
