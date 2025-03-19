@@ -14,10 +14,14 @@ def page2():
     resistencia1, d1 = st.number_input("resistencia #1:"), st.number_input("Distancia #1 [cm]:")
     
     tipo_coating=st.selectbox('Tipo de Coating', ['FBE', 'PE', 'Epoxy'])
-    tipo=st.selectbox('Tipo de Tubería', ['Tuberías largas con pocas ramificaciones', 'Distribución de Gas o Agua, con muchas ramificaciones'])
+    tipo=st.selectbox(
+        'Tipo de Tubería', 
+        ['Tuberías largas con pocas ramificaciones', 'Distribución de Gas o Agua, con muchas ramificaciones'], 
+        index=0  # Set default value to the first option
+    )
+    
     valor_conductancia=200
-    # tipo='Tuberías largas con pocas ramificaciones'
-    # tipo='Distribución de Gas o Agua, con muchas ramificaciones'
+
     
     grafica_conductancia(valor_conductancia)
         
