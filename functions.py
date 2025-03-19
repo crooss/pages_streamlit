@@ -166,6 +166,125 @@ def grafica_conductancia(valor):
     plt.savefig('images/barras_CP4.png', dpi=300, bbox_inches='tight')
     return 'images/barras_CP4.png'
  
+import matplotlib.pyplot as plt
+import numpy as np
+def tuberias_largas(valor_conductancia):
+    x = np.linspace(0.0001, 180, 1000000)  # % de Área Desnuda
+    y = np.power(10, 4.03856 + 0.90785 * np.log10(x))
+
+    # Crear la figura y los ejes
+    fig, ax = plt.subplots(figsize=(8, 6))
+
+    # Dibujar línea principal
+    ax.plot(x, y, color='black')
+
+    # Colorear áreas de calidad
+    transparencia=1
+    ax.fill_between(x, 0, y, where=(y >= 0) & (y <= 100), facecolor='green', alpha=transparencia, label='Excelente', zorder=1)
+    ax.fill_betweenx(y, 0, x, where=(y >= 0) & (y <= 100), facecolor='green', alpha=transparencia, zorder=1)
+
+    ax.fill_between(x, 0, y, where=(y >= 100-.1) & (y <= 500), facecolor='limegreen', alpha=transparencia, label='Buena', zorder=0)    
+    ax.fill_betweenx(y, 0, x, where=(y >= 100-.1) & (y <= 500), facecolor='limegreen', alpha=transparencia, zorder=0)    
+    
+    ax.fill_between(x, 0, y, where=(y >= 500) & (y <= 1000), facecolor='yellow', alpha=transparencia, label='Regular')    
+    ax.fill_betweenx(y, 0, x, where=(y >= 500) & (y <= 1000), facecolor='yellow', alpha=transparencia)    
+
+    ax.fill_between(x, 0, y, where=(y >= 1000) & (y <= 40000), facecolor='red', alpha=transparencia, label='Pobre')
+    ax.fill_betweenx(y, 0, x, where=(y >= 1000) & (y <= 40000), facecolor='red', alpha=transparencia)
+    
+    ax.fill_between(x, 0, y, where=(y >= 40000), facecolor='gray', alpha=transparencia, label='Bare')
+    ax.fill_betweenx(y, 0, x, where=(y >= 40000) & (y <= 1000000), facecolor='gray', alpha=transparencia)
+
+    x_value = x[np.where(y >= valor_conductancia)[0][0]]
+    ax.scatter(x_value, valor_conductancia, color='black', zorder=5)  # Coordenadas del punto
+    # Anotación de un punto específico con recuadro de fondo blanco
+    ax.annotate(f'{valor_conductancia:,} μS/m²\n{x_value:.3f}% bare\n{100-x_value:.3f}% coated', xy=(x_value, valor_conductancia), xytext=(7, 1000),
+                arrowprops=dict(facecolor='black', arrowstyle='->'),
+                bbox=dict(facecolor='white', edgecolor='black', boxstyle='round,pad=0.5'),
+                fontsize=8)
+
+    ax.set_xlabel('% de Área Desnuda')
+    ax.set_ylabel('Conductancia @1,000 Ω-cm [μS/m$^2$]')
+    ax.set_title('Gráfico de Conductancia @1,000 Ω-cm')
+
+    # Escalas logarítmicas
+    ax.set_yscale('log')
+    ax.set_xscale('log')
+    ax.set_xlim(.0001,100)
+    ax.xaxis.set_major_formatter(plt.FuncFormatter(lambda x, _: f'{x:.3f}%'))
+    ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, loc: "{:,}".format(int(x))))
+        # Agregar etiquetas adicionales en el eje y
+    additional_yticks = [ 40000, 500]
+    ax.set_yticks(list(ax.get_yticks()) + additional_yticks)
+    ax.get_yaxis().set_major_formatter(plt.FuncFormatter(lambda x, loc: "{:,}".format(int(x))))
+    ax.grid(True, which='both', linestyle='-', linewidth=0.5, color='black')
+    ax.legend(loc='best')
+    ax.set_ylim(1,1000000)
+
+    ax.text(1.05, .5, 'CP 3–Cathodic Protection Technologist COURSE MANUAL Figure 4-6', ha='center', va='center', transform=ax.transAxes, fontsize=9, color='gray', rotation=90)
+    plt.savefig('images/tuberias_largas.png', dpi=300, bbox_inches='tight')
+    plt.show()
+
+def tuberias_distribucion(valor_conductancia):
+    x = np.linspace(0.0001, 180, 1000000)  # % de Área Desnuda
+    y = np.power(10, 4.03856 + 0.90785 * np.log10(x))
+
+    # Crear la figura y los ejes
+    fig, ax = plt.subplots(figsize=(8, 6))
+
+    # Dibujar línea principal
+    ax.plot(x, y, color='black')
+
+    # Colorear áreas de calidad
+    transparencia=1
+    ax.fill_between(x, 0, y, where=(y >= 0) & (y <= 500), facecolor='green', alpha=transparencia, label='Excelente', zorder=1)
+    ax.fill_betweenx(y, 0, x, where=(y >= 0) & (y <= 500), facecolor='green', alpha=transparencia, zorder=1)
+
+    ax.fill_between(x, 0, y, where=(y >= 500-.1) & (y <= 1000), facecolor='limegreen', alpha=transparencia, label='Buena', zorder=0)    
+    ax.fill_betweenx(y, 0, x, where=(y >= 500-.1) & (y <= 1000), facecolor='limegreen', alpha=transparencia, zorder=0)    
+    
+    ax.fill_between(x, 0, y, where=(y >= 1000) & (y <= 5000), facecolor='yellow', alpha=transparencia, label='Regular')    
+    ax.fill_betweenx(y, 0, x, where=(y >= 1000) & (y <= 5000), facecolor='yellow', alpha=transparencia)    
+
+    ax.fill_between(x, 0, y, where=(y >= 5000) & (y <= 40000), facecolor='red', alpha=transparencia, label='Pobre')
+    ax.fill_betweenx(y, 0, x, where=(y >= 5000) & (y <= 40000), facecolor='red', alpha=transparencia)
+    
+    ax.fill_between(x, 0, y, where=(y >= 40000), facecolor='gray', alpha=transparencia, label='Bare')
+    ax.fill_betweenx(y, 0, x, where=(y >= 40000) & (y <= 1000000), facecolor='gray', alpha=transparencia)
+
+    x_value = x[np.where(y >= valor_conductancia)[0][0]]
+    ax.scatter(x_value, valor_conductancia, color='black', zorder=5)  # Coordenadas del punto
+    # Anotación de un punto específico con recuadro de fondo blanco
+    ax.annotate(f'{valor_conductancia:,} μS/m²\n{x_value:.3f}% bare\n{100-x_value:.3f}% coated', xy=(x_value, valor_conductancia), xytext=(7, 1000),
+                arrowprops=dict(facecolor='black', arrowstyle='->'),
+                bbox=dict(facecolor='white', edgecolor='black', boxstyle='round,pad=0.5'),
+                fontsize=8)
+
+    ax.set_xlabel('% de Área Desnuda')
+    ax.set_ylabel('Conductancia @1,000 Ω-cm [μS/m$^2$]')
+    ax.set_title('Gráfico de Conductancia @1,000 Ω-cm')
+
+    # Escalas logarítmicas
+    ax.set_yscale('log')
+    ax.set_xscale('log')
+    ax.set_xlim(.0001,100)
+    ax.xaxis.set_major_formatter(plt.FuncFormatter(lambda x, _: f'{x:.3f}%'))
+    ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, loc: "{:,}".format(int(x))))
+        # Agregar etiquetas adicionales en el eje y
+    additional_yticks = [ 40000, 500]
+    ax.set_yticks(list(ax.get_yticks()) + additional_yticks)
+    ax.get_yaxis().set_major_formatter(plt.FuncFormatter(lambda x, loc: "{:,}".format(int(x))))
+    ax.grid(True, which='both', linestyle='-', linewidth=0.5, color='black')
+    ax.legend(loc='best')
+    ax.set_ylim(1,1000000)
+
+    ax.text(1.05, .5, 'CP 3–Cathodic Protection Technologist COURSE MANUAL Figure 4-6', ha='center', va='center', transform=ax.transAxes, fontsize=9, color='gray', rotation=90)
+    plt.savefig('images/tuberias_distribucion.png', dpi=300, bbox_inches='tight')
+
+    plt.show()
+
+
+
 
 
 
