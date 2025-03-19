@@ -94,8 +94,9 @@ def page2():
     st.header("4.-Conductancia de recubrimiento")
     
     st.subheader(f"Conductancia de recubrimiento g [S]: {(abs(I_pick_1-I_pick_2)/promedio_deltas):,.2f} S")
-    diametro_in=st.number_input("Diametro [in]:",format="%0.3f", max_value=42.0, min_value=0.0, step=0.01)
-    if diametro_in != 0:
+    diametro_in=st.number_input("Diametro [in]:",format="%0.3f")
+    
+    if diametro_in:
         diametro_m=diametro_in*0.0254
         Longitud_tramo=abs(km_1-km_2)
         area_coated=(np.pi*diametro_m)*Longitud_tramo
