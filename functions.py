@@ -19,6 +19,7 @@ from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 from matplotlib.colors import ListedColormap
 import matplotlib.patches as patches
 matplotlib.use('agg')
+plt.rcParams['font.family'] = 'Century Gothic'
 def graficar(angulo_inicio,angulo_final,nombre,PM):
         nombre=nombre.upper()
         if angulo_final-angulo_inicio<0:
