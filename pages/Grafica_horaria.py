@@ -19,7 +19,9 @@ def Grafica_horaria():
     PM=st.number_input("PM")/100
 
     # if name:
-    st.write(f"El texto es, {texto('arturo')}!")
+    def texto1(texto):
+        return texto.upper()
+    st.write(f"El texto es, {texto1('arturo')}!")
 
     def radianes_a_horas(radianes):
         radianes = radianes % (2 * math.pi) # Normalizar los radianes para estar en el rango de 0 a 2π
