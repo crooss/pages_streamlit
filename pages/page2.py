@@ -1,6 +1,13 @@
 import streamlit as st
 from functions import grafica_conductancia, tuberias_largas, tuberias_distribucion
 import numpy as np
+
+    
+def all_values_present(values):
+    return all(value is not None and value != '' for value in values)
+
+
+
 def page2():
     st.title("Calculo de conductancia específica de recubrimiento")
     # st.write("Welcome to the second page of the Streamlit application!")
@@ -23,7 +30,12 @@ def page2():
         if (2*np.pi*d1*resistencia1)>0 and (2*np.pi*d2*resistencia2)>0:
             resistividad_avg=round(((2*np.pi*d1*resistencia1)+(2*np.pi*d2*resistencia2))/2,0)
             st.markdown(f"\nResistividad promedio: {resistividad_avg:,.2f} Ω-cm",)
-       
+
+    
+    
+    
+    
+    
     st.divider()
     st.header("2.-Calibración de tramo en estación de 4 pines")
     
@@ -139,3 +151,4 @@ def page2():
 
 if __name__ == "__main__":
     page2()
+    print([1, 2, 3, '', 5])

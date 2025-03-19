@@ -244,7 +244,7 @@ def tuberias_largas(valor_conductancia):
 
     ax.text(1.05, .5, 'CP 3–Cathodic Protection Technologist COURSE MANUAL Figure 4-6', ha='center', va='center', transform=ax.transAxes, fontsize=9, color='gray', rotation=90)
     plt.savefig('images/tuberias_largas.png', dpi=300, bbox_inches='tight')
-    plt.show()
+    # plt.show()
 
 def tuberias_distribucion(valor_conductancia):
     x = np.linspace(0.0001, 180, 1000000)  # % de Área Desnuda
@@ -301,8 +301,8 @@ def tuberias_distribucion(valor_conductancia):
 
     ax.text(1.05, .5, 'CP 3–Cathodic Protection Technologist COURSE MANUAL Figure 4-6', ha='center', va='center', transform=ax.transAxes, fontsize=9, color='gray', rotation=90)
     plt.savefig('images/tuberias_distribucion.png', dpi=300, bbox_inches='tight')
-
-    plt.show()
+    return 'images/tuberias_distribucion.png'
+    # plt.show()
 
 
 
