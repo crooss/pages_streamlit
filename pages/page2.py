@@ -29,6 +29,13 @@ def page2():
             st.markdown(f"\nResistividad promedio: {resistividad_avg:,.2f} Ω-cm",)
        
     st.divider()
+    st.header("Calibración de tramo en estación de 4 pines")
+    
+    
+    
+    
+    st.divider()
+    
     st.header("Conductancia de recubrimiento")
     valor_conductancia=st.number_input("Conductancia:")
     
