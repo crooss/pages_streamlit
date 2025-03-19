@@ -47,7 +47,7 @@ def page2():
     
     if caida_2_on and caida_2_off and corriente_prueba_2_on:
         R_tramo2=(caida_2_on-caida_2_off)/(corriente_prueba_2_on-corriente_prueba_2_off)
-        st.markdown(f"Resistencia del tramo #2: {((R_tramo1)):,.6f} Ω")
+        st.markdown(f"Resistencia del tramo #2: {((R_tramo2)):,.6f} Ω")
     
     st.divider()    
     st.header("3.-USANDO CORRIENTE DEL RPC")
