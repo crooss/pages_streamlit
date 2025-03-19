@@ -63,9 +63,9 @@ def page2():
         st.subheader("Para tramo #2")
         Potencial_ON_2, Potencial_OFF_2 = st.number_input("Potencial ON #2 [V]:",format="%0.3f"), st.number_input("Potencial OFF #2 [V]:",format="%0.3f")
         delta_pot_2=abs(Potencial_ON_2-Potencial_OFF_2)
-        st.markdown(f"∆v [V]: {delta_pot_2:,.3f} V")
-    
+        
     if Potencial_ON_1 and Potencial_OFF_1 and Potencial_ON_2 and Potencial_OFF_2:
+        st.markdown(f"∆v [V]: {delta_pot_2:,.3f} V")
         ratio_deltas=delta_pot_1/delta_pot_2
     
         promedio_deltas=(delta_pot_1+delta_pot_2)/2
@@ -84,6 +84,7 @@ def page2():
     
     if caida_rpc_1_on and caida_rpc_1_off and caida_rpc_2_on and caida_rpc_2_off:
         delta1=abs(caida_rpc_1_on-caida_rpc_1_off)
+        st.markdown(f"delta1 [V]: {delta1:,.3f}")
         delta2=abs(caida_rpc_2_on-caida_rpc_2_off)
         I_pick_1=abs(delta1/1000/R_tramo1)
         I_pick_2=abs(delta2/1000/R_tramo2)
