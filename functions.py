@@ -172,7 +172,9 @@ def grafica_conductancia(valor):
     ax.get_yaxis().set_major_formatter(plt.FuncFormatter(lambda x, loc: "{:,}".format(int(x))))
     ax.text(2.5, .05, f'Conductancia [μS/m$^2$]:\n{valor:,.0f} μS/m$^2$', ha='left', va='bottom', fontsize=8, color='black', transform=ax.transAxes)
     ax.text(10, .5, 'Table 2.6 CP 4–Cathodic Protection Specialist Course Manual', ha='center', va='center', transform=ax.transAxes, fontsize=8, color='gray', rotation=90)
+    plt.gcf().canvas.draw()
     plt.savefig('images/barras_CP4.png')  # Save the figure as an image
-    plt.show()    
+    plt.close()
+    # plt.show()    
 
 
