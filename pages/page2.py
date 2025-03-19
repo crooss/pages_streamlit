@@ -11,7 +11,9 @@ def page2():
     if user_input:
         st.write(f"You entered: {user_input}")
 
-    resistencia1, d1 = st.number_input("resistencia #1:"), st.number_input("Distancia #1 [cm]:")
+    c1, c2 = st.columns([1, 1])
+    with c1:
+        resistencia1, d1 = st.number_input("resistencia #1:"), st.number_input("Distancia #1 [cm]:")
     valor_conductancia=st.number_input("Conductancia:")
     
     tipo_coating=st.selectbox('Tipo de Coating', 
