@@ -64,10 +64,13 @@ def page2():
         Potencial_ON_2, Potencial_OFF_2 = st.number_input("Potencial ON #2 [V]:",format="%0.3f"), st.number_input("Potencial OFF #2 [V]:",format="%0.3f")
         delta_pot_2=abs(Potencial_ON_2-Potencial_OFF_2)
         st.markdown(f"∆v [V]: {delta_pot_2:,.3f} V")
-    ratio_deltas=delta_pot_1/delta_pot_2
     
-    promedio_deltas=(delta_pot_1+delta_pot_2)/2
-    st.markdown(f"Promedio de ∆v={round((delta_pot_1+delta_pot_2)/2,4)}")
+    if Potencial_ON_1 and Potencial_OFF_1 and Potencial_ON_2 and Potencial_OFF_2:
+        ratio_deltas=delta_pot_1/delta_pot_2
+    
+        promedio_deltas=(delta_pot_1+delta_pot_2)/2
+        st.markdown(f"Promedio de ∆v={round((delta_pot_1+delta_pot_2)/2,4)}")
+        
     if ratio_deltas>0.625 or ratio_deltas<1.6:
         st.markdown(f"∆va/∆vb={round(ratio_deltas,3)}")
         st.markdown(f"NOTE 6: If the ratio of the ΔV potentials from each pair of adjacent test locations is between 1.6 and 0.625, then the arithmetic mean of the two can be taken as the average potential change in the section of pipeline between these test locations.1 However, if the ratio is outside this range, then one or more intermediate locations should be selected for the potential measurements until the ratio between two successive values is between 1.6 and 0.625. Alternatively, one of the attenuation methods outlined in Section 4 can be used.")
