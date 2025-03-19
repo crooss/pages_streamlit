@@ -4,6 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 import math
+from functions import *
 matplotlib.use('agg')
 # plt.rcParams['font.family'] = 'Century Gothic'
 
@@ -21,7 +22,7 @@ def Grafica_horaria():
     
 
     # if name:
-    #     st.write(f"Hello, {name}!")
+    st.write(f"El texto es, {texto('arturo')}!")
 
     def radianes_a_horas(radianes):
         radianes = radianes % (2 * math.pi) # Normalizar los radianes para estar en el rango de 0 a 2π
