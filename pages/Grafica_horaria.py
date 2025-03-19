@@ -4,7 +4,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 import math
-from functions import *
+from functions import graficar, texto, radianes_a_horas
 matplotlib.use('agg')
 # plt.rcParams['font.family'] = 'Century Gothic'
 
@@ -23,7 +23,6 @@ def Grafica_horaria():
     
     if angulo_final and nombre and PM:
         graficar(angulo_inicio,angulo_final,nombre,PM)
-    
         # Display the saved figure in Streamlit
         st.image('images/fig.png', caption='Generated Plot', use_container_width=True)
     
