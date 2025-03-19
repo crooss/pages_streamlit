@@ -115,19 +115,31 @@ from matplotlib.colors import ListedColormap
 import matplotlib.pyplot as plt
 import matplotlib.patches as patches
 import numpy as np
-def grafica_conductancia(valor):
+def grafica_conductancia(valor, seleccion_tuberia):
     fig, ax = plt.subplots(figsize=(1, 6))
     # Determine the color based on the value
-    if valor <= 100:
-        bar_color = 'green'
-    elif valor <= 500:
-        bar_color = 'limegreen'
-    elif valor <= 1000:
-        bar_color = 'yellow'
-    elif valor <= 40000:
-        bar_color = 'red'   
-    else:
-        bar_color = 'black'
+    if seleccion_tuberia=='Tuberías largas con pocas ramificaciones':
+        if valor <= 100:
+            bar_color = 'green'
+        elif valor <= 500:
+            bar_color = 'limegreen'
+        elif valor <= 1000:
+            bar_color = 'yellow'
+        elif valor <= 40000:
+            bar_color = 'red'   
+        else:
+            bar_color = 'gray'
+    elif seleccion_tuberia=='Distribución de Gas o Agua, con muchas ramificaciones':
+        if valor <= 500:
+            bar_color = 'green'
+        elif valor <= 1000:
+            bar_color = 'limegreen'
+        elif valor <= 5000:
+            bar_color = 'yellow'
+        elif valor <= 40000:
+            bar_color = 'red'   
+        else:
+            bar_color = 'gray'
     ax.bar(1, valor, color=bar_color, width=1)
     print(ax.get_xlim())
     minimo_x, maximo_x=ax.get_xlim()

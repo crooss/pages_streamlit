@@ -19,7 +19,7 @@ def page2():
         'Tipo de Tubería', 
         ['','Tuberías largas con pocas ramificaciones', 'Distribución de Gas o Agua, con muchas ramificaciones'], 
         index=0)  # Set default value to the first option
-    grafica_conductancia(valor_conductancia)
+    grafica_conductancia(valor_conductancia, tipo)
     col1, col2, col3 = st.columns([1, 2, 1])
     with col2:
         st.image('images/barras_CP4.png', caption='Grafico de barras CP4', width=300)
