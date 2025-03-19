@@ -183,6 +183,7 @@ def grafica_conductancia(valor, seleccion_tuberia):
     ax.get_yaxis().set_major_formatter(plt.FuncFormatter(lambda x, loc: "{:,}".format(int(x))))
     ax.text(2.5, .05, f'Conductancia [μS/m$^2$]:\n{valor:,.1f} μS/m$^2$', ha='left', va='bottom', fontsize=8, color='black', transform=ax.transAxes)
     ax.text(10, .5, 'Table 2.6 CP 4–Cathodic Protection Specialist Course Manual', ha='center', va='center', transform=ax.transAxes, fontsize=8, color='gray', rotation=90)
+    ax.set_ylim(1, 1000000)
     plt.savefig('images/barras_CP4.png', dpi=300, bbox_inches='tight')
     return 'images/barras_CP4.png'
  
