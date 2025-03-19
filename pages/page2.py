@@ -96,7 +96,7 @@ def page2():
     st.subheader(f"Conductancia de recubrimiento g [S]: {(abs(I_pick_1-I_pick_2)/promedio_deltas):,.2f} S")
     diametro_in=st.number_input("Diametro [in]:",format="%0.3f", step=0.05)
     
-    if diametro_in>0.5:
+    if diametro_in>0:
         diametro_m=diametro_in*0.0254
         Longitud_tramo=abs(km_1-km_2)
         area_coated=(np.pi*diametro_m)*Longitud_tramo
@@ -107,32 +107,32 @@ def page2():
     
         st.subheader(f"Normalizacion de Conductancia especifica @ 1,000 Ω-cm")
     
-    NORM_conductancia_especifica=conducatancia_especifica*resistividad_avg/1000
-    st.subheader(f"Conductancia especifica normalizada: {NORM_conductancia_especifica:,.0f} μS/m²")
-    # valor_conductancia=st.number_input("Conductancia:")
-    valor_conductancia=conducatancia_especifica
+        NORM_conductancia_especifica=conducatancia_especifica*resistividad_avg/1000
+        st.subheader(f"Conductancia especifica normalizada: {NORM_conductancia_especifica:,.0f} μS/m²")
+        # valor_conductancia=st.number_input("Conductancia:")
+        valor_conductancia=conducatancia_especifica
     
-    tipo_coating=st.selectbox('Tipo de Coating', 
+        tipo_coating=st.selectbox('Tipo de Coating', 
                               ['','FBE', 'PE', 'Alquitrán de hulla','Tricapa','Visco-elastico', 'Otros'],
                               index=0)  # Set default value to the first option
-    tipo=st.selectbox('Tipo de Tubería', 
+        tipo=st.selectbox('Tipo de Tubería', 
         ['','Tuberías largas con pocas ramificaciones', 'Distribución de Gas o Agua, con muchas ramificaciones'], 
         index=0)  # Set default value to the first option
-    st.header("5.-Resultados")
-    if tipo and tipo_coating:
-        grafica_conductancia(valor_conductancia, tipo)
-        col1, col2, col3 = st.columns([1, 2, 1])
-        with col2:
-            st.image('images/barras_CP4.png', caption='Conductancia específica μS/m² y clasificación', width=300)
-    if tipo_coating=='FBE':
-        if tipo=='Tuberías largas con pocas ramificaciones':
-            tuberias_largas(valor_conductancia)
-            st.image('images/tuberias_largas.png', caption='Tuberías largas con pocas ramificaciones', use_container_width=True)
-        elif tipo=='Distribución de Gas o Agua, con muchas ramificaciones':
-            tuberias_distribucion(valor_conductancia)
-            st.image('images/tuberias_distribucion.png', caption='Tuberías largas con pocas ramificaciones', use_container_width=True)
+        st.header("5.-Resultados")
+        if tipo and tipo_coating:
+            grafica_conductancia(valor_conductancia, tipo)
+            col1, col2, col3 = st.columns([1, 2, 1])
+            with col2:
+                st.image('images/barras_CP4.png', caption='Conductancia específica μS/m² y clasificación', width=300)
+        if tipo_coating=='FBE':
+            if tipo=='Tuberías largas con pocas ramificaciones':
+                tuberias_largas(valor_conductancia)
+                st.image('images/tuberias_largas.png', caption='Tuberías largas con pocas ramificaciones', use_container_width=True)
+            elif tipo=='Distribución de Gas o Agua, con muchas ramificaciones':
+                tuberias_distribucion(valor_conductancia)
+                st.image('images/tuberias_distribucion.png', caption='Tuberías largas con pocas ramificaciones', use_container_width=True)
+            
         
-    
     
     # st.header("Data Visualization Example")
     # st.line_chart([1, 2, 3, 4, 5])  # Simple line chart
