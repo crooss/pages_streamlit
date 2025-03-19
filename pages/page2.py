@@ -2,7 +2,7 @@ import streamlit as st
 from functions import grafica_conductancia, tuberias_largas, tuberias_distribucion
 import numpy as np
 def page2():
-    st.title("Page 2")
+    st.title("Page 2: graficos y calculos")
     st.write("Welcome to the second page of the Streamlit application!")
     st.write("Here you can add different components and functionalities tailored to this page.")
     
@@ -22,7 +22,13 @@ def page2():
         resistencia2, d2 = st.number_input("resistencia #2:"), st.number_input("Distancia #2 [cm]:")
         if resistencia2 and d2:
             st.markdown(f"\nResistividad: {(2*np.pi*d2*resistencia2):,.2f} Ω-cm")
-
+    c1, c2 = st.columns([2, 1])
+    with c1:
+        if (2*np.pi*d1*resistencia1)>0 and (2*np.pi*d2*resistencia2)>0:
+            resistividad_avg=((2*np.pi*d1*resistencia1)+(2*np.pi*d2*resistencia2))/2
+            st.markdown(f"\nResistividad promedio: {resistividad_avg:,.2f} Ω-cm",)
+       
+    st.divider()
     st.header("Conductancia de recubrimiento")
     valor_conductancia=st.number_input("Conductancia:")
     
@@ -47,8 +53,8 @@ def page2():
         
     
     
-    st.header("Data Visualization Example")
-    st.line_chart([1, 2, 3, 4, 5])  # Simple line chart
+    # st.header("Data Visualization Example")
+    # st.line_chart([1, 2, 3, 4, 5])  # Simple line chart
 
 if __name__ == "__main__":
     page2()
