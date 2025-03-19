@@ -16,6 +16,8 @@ import numpy as np
 import matplotlib
 import matplotlib.pyplot as plt
 from matplotlib.offsetbox import OffsetImage, AnnotationBbox
+from matplotlib.colors import ListedColormap
+import matplotlib.patches as patches
 matplotlib.use('agg')
 def graficar(angulo_inicio,angulo_final,nombre,PM):
         nombre=nombre.upper()
@@ -109,12 +111,6 @@ def graficar(angulo_inicio,angulo_final,nombre,PM):
         print('Figure saved')
         return 'images/fig.png'
 
-
-import matplotlib
-from matplotlib.colors import ListedColormap
-import matplotlib.pyplot as plt
-import matplotlib.patches as patches
-import numpy as np
 def grafica_conductancia(valor, seleccion_tuberia):
     fig, ax = plt.subplots(figsize=(1, 6))
     # Determine the color based on the value
@@ -187,8 +183,6 @@ def grafica_conductancia(valor, seleccion_tuberia):
     plt.savefig('images/barras_CP4.png', dpi=300, bbox_inches='tight')
     return 'images/barras_CP4.png'
  
-import matplotlib.pyplot as plt
-import numpy as np
 def tuberias_largas(valor_conductancia):
     x = np.linspace(0.0001, 180, 1000000)  # % de Área Desnuda
     y = np.power(10, 4.03856 + 0.90785 * np.log10(x))
