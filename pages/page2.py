@@ -13,7 +13,7 @@ def page2():
 
     resistencia1, d1 = st.number_input("resistencia #1:"), st.number_input("Distancia #1 [cm]:")
     grafica_conductancia(200)
-    st.image('images/barras_CP4.png', caption='Grafico de barras CP4',width=300, use_container_width=False)
+    st.image('images/barras_CP4.png', caption='Grafico de barras CP4', use_container_width=True)
     
     st.header("Data Visualization Example")
     st.line_chart([1, 2, 3, 4, 5])  # Simple line chart
