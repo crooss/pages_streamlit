@@ -15,7 +15,7 @@ def page2():
     valor_conductancia=st.number_input("Conductancia:")
     
     tipo_coating=st.selectbox('Tipo de Coating', 
-                              ['','FBE', 'PE', 'Epoxy'],
+                              ['','FBE', 'PE', 'Alquitrán de hulla','Tricapa','Visco-elastico', 'Otros'],
                               index=0)  # Set default value to the first option
     tipo=st.selectbox('Tipo de Tubería', 
         ['','Tuberías largas con pocas ramificaciones', 'Distribución de Gas o Agua, con muchas ramificaciones'], 
