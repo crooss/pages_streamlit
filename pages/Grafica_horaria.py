@@ -9,11 +9,11 @@ matplotlib.use('agg')
 plt.rcParams['font.family'] = 'Century Gothic'
 
 def Grafica_horaria():
-    st.title("Realizar grafico de posición horaria de una anomalía")
-    nombre=st.text_input("Nombre de la anomalia", value="#1")
-    angulo_inicio=st.number_input("Angulo inicial", min_value=0.0, max_value=360.0, format="%.2f")
-    angulo_final=st.number_input("Angulo final",min_value=0.0, max_value=360.0, format="%.2f")
-    PM=st.number_input("PM")/100
+    st.title("Realizar gráfico de posición horaria de una anomalía")
+    nombre=st.text_input("Nombre de la anomalía", value="#1")
+    angulo_inicio=st.number_input("Ángulo inicial", min_value=0.0, max_value=360.0, format="%.2f")
+    angulo_final=st.number_input("Ángulo final",min_value=0.0, max_value=360.0, format="%.2f")
+    PM=st.number_input("Pérdida de Metal")/100
     if angulo_final and nombre and PM:
         graficar(angulo_inicio,angulo_final,nombre,PM)
         # Display the saved figure in Streamlit
