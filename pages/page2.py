@@ -16,7 +16,7 @@ def page2():
     tipo_coating=st.selectbox('Tipo de Coating', ['FBE', 'PE', 'Epoxy'])
     tipo=st.selectbox(
         'Tipo de Tubería', 
-        ['Tuberías largas con pocas ramificaciones', 'Distribución de Gas o Agua, con muchas ramificaciones'], 
+        ['','Tuberías largas con pocas ramificaciones', 'Distribución de Gas o Agua, con muchas ramificaciones'], 
         index=0  # Set default value to the first option
     )
     
