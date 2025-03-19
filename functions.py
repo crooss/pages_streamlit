@@ -291,7 +291,7 @@ def tuberias_distribucion(valor_conductancia):
     ax.xaxis.set_major_formatter(plt.FuncFormatter(lambda x, _: f'{x:.3f}%'))
     ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, loc: "{:,}".format(int(x))))
         # Agregar etiquetas adicionales en el eje y
-    additional_yticks = [ 40000, 500]
+    additional_yticks = [ 40000, 5000,500]
     ax.set_yticks(list(ax.get_yticks()) + additional_yticks)
     ax.get_yaxis().set_major_formatter(plt.FuncFormatter(lambda x, loc: "{:,}".format(int(x))))
     ax.grid(True, which='both', linestyle='-', linewidth=0.5, color='black')
