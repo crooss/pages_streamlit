@@ -1,5 +1,6 @@
 import streamlit as st
 from functions import grafica_conductancia, tuberias_largas, tuberias_distribucion
+import numpy as np
 def page2():
     st.title("Page 2")
     st.write("Welcome to the second page of the Streamlit application!")
@@ -11,11 +12,18 @@ def page2():
     if user_input:
         st.write(f"You entered: {user_input}")
 
-    c1, c2 = st.columns([1, 1])
+    st.header("Resistividad de suelos")
+    c1, c2, c3 = st.columns([1, 1, 1])
     with c1:
         resistencia1, d1 = st.number_input("resistencia #1:"), st.number_input("Distancia #1 [cm]:")
+        if resistencia1 and d1:
+            st.markdown(f"\nResistividad: {(2*np.pi*d1*resistencia1):,.2f} Ω-cm")
     with c2:
         resistencia2, d2 = st.number_input("resistencia #2:"), st.number_input("Distancia #2 [cm]:")
+        if resistencia2 and d2:
+            st.markdown(f"\nResistividad: {(2*np.pi*d2*resistencia2):,.2f} Ω-cm")
+
+    st.header("Conductancia de recubrimiento")
     valor_conductancia=st.number_input("Conductancia:")
     
     tipo_coating=st.selectbox('Tipo de Coating', 
