@@ -9,8 +9,8 @@ matplotlib.use('agg')
 # plt.rcParams['font.family'] = 'Century Gothic'
 
 def Grafica_horaria():
-    st.title("Welcome to Page 1")
-    st.write("This is the first page of the Streamlit application.")
+    st.title("realizar grafico de posición horaria de una anomalía")
+    # st.write("This is the first page of the Streamlit application.")
     
     # Example of an interactive widget
     nombre=st.text_input("Nombre de la anomalia", value="#1")
