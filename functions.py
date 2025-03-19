@@ -219,7 +219,7 @@ def tuberias_largas(valor_conductancia):
     x_value = x[np.where(y >= valor_conductancia)[0][0]]
     ax.scatter(x_value, valor_conductancia, color='black', zorder=5)  # Coordenadas del punto
     # Anotación de un punto específico con recuadro de fondo blanco
-    ax.annotate(f'{valor_conductancia:,} μS/m²\n{x_value:.3f}% bare\n{100-x_value:.3f}% coated', xy=(x_value, valor_conductancia), xytext=(7, 1000),
+    ax.annotate(f'{valor_conductancia:,.0f} μS/m²\n{x_value:.3f}% bare\n{100-x_value:.3f}% coated', xy=(x_value, valor_conductancia), xytext=(7, 1000),
                 arrowprops=dict(facecolor='black', arrowstyle='->'),
                 bbox=dict(facecolor='white', edgecolor='black', boxstyle='round,pad=0.5'),
                 fontsize=8)
@@ -276,7 +276,7 @@ def tuberias_distribucion(valor_conductancia):
     x_value = x[np.where(y >= valor_conductancia)[0][0]]
     ax.scatter(x_value, valor_conductancia, color='black', zorder=5)  # Coordenadas del punto
     # Anotación de un punto específico con recuadro de fondo blanco
-    ax.annotate(f'{valor_conductancia:,} μS/m²\n{x_value:.3f}% bare\n{100-x_value:.3f}% coated', xy=(x_value, valor_conductancia), xytext=(7, 1000),
+    ax.annotate(f'{valor_conductancia:,.0f} μS/m²\n{x_value:.3f}% bare\n{100-x_value:.3f}% coated', xy=(x_value, valor_conductancia), xytext=(7, 1000),
                 arrowprops=dict(facecolor='black', arrowstyle='->'),
                 bbox=dict(facecolor='white', edgecolor='black', boxstyle='round,pad=0.5'),
                 fontsize=8)
