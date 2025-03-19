@@ -94,7 +94,7 @@ def page2():
     st.header("4.-Conductancia de recubrimiento")
     
     st.subheader(f"Conductancia de recubrimiento g [S]: {(abs(I_pick_1-I_pick_2)/promedio_deltas):,.2f} S")
-    diametro_in=st.number_input("Diametro [in]:",format="%0.3f")
+    diametro_in=st.number_input("Diametro [in]:",format="%0.3f", step=0.05)
     
     if diametro_in:
         diametro_m=diametro_in*0.0254
