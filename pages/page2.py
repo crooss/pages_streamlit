@@ -71,9 +71,9 @@ def page2():
         promedio_deltas=(delta_pot_1+delta_pot_2)/2
         st.markdown(f"Promedio de ∆v={round((delta_pot_1+delta_pot_2)/2,4)}")
         
-    if ratio_deltas>0.625 or ratio_deltas<1.6:
-        st.markdown(f"∆va/∆vb={round(ratio_deltas,3)}")
-        st.markdown(f"NOTE 6: If the ratio of the ΔV potentials from each pair of adjacent test locations is between 1.6 and 0.625, then the arithmetic mean of the two can be taken as the average potential change in the section of pipeline between these test locations.1 However, if the ratio is outside this range, then one or more intermediate locations should be selected for the potential measurements until the ratio between two successive values is between 1.6 and 0.625. Alternatively, one of the attenuation methods outlined in Section 4 can be used.")
+        if ratio_deltas>0.625 or ratio_deltas<1.6:
+            st.markdown(f"∆va/∆vb={round(ratio_deltas,3)}")
+            st.markdown(f"NOTE 6: If the ratio of the ΔV potentials from each pair of adjacent test locations is between 1.6 and 0.625, then the arithmetic mean of the two can be taken as the average potential change in the section of pipeline between these test locations.1 However, if the ratio is outside this range, then one or more intermediate locations should be selected for the potential measurements until the ratio between two successive values is between 1.6 and 0.625. Alternatively, one of the attenuation methods outlined in Section 4 can be used.")
     
     st.subheader("Caída de Voltaje en el tramo usando la corriente del RPC")
     c1, c2, c3 = st.columns([1, 1, 1])
