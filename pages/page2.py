@@ -86,8 +86,8 @@ def page2():
         delta1=abs(caida_rpc_1_on-caida_rpc_1_off)
         st.markdown(f"delta1 [V]: {delta1:,.3f}")
         delta2=abs(caida_rpc_2_on-caida_rpc_2_off)
-        I_pick_1=delta1/1000/R_tramo1
-        I_pick_2=delta2/1000/R_tramo2
+        I_pick_1=abs(delta1/1000/R_tramo1)
+        I_pick_2=abs(delta2/1000/R_tramo2)
         st.markdown(f"Corriente de Pickering #1: {I_pick_1:,.3f} A")
         st.markdown(f"Corriente de Pickering #2: {I_pick_2:,.3f} A")    
     st.divider()  
