@@ -101,11 +101,10 @@ def page2():
         area_coated=(np.pi*diametro_m)*Longitud_tramo
         st.markdown(f"Area del tramo: {area_coated:,.2f} m²")
     
-    conducatancia_especifica=1000000*(abs(I_pick_1-I_pick_2)/promedio_deltas/area_coated
-    )
-    st.markdown(f"Conductancia especifica: {conducatancia_especifica:,.0f} μS/m² @ {resistividad_avg:,.2f} Ω-cm")
+        conducatancia_especifica=1000000*(abs(I_pick_1-I_pick_2)/promedio_deltas/area_coated)
+        st.markdown(f"Conductancia especifica: {conducatancia_especifica:,.0f} μS/m² @ {resistividad_avg:,.2f} Ω-cm")
     
-    st.subheader(f"Normalizacion de Conductancia especifica @ 1,000 Ω-cm")
+        st.subheader(f"Normalizacion de Conductancia especifica @ 1,000 Ω-cm")
     
     NORM_conductancia_especifica=conducatancia_especifica*resistividad_avg/1000
     st.subheader(f"Conductancia especifica normalizada: {NORM_conductancia_especifica:,.0f} μS/m²")
