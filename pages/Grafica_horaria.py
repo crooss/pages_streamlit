@@ -14,12 +14,9 @@ def Grafica_horaria():
     
     # Example of an interactive widget
     nombre=st.text_input("Nombre de la anomalia", value="#1")
-    
-    
     angulo_inicio=st.number_input("Angulo inicial", min_value=0.0, max_value=360.0, format="%.2f")
     angulo_final=st.number_input("Angulo final",min_value=0.0, max_value=360.0, format="%.2f")
     PM=st.number_input("PM")/100
-    
 
     # if name:
     st.write(f"El texto es, {texto('arturo')}!")
