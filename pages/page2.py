@@ -107,14 +107,14 @@ def page2():
                     st.markdown(f"Area del tramo: {area_coated:,.2f} m²")
                 
                     conducatancia_especifica=1000000*(abs(I_pick_1-I_pick_2)/promedio_deltas/area_coated)
-                    st.markdown(f"Conductancia especifica: {conducatancia_especifica:,.0f} μS/m² @ {resistividad_avg:,.2f} Ω-cm")
+                    st.markdown(f"Conductancia específica: {conducatancia_especifica:,.2f} μS/m² @ {resistividad_avg:,.2f} Ω-cm")
                 
-                    st.subheader(f"Normalizacion de Conductancia especifica @ 1,000 Ω-cm")
+                    st.subheader(f"Normalización de Conductancia específica @ 1,000 Ω-cm")
                 
                     NORM_conductancia_especifica=conducatancia_especifica*resistividad_avg/1000
-                    st.subheader(f"Conductancia especifica normalizada: {NORM_conductancia_especifica:,.0f} μS/m²")
+                    st.subheader(f"Conductancia específica normalizada: {round(NORM_conductancia_especifica,0)} μS/m²")
                     # valor_conductancia=st.number_input("Conductancia:")
-                    valor_conductancia=conducatancia_especifica
+                    valor_conductancia=NORM_conductancia_especifica
                     
                     tipo=st.radio("Tipo de Tubería", 
                              ['Tuberías largas con pocas ramificaciones', 
@@ -123,7 +123,7 @@ def page2():
                     st.markdown(tipo if tipo!=None else "No seleccionado")
                     
                     tipo_coating=st.radio('Tipo de coating', 
-                                    ['FBE', 'PE', 'Alquitrán de hulla','Tricapa','Visco-elastico', 'Otros'],
+                                    ['FBE', 'PE', 'Alquitrán de hulla','Tricapa','Visco-elástico', 'Otros'],
                                     index=None)  # Set default value to the first option
                     st.markdown(tipo_coating if tipo_coating!=None else "No seleccionado")
                     
@@ -140,11 +140,7 @@ def page2():
                         elif tipo=='Distribución de Gas o Agua, con muchas ramificaciones':
                             tuberias_distribucion(valor_conductancia)
                             st.image('images/tuberias_distribucion.png', caption='Tuberías largas con pocas ramificaciones', use_container_width=True)
-            
-        
-    
-    # st.header("Data Visualization Example")
-    # st.line_chart([1, 2, 3, 4, 5])  # Simple line chart
+                            
 
 if __name__ == "__main__":
     page2()
