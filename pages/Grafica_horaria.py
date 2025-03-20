@@ -11,8 +11,8 @@ matplotlib.use('agg')
 def Grafica_horaria():
     st.title("Realizar gráfico de posición horaria de una anomalía")
     nombre=st.text_input("Nombre de la anomalía", value="#1")
-    angulo_inicio=st.number_input("Ángulo inicial [°]", min_value=0.0, max_value=360.0, format="%.2f")
-    angulo_final=st.number_input("Ángulo final [°]",min_value=0.0, max_value=360.0, format="%.2f")
+    angulo_inicio=st.number_input("Ángulo inicial [°]", min_value=0.0, max_value=360.0, format="%.3f")
+    angulo_final=st.number_input("Ángulo final [°]",min_value=0.0, max_value=360.0, format="%.3f")
     PM=st.number_input("Pérdida de Metal [%]")/100
     if angulo_final and nombre and PM:
         graficar(angulo_inicio,angulo_final,nombre,PM)
