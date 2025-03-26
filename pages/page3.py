@@ -35,7 +35,7 @@ def page3():
                     if option_columns_t and option_columns_L and option_columns_W:
                         Plot_geometry(df, option_columns_W, option_columns_L, option_columns_t)
                         # Display the saved figure in Streamlit
-                        st.image('images/fig.png', caption='Generated Plot', use_container_width=True)
+                        st.image('images/Plot_geometry.png', caption='Anomaly dimesion class', use_container_width=True)
             
             
 
