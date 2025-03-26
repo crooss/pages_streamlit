@@ -25,6 +25,14 @@ def page3():
         if option:
             dataframe = pd.read_excel(uploaded_file, sheet_name=option)
             st.write(dataframe)
+            
+            option_columns_L = st.selectbox('Seleccionar la columna que contiene la longitud del defecto en mm', dataframe.columns)
+            if option_columns_L:
+                option_columns_W=st.selectbox('Seleccionar la columna que contiene el ancho del defecto en mm', dataframe.columns)
+                if option_columns_W:
+                    option_columns_t=st.selectbox('Seleccionar la columna que contiene el espesor nominal en mm', dataframe.columns)
+            
+            
 
 
 if __name__ == "__main__":
