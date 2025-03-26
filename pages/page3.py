@@ -1,5 +1,5 @@
 import streamlit as st
-from io import StringIO
+# from io import StringIO
 import pandas as pd
 
 def page3():
