@@ -11,7 +11,7 @@ def main():
     pages = {
         "Grafica Horaria": "pages/Grafica_horaria",
         "Conductancia específica": "pages/Conductancia_específica",
-        "Geometry": "pages/page3"
+        "Geometry": "pages/Geometry_Dimension_Class"
     }
     
     selection = st.sidebar.radio("Go to", list(pages.keys()), index=None)
@@ -25,8 +25,8 @@ def main():
         import pages.Conductancia_específica as page
         page.Conductancia_específica()
     elif selection == "Geometry":
-        import pages.page3 as page
-        page.page3()
+        import pages.Geometry_Dimension_Class as page
+        page.Geometry_Dimension_Class()
     
     # Execute the selected page's run function
     # page.run()

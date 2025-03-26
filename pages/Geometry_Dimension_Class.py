@@ -2,7 +2,7 @@ import streamlit as st
 # from io import StringIO
 import pandas as pd
 from funct_geometry import Plot_geometry
-def page3():
+def Geometry_Dimension_Class():
     st.title("Anomaly Dimesion Class")
     st.write("Welcome to the third page of the Streamlit application!")
     st.write("This page can be used to display additional features or information.")
@@ -32,4 +32,4 @@ def page3():
                             st.image('images/Plot_geometry.png', caption='Anomaly dimesion class', use_container_width=True)
 
 if __name__ == "__main__":
-    page3()
+    Geometry_Dimension_Class()
