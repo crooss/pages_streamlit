@@ -1,7 +1,7 @@
 import streamlit as st
 # from io import StringIO
 import pandas as pd
-
+from funct_geometry import Plot_geometry
 def page3():
     st.title("Page 3")
     st.write("Welcome to the third page of the Streamlit application!")
@@ -31,6 +31,10 @@ def page3():
                 option_columns_W=st.selectbox('Seleccionar la columna que contiene el ancho del defecto en mm', dataframe.columns, index=None)
                 if option_columns_W:
                     option_columns_t=st.selectbox('Seleccionar la columna que contiene el espesor nominal en mm', dataframe.columns, index=None)
+                    if option_columns_t and option_columns_L and option_columns_W:
+                        Plot_geometry(dataframe, option_columns_W, option_columns_L, option_columns_t)
+                        # Display the saved figure in Streamlit
+                        st.image('images/fig.png', caption='Generated Plot', use_container_width=True)
             
             
 
