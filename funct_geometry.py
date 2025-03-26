@@ -43,5 +43,5 @@ def Plot_geometry(df, optionW, optionL, optiont, extent_xy):
     
     
     plt.savefig('images/Plot_geometry.png', dpi=300, bbox_inches='tight')
-    return 'images/Plot_geometry.png'
+    return fig
     plt.show()
