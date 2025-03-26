@@ -10,18 +10,17 @@ def calcular_WA(w,t):
 
 
 def Plot_geometry(df, optionW, optionL, optiont):
-    
     df['ESPESOR [mm]']=df['ESPESOR [in]']*25.4
     df['WA'] = df.apply(lambda row: calcular_WA(row[optionW], row[optiont]), axis=1)
     df['LA'] = df.apply(lambda row: calcular_WA(row[optionL], row[optiont]), axis=1)
         
+    fig, ax = plt.subplots(figsize=(6, 6))
+    
     ax.scatter(df['LA'],df['WA'],s=3,color='black', marker='o',zorder=5, alpha=.5)
 
     maximo=max(df['LA'].max(),df['WA'].max())
     maximo=math.ceil(maximo / 10) * 10
     
-    
-    fig, ax = plt.subplots(figsize=(6, 6))
     ax.set_xlim(0,10)
     ax.set_ylim(0,10)
     # Colorear áreas de calidad
