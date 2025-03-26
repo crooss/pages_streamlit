@@ -4,9 +4,12 @@ import pandas as pd
 from funct_geometry import Plot_geometry
 def Geometry_Dimension_Class():
     st.title("Anomaly Dimesion Class")
-    st.write("Welcome to the third page of the Streamlit application!")
-    st.write("This page can be used to display additional features or information.")
-    
+    st.write("Esta aplicacion ayuda a la creacion de un grafico de clasificaciones de dimensiones de corridas instrumentadas")
+    st.write("Los datos necesarios para la creacion del grafico son: ")
+    st.write("Longitud de anomalia en mm")
+    st.write("Ancho de anomalia en mm")
+    st.write("Espesor nominal en mm")
+
     uploaded_file = st.file_uploader("Choose a file")
     if uploaded_file is not None:
         # List all sheet names in the uploaded Excel file
