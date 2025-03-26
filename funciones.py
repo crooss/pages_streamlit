@@ -301,6 +301,6 @@ def tuberias_distribucion(valor_conductancia):
 
 
 
-
+# print(radianes_a_horas(2.103121749))
 
 

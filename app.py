@@ -1,4 +1,6 @@
 import streamlit as st
+# streamlit run app.py
+
 
 # Main entry point for the Streamlit application
 def main():
