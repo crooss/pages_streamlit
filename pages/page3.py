@@ -24,6 +24,7 @@ def page3():
         option = st.selectbox('Seleccionar la Hoja de origen de datos',(sheet_names), index=None)
         if option:
             dataframe = pd.read_excel(uploaded_file, sheet_name=option)
+            df=pd.DataFrame(dataframe)
             st.write(dataframe)
             
             option_columns_L = st.selectbox('Seleccionar la columna que contiene la longitud del defecto en mm', dataframe.columns, index=None)
@@ -32,7 +33,7 @@ def page3():
                 if option_columns_W:
                     option_columns_t=st.selectbox('Seleccionar la columna que contiene el espesor nominal en mm', dataframe.columns, index=None)
                     if option_columns_t and option_columns_L and option_columns_W:
-                        Plot_geometry(dataframe, option_columns_W, option_columns_L, option_columns_t)
+                        Plot_geometry(df, option_columns_W, option_columns_L, option_columns_t)
                         # Display the saved figure in Streamlit
                         st.image('images/fig.png', caption='Generated Plot', use_container_width=True)
             
