@@ -9,7 +9,7 @@ def calcular_WA(w,t):
 
 
 
-def Plot_geometry(df, optionW, optionL, optiont):
+def Plot_geometry(df, optionW, optionL, optiont, extent_xy):
     df['ESPESOR [mm]']=df['ESPESOR [in]']*25.4
     df['WA'] = df.apply(lambda row: calcular_WA(row[optionW], row[optiont]), axis=1)
     df['LA'] = df.apply(lambda row: calcular_WA(row[optionL], row[optiont]), axis=1)
@@ -21,17 +21,17 @@ def Plot_geometry(df, optionW, optionL, optiont):
     maximo=max(df['LA'].max(),df['WA'].max())
     maximo=math.ceil(maximo / 10) * 10
     
-    ax.set_xlim(0,10)
-    ax.set_ylim(0,10)
+    ax.set_xlim(0,extent_xy)
+    ax.set_ylim(0,extent_xy)
     # Colorear áreas de calidad
     transparencia=.5
     ax.fill([0, 1, 1, 0,],  [0, 0, 1, 1,], 'lightblue', alpha=transparencia, label='Pin-hole')
     ax.fill([1, 2, 6, 3, 3, 1], [1, 1, 3, 3, 6, 2], 'gray', alpha=transparencia,label='Pitting')
-    ax.fill([0,1,1,0], [1,1,10,10], 'red', alpha=transparencia,label='Circumferential slotting')
-    ax.fill([1,3,3,1,1], [2,6,10,10,2], 'plum', alpha=transparencia,label='Circumferential grooving')
-    ax.fill([1,10,10,1], [0,0,1,1], 'orange', alpha=transparencia, label='Axial slotting')
-    ax.fill([2,10,10,6,2], [1,1,3,3,1], 'salmon', alpha=transparencia,label='Axial grooving')
-    ax.fill([3,10,10,3], [3,3,10,10], 'limegreen', alpha=transparencia,label='General')
+    ax.fill([0,1,1,0], [1,1,maximo,maximo], 'red', alpha=transparencia,label='Circumferential slotting')
+    ax.fill([1,3,3,1,1], [2,6,maximo,maximo,2], 'plum', alpha=transparencia,label='Circumferential grooving')
+    ax.fill([1,maximo,maximo,1], [0,0,1,1], 'orange', alpha=transparencia, label='Axial slotting')
+    ax.fill([2,maximo,maximo,6,2], [1,1,3,3,1], 'salmon', alpha=transparencia,label='Axial grooving')
+    ax.fill([3,maximo,maximo,3], [3,3,maximo,maximo], 'limegreen', alpha=transparencia,label='General')
     ax.xaxis.set_major_locator(plt.MultipleLocator(1))
     ax.yaxis.set_major_locator(plt.MultipleLocator(1))
     ax.legend(loc='upper left', bbox_to_anchor=(1.02, 1), borderaxespad=0.)
