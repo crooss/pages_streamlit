@@ -31,8 +31,8 @@ def Plot_geometry(df, optionW, optionL, optiont, extent_xy):
     ax.fill([2,maximo,maximo,6,2], [1,1,3,3,1], 'salmon', alpha=transparencia,label='Axial grooving')
     ax.fill([3,maximo,maximo,3], [3,3,maximo,maximo], 'limegreen', alpha=transparencia,label='General')
     
-    ax.xaxis.set_major_locator(plt.maxNLocator(10))
-    ax.yaxis.set_major_locator(plt.maxNLocator(10))
+    ax.xaxis.set_major_locator(plt.MaxNLocator(10))
+    ax.yaxis.set_major_locator(plt.MaxNLocator(10))
     # ax.yaxis.set_major_locator(plt.MultipleLocator(1))
     ax.legend(loc='upper left', bbox_to_anchor=(1.02, 1), borderaxespad=0.)
     ax.set_xlabel('L/A')
