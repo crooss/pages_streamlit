@@ -26,9 +26,10 @@ def page3():
                     option_columns_t=st.selectbox('Seleccionar la columna que contiene el espesor nominal en mm', dataframe.columns, index=None)
                     if option_columns_t and option_columns_L and option_columns_W:
                         extent_xy=st.radio("Extensión del eje x y eje y", [10,20,30], index=None)
-                        Plot_geometry(df, option_columns_W, option_columns_L, option_columns_t, extent_xy)
-                        # Display the saved figure in Streamlit
-                        st.image('images/Plot_geometry.png', caption='Anomaly dimesion class', use_container_width=True)
+                        if extent_xy:
+                            Plot_geometry(df, option_columns_W, option_columns_L, option_columns_t, extent_xy)
+                            # Display the saved figure in Streamlit
+                            st.image('images/Plot_geometry.png', caption='Anomaly dimesion class', use_container_width=True)
 
 if __name__ == "__main__":
     page3()
