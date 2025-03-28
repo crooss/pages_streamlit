@@ -65,7 +65,7 @@ def Conductancia_específica():
             
             with c2:
                 st.subheader("Para tramo #2")
-                Potencial_ON_2, Potencial_OFF_2 = st.number_input("Potencial ON #2 [V]:",format="%0.3f"), st.number_input("Potencial OFF #2 [V]:",format="%0.3f")
+                Potencial_ON_2, Potencial_OFF_2 = st.number_input("Potencial ON #2 [V]:",format="%0.4f"), st.number_input("Potencial OFF #2 [V]:",format="%0.3f")
                 delta_pot_2=abs(Potencial_ON_2-Potencial_OFF_2)
                 
             if Potencial_ON_1 and Potencial_OFF_1 and Potencial_ON_2 and Potencial_OFF_2:
