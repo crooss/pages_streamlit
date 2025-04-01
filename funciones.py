@@ -7,7 +7,7 @@ def radianes_a_horas(radianes):
         horas = (radianes / (2 * math.pi)) * 12 # Convertir radianes a horas   
         horas_completas = int(horas) # Extraer las horas completas
         minutos = (horas - horas_completas) * 60 # Convertir el resto a minutos
-        minutos_completos = int(minutos)
+        minutos_completos = int(round(minutos,2))
         segundos = (minutos - minutos_completos) * 60 # Convertir el resto a segundos
         segundos_completos = int(round(segundos,0))
         return horas_completas, minutos_completos, segundos_completos
