@@ -214,10 +214,12 @@ def tuberias_largas(valor_conductancia):
     x_value = x[np.where(y >= valor_conductancia)[0][0]]
     ax.scatter(x_value, valor_conductancia, color='black', zorder=5)  # Coordenadas del punto
     # Anotación de un punto específico con recuadro de fondo blanco
-    ax.annotate(f'{valor_conductancia:,.0f} μS/m²\n{x_value:.3f}% bare\n{100-x_value:.3f}% coated', xy=(x_value, valor_conductancia), xytext=(7, 1000),
-                arrowprops=dict(facecolor='black', arrowstyle='->'),
-                bbox=dict(facecolor='white', edgecolor='black', boxstyle='round,pad=0.5'),
-                fontsize=8)
+    ax.annotate(f'{valor_conductancia:,.0f} μS/m²\n{x_value:.3f}% bare\n{100-x_value:.3f}% coated', 
+            xy=(x_value, valor_conductancia), 
+            # arrowprops=dict(facecolor='black', arrowstyle='->'),
+            xytext=(7, 70),
+            bbox=dict(facecolor='white', edgecolor='black', boxstyle='round,pad=0.5'),
+            fontsize=8)
 
     ax.set_xlabel('% de Área Desnuda')
     ax.set_ylabel('Conductancia @1,000 Ω-cm [μS/m$^2$]')
@@ -227,7 +229,15 @@ def tuberias_largas(valor_conductancia):
     ax.set_yscale('log')
     ax.set_xscale('log')
     ax.set_xlim(.0001,100)
-    ax.xaxis.set_major_formatter(plt.FuncFormatter(lambda x, _: f'{x:.3f}%'))
+    
+    def ty(num):
+        num=round(num*10,5)
+        if  num % 2==0:
+            return f'{num/10:.0f}%'
+        else:
+            return f'{num/10:.3f}%'
+        
+    ax.xaxis.set_major_formatter(plt.FuncFormatter(lambda x, ti: ty(x)))
     ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, loc: "{:,}".format(int(x))))
         # Agregar etiquetas adicionales en el eje y
     additional_yticks = [ 40000, 500]
@@ -271,10 +281,12 @@ def tuberias_distribucion(valor_conductancia):
     x_value = x[np.where(y >= valor_conductancia)[0][0]]
     ax.scatter(x_value, valor_conductancia, color='black', zorder=5)  # Coordenadas del punto
     # Anotación de un punto específico con recuadro de fondo blanco
-    ax.annotate(f'{valor_conductancia:,.0f} μS/m²\n{x_value:.3f}% bare\n{100-x_value:.3f}% coated', xy=(x_value, valor_conductancia), xytext=(7, 1000),
-                arrowprops=dict(facecolor='black', arrowstyle='->'),
-                bbox=dict(facecolor='white', edgecolor='black', boxstyle='round,pad=0.5'),
-                fontsize=8)
+    ax.annotate(f'{valor_conductancia:,.0f} μS/m²\n{x_value:.3f}% bare\n{100-x_value:.3f}% coated', 
+            xy=(x_value, valor_conductancia), 
+            # arrowprops=dict(facecolor='black', arrowstyle='->'),
+            xytext=(7, 70),
+            bbox=dict(facecolor='white', edgecolor='black', boxstyle='round,pad=0.5'),
+            fontsize=8)
 
     ax.set_xlabel('% de Área Desnuda')
     ax.set_ylabel('Conductancia @1,000 Ω-cm [μS/m$^2$]')
@@ -284,7 +296,14 @@ def tuberias_distribucion(valor_conductancia):
     ax.set_yscale('log')
     ax.set_xscale('log')
     ax.set_xlim(.0001,100)
-    ax.xaxis.set_major_formatter(plt.FuncFormatter(lambda x, _: f'{x:.3f}%'))
+    def ty(num):
+        num=round(num*10,5)
+        if  num % 2==0:
+            return f'{num/10:.0f}%'
+        else:
+            return f'{num/10:.3f}%'
+        
+    ax.xaxis.set_major_formatter(plt.FuncFormatter(lambda x, ti: ty(x)))
     ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, loc: "{:,}".format(int(x))))
         # Agregar etiquetas adicionales en el eje y
     additional_yticks = [ 40000, 5000,500]
