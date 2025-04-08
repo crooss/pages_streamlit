@@ -318,6 +318,62 @@ def tuberias_distribucion(valor_conductancia):
     return 'images/tuberias_distribucion.png'
     # plt.show()
 
+def tuberias_TM0102(valor):
+    fig, ax = plt.subplots(figsize=(1, 6))
+    # Determine the color based on the value
+    if valor <= 100:
+        bar_color = 'green'
+    elif valor <= 500:
+        bar_color = 'limegreen'
+    elif valor <= 2000:
+        bar_color = 'yellow'
+    elif valor <= 1000000:
+        bar_color = 'red'   
+
+    ax.bar(1, valor, color=bar_color, width=1)
+    # print(ax.get_xlim())
+    minimo_x, maximo_x=ax.get_xlim()
+    ax.set_xlim(minimo_x, maximo_x)
+    
+    ax.set_yscale('log')
+    
+    if valor<200000:
+        ax.set_ylim(5, 200000)
+        additional_yticks = [2000,500]
+    else:
+        ax.set_ylim(5, 1000000)
+        additional_yticks = [2000,500]
+    
+    ax.get_yaxis().set_major_formatter(plt.FuncFormatter(lambda x, loc: "{:,}".format(int(x))))
+
+    # Crear el mapa de colores
+    cmap = ListedColormap(['green', 'limegreen', 'yellow', 'red'])
+    norm_bins = np.array([0, 1, 2, 3, 4])
+    norm = matplotlib.colors.BoundaryNorm(norm_bins, cmap.N)
+    sm = plt.cm.ScalarMappable(cmap=cmap, norm=norm)
+    sm.set_array([])
+    cbar = plt.colorbar(sm, ticks=[0.5, 1.5, 2.5, 3.5], ax=ax, fraction=0.2, pad=0.5)
+    cbar.ax.set_yticklabels(['Excellent', 'Good', 'Fair', 'Poor'])
+    cbar.ax.set_aspect('auto')
+    ax.set_ylabel('Conductancia a 1,000 Ω-cm [μS/m$^2$]')
+    ax.get_xaxis().set_visible(False)
+    for each in [100,500,2000]:
+        ax.hlines(y=each, xmin=minimo_x, xmax=maximo_x, colors='black', linestyles='-')
+    ax.set_yticks(list(ax.get_yticks()) + additional_yticks)
+    if valor<100000:
+        ax.set_ylim(5, 1000000)
+        additional_yticks = [2000,500]
+    else:
+        ax.set_ylim(5, 10000000)
+        additional_yticks = [2000,500]  
+    ax.get_yaxis().set_major_formatter(plt.FuncFormatter(lambda x, loc: "{:,}".format(int(x))))
+    ax.text(2.5, .05, f'Conductancia [μS/m$^2$]:\n{valor:,.0f} μS/m$^2$', ha='left', va='bottom', fontsize=8, color='black', transform=ax.transAxes)
+    ax.text(8.5, .5, 'NACE TM0102-2023\nMeasurement of Protective Coating Electrical Conductance on Underground Pipelines\nTable 5 Table of Specific Coating Conductance vs Coating Quality for 1,000 Ω-cm Soil', ha='center', va='center', transform=ax.transAxes, fontsize=8, color='gray', rotation=90)
+    plt.savefig('images/barras_TM0102.png', dpi=300, bbox_inches='tight')
+    # plt.show()
+    return 'images/barras_TM0102.png'
+   
+
 
 
 # print(radianes_a_horas(2.103121749))
