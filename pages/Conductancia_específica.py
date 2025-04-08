@@ -142,10 +142,10 @@ def Conductancia_específica():
                         elif tipo=='Distribución de Gas o Agua, con muchas ramificaciones':
                             tuberias_distribucion(valor_conductancia)
                             st.image('images/tuberias_distribucion.png', caption='Tuberías largas con pocas ramificaciones', use_container_width=True)
-                            
-                    tuberias_TM0102(valor_conductancia)    
-                    st.header("5.1.-Resultados NACE-TM0102")
-                    st.image('images/barras_TM0102.png', caption='Conductancia específica μS/m² y clasificación - NACE-TM0102', width=300)
+                    if tipo_coating:
+                        tuberias_TM0102(valor_conductancia)    
+                        st.header("5.1.-Resultados NACE-TM0102")
+                        st.image('images/barras_TM0102.png', caption='Conductancia específica μS/m² y clasificación - NACE-TM0102', width=300)
 
                             
 
