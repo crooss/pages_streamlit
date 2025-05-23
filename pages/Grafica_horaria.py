@@ -18,6 +18,6 @@ def Grafica_horaria():
         graficar(angulo_inicio,angulo_final,nombre,PM)
         # Display the saved figure in Streamlit
         st.image('images/fig.png', caption='Generated Plot', use_container_width=True)
-
+        # st.pyplot(graficar(angulo_inicio,angulo_final,nombre,PM)[1])
 if __name__ == "__main__":
     Grafica_horaria()
