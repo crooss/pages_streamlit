@@ -8,7 +8,8 @@ def calcular_WA(w,t):
         return w/t
 
 def Plot_geometry(df, optionW, optionL, optiont, extent_xy):
-    df['ESPESOR [mm]']=df['ESPESOR [in]']*25.4
+    # df['ESPESOR [mm]']=df['ESPESOR [in]']*25.4
+    # df[optiont]=df['ESPESOR [in]']*25.4
     df['WA'] = df.apply(lambda row: calcular_WA(row[optionW], row[optiont]), axis=1)
     df['LA'] = df.apply(lambda row: calcular_WA(row[optionL], row[optiont]), axis=1)
         
