@@ -26,8 +26,7 @@ def main():
     }
     </style>
     """,
-    unsafe_allow_html=True
-)
+    unsafe_allow_html=True)
     # selection = st.sidebar.radio("Go to", list(pages.keys()), index=None)
     # page = None
 
