@@ -23,7 +23,7 @@ def Modelado():
     
     
     
-    resistividad=st.number_input(f"Resistividad [$\Omega$ cm]", min_value=0, max_value=500000, step=10)
+    resistividad=st.number_input(r"Resistividad [$\Omega$ cm]", min_value=0, max_value=500000, step=10)
     ph=st.number_input("pH",min_value=0.0, max_value=14.0, format="%.1f", step=0.1)
     pot_off=st.number_input("Potencial Off [V]", format="%.3f", step=0.001)
     
