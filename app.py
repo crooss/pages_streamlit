@@ -11,7 +11,8 @@ def main():
     pages = {
         "Grafica Horaria": "pages/Grafica_horaria",
         "Conductancia específica": "pages/Conductancia_específica",
-        "Geometry": "pages/Geometry_Dimension_Class"
+        "Geometry": "pages/Geometry_Dimension_Class",
+        "Prediccion mpy": "pages/Modelo_UHLIG"
     }
     
     # selection = st.sidebar.radio("Go to", list(pages.keys()), index=None)

@@ -373,9 +373,155 @@ def tuberias_TM0102(valor):
     # plt.show()
     return 'images/barras_TM0102.png'
    
+#%%
+from scipy.interpolate import RegularGridInterpolator # type: ignore
+from matplotlib.ticker import MultipleLocator, FuncFormatter # type: ignore
+import numpy as np # type: ignore
+def mpy_UGLIH(rho,ph):
+    if rho>0 and ph>0:
+        # Definición de la tabla de valores rho y ph
+        rho_values = np.array([10,100, 200, 300, 400, 500, 1000, 2000, 3000, 4000, 5000, 10000,1000000])  # Valores de rho
+        ph_values = np.array([3, 4, 5, 6, 6.5, 7, 7.0001, 7.5, 8, 8.5, 9, 9.5,14])  # Valores de ph
 
+        if rho<10:
+            rho=10
+        elif rho>1000000:
+            rho=1000000
+            
+        if ph<3:
+            ph=3
+        elif ph>14:
+            return "El ph no puede ser mayor a 14"
+        
+        # Matriz de valores de la tabla
+        data = np.array([
+            [22.598, 22.008, 21.535, 20.906, 18.150, 12.795, 32.244, 27.283, 27.283, 27.283, 27.283, 27.283, 27.283],
+            [22.598, 22.008, 21.535, 20.906, 18.150, 12.795, 32.244, 27.283, 27.283, 27.283, 27.283, 27.283, 27.283],
+            [22.598, 22.008, 21.142, 20.000, 13.268, 10.315, 22.717, 22.323, 22.323, 22.323, 22.323, 22.323, 22.323],
+            [22.598, 22.008, 20.984, 18.386, 11.417, 8.898, 18.110, 16.614, 16.614, 16.614, 16.614, 16.614, 16.614],
+            [22.598, 22.008, 20.669, 16.575, 10.315, 7.874, 15.472, 13.504, 13.504, 13.504, 13.504, 13.504, 13.504],
+            [22.598, 21.575, 19.252, 14.528, 9.213, 7.087, 12.520, 9.567, 9.606, 9.449, 9.449, 9.449, 9.449],
+            [21.969, 18.583, 14.843, 12.441, 7.559, 4.882, 5.315, 4.921, 4.630, 4.630, 4.630, 4.630, 4.630],
+            [15.276, 13.465, 11.850, 9.449, 5.512, 3.528, 4.685, 3.752, 3.469, 3.394, 3.386, 3.366, 3.366],
+            [13.740, 12.087, 10.197, 8.031, 4.213, 2.528, 3.724, 3.075, 2.606, 2.406, 2.299, 2.252, 2.252],
+            [12.598, 10.669, 9.213, 7.008, 3.134, 1.394, 2.953, 1.906, 0.835, 0.039, 0.039, 0.039, 0.039],
+            [11.929, 10.039, 8.622, 6.142, 2.650, 0.815, 2.606, 1.394, 0.206, 0.039, 0.039, 0.039, 0.039],
+            [11.102, 9.370, 7.874, 5.315, 2.217, 0.013, 2.079, 0.380, 0.039, 0.039, 0.039, 0.039, 0.039],
+            [11.102, 9.370, 7.874, 5.315, 2.217, 0.013, 2.079, 0.380, 0.039, 0.039, 0.039, 0.039, 0.039]
+        ])
+        
+        # Crear el interpolador
+        interpolador = RegularGridInterpolator((rho_values, ph_values), data)
+
+        # Interpolación
+        valor_interpolado = interpolador((rho, ph))
+        return round(valor_interpolado+0,3)
 
 
 # print(radianes_a_horas(2.103121749))
+
+
+#%%
+import pandas as pd
+import matplotlib.pyplot as plt
+import numpy as np
+from scipy.interpolate import RegularGridInterpolator # type: ignore
+from matplotlib.ticker import MultipleLocator, FuncFormatter # type: ignore
+import matplotlib.ticker as ticker
+from matplotlib.ticker import (MultipleLocator, AutoMinorLocator,FormatStrFormatter)
+import math
+from scipy.optimize import curve_fit
+import warnings
+from scipy.optimize import OptimizeWarning
+warnings.filterwarnings("ignore", category=OptimizeWarning)
+
+def Modelado_mitigación_UHLIG(rho, ph, pot_off):
+    ph if ph != 7 else ph+.00001  # Asegurar que el pH no sea menor a 3
+    if ph>14:
+        print("El pH no puede ser mayor a 14")
+        return 
+    # mpy_uhlig = mpy_UGLIH(rho, ph)  # Cálculo de mpy según UHLIG
+    mpy_uhlig = mpy_UGLIH(rho, ph)  if mpy_UGLIH(rho, ph)>1.5 else 1.5 # limitar a 1.5, evitar error
+    x=np.linspace(10,50000,100)
+    y=np.linspace(3,14)
+    x,y=np.meshgrid(x,y)
+
+    Z = np.zeros_like(x)
+
+    for i in range(x.shape[0]):
+        for j in range(x.shape[1]):
+            Z[i, j] = mpy_UGLIH(x[i, j], y[i, j])
+
+    fig, ax = plt.subplots(1,2,figsize=(12,4),gridspec_kw={"width_ratios": [2, 2]})
+    fig.subplots_adjust( wspace=0.3, hspace=0.1)
+    
+    grafico=ax[0].contourf(x,y,Z,cmap='rainbow',levels= 20)
+    ax[0].scatter(rho, ph, zorder=5, color='black', s=30, label=f"mpy: {mpy_uhlig:.2f} mpy")
+    # puntos=axes.scatter(6200,5, zorder=5,color='black',s=6)
+    ax[0].yaxis.set_major_locator(MultipleLocator(1))
+    ax[0].xaxis.set_major_locator(MultipleLocator(1000))
+    ax[0].set_xticks(ax[0].get_xticks(), ax[0].get_xticklabels(), rotation=90, ha='center',size=8)
+    ax[0].set_yticks(ax[0].get_yticks(), ax[0].get_yticklabels(), ha='center',size=9)
+    lim_supx= math.ceil(rho)*1.1 if rho>= 9900 else 10000
+    ax[0].set(ylim=(3,14), xlim=(0,lim_supx),ylabel='pH', xlabel='Resistividad')
+    ax[0].get_xaxis().set_major_formatter(FuncFormatter(lambda x, p: format(int(x), ',')))
+    ax[0].set_title(f"Predicción de mpy Unmitigated", fontsize=12)
+    ax[0].legend(fontsize=8)    
+    cbar = plt.colorbar(grafico,ticks=np.arange(0, 34,2))
+    cbar.set_label('mpy')
+    ax[0].grid(True, color='black')
+
+# Ajuste de curva logarítmica para mpy Unmitigated
+    x_data = np.array([mpy_uhlig, 1])
+    y_data = np.array([-0.5, -0.85])
+    # Función con asíntota en x=0.1
+    def log_asymptotic(x, A, B):
+        return A * np.log(x - 0.1) + B
+    # Ajuste de parámetros
+    params, _ = curve_fit(log_asymptotic, x_data, y_data)
+    A, B = params
+    x = np.linspace(.1+.01, mpy_uhlig, 500)  # evitar x=0.1 por la singularidad
+    y = log_asymptotic(x, A, B)
+    mpy_predict=x[np.where(y>=pot_off)[0][0]]
+
+    etiqueta=f'y = {A:.3f}  ln(x - 0.1) - {-1*B:.3f}' if B<0 else f'y = {A:.3f}  ln(x - 0.1) + {B:.3f}'
+    curva_plot=ax[1].plot(x, y, label=etiqueta)
+    ax[1].invert_yaxis()
+    puntos_ajuste=ax[1].scatter(x_data, y_data, color='maroon', zorder=5, s=12,label="Puntos de ajuste")
+    punto_predict=ax[1].scatter(mpy_predict, pot_off, color='blue', zorder=5, label=f"Predicción mpy = {mpy_predict:.2f} mpy \n $\\rho$ = {rho:,} $\u03A9$ cm \n pH = {ph:.1f} \n Potencial off= {pot_off:.3f} V")
+    ax[1].vlines(mpy_predict, -.4, pot_off, color='blue', linestyle='--', lw=1, label=f"mpy predicción {mpy_predict:.2f} mpy")
+    ax[1].hlines(pot_off, 0, mpy_predict, color='blue', linestyle='--', lw=1)
+    asintota=ax[1].axvline(0.1, color='gray', linestyle='--', lw=1, label="Asíntota en $x = 0.1$ mpy")
+    Linea_pot_nat=ax[1].axhline(-.500, color='maroon', linestyle='--', lw=1,label='Pot Natural')
+    Linea_criterio=ax[1].axhline(-.850, color='red', linestyle='--', lw=1,label='Criterio -0.850 V')
+    ax[1].set_xlabel("mpy")
+    ax[1].set_ylabel("Potencial (V)")
+    ax[1].set_yticks(np.arange(-2, np.max(y)+0.1, 0.1))
+    # ax[1].set_xticks(np.arange(0, math.ceil(mpy_uhlig*1.1),1), rotation=90)
+    # ax[1].xaxis.set_major_locator(ticker.MaxNLocator(20,integer=True))
+    ax[1].xaxis.set_major_locator(ticker.MaxNLocator(10))
+    ax[1].set_xticks(ax[1].get_xticks(), ax[1].get_xticklabels(), rotation=90)
+    
+    ax[1].xaxis.set_minor_locator(ticker.AutoMinorLocator())
+    ax[1].yaxis.set_major_formatter(FormatStrFormatter('%.3f'))
+    ax[1].yaxis.set_minor_locator(ticker.MultipleLocator(.05))
+    # .set_major_formatter(FormatStrFormatter('%.3f'))
+
+    ax[1].set_title(f"Curva de predicción con $\\rho$={rho:,} $\u03A9$ cm y pH={ph:.1f} a un pot_off:{pot_off:.3f} V", fontsize=8)
+    leyenda1=ax[1].legend(handles=[ puntos_ajuste, Linea_criterio,Linea_pot_nat, asintota], loc='upper right',fontsize=6)
+    ax[1].add_artist(leyenda1)
+
+    leyenda2=ax[1].legend(handles=[punto_predict], loc='upper left', fontsize=8)
+    ax[1].add_artist(leyenda2)
+
+    leyenda3=ax[1].legend(handles=curva_plot, loc='lower right', fontsize=6)
+    ax[1].add_artist(leyenda3)
+
+
+    ax[1].set_xlim(0,mpy_uhlig*1.1)
+    ax[1].set_ylim(-.4,-1.6)
+    ax[1].grid(True)
+    # fig.tight_layout()
+    return fig
 
 
