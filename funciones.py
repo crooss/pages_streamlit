@@ -422,18 +422,18 @@ def mpy_UGLIH(rho,ph):
 
 
 #%%
-import pandas as pd
-import matplotlib.pyplot as plt
-import numpy as np
-from scipy.interpolate import RegularGridInterpolator # type: ignore
-from matplotlib.ticker import MultipleLocator, FuncFormatter # type: ignore
-import matplotlib.ticker as ticker
-from matplotlib.ticker import (MultipleLocator, AutoMinorLocator,FormatStrFormatter)
-import math
-from scipy.optimize import curve_fit
-import warnings
-from scipy.optimize import OptimizeWarning
-warnings.filterwarnings("ignore", category=OptimizeWarning)
+# import pandas as pd
+# import matplotlib.pyplot as plt
+# import numpy as np
+# from scipy.interpolate import RegularGridInterpolator # type: ignore
+# from matplotlib.ticker import MultipleLocator, FuncFormatter # type: ignore
+# import matplotlib.ticker as ticker
+# from matplotlib.ticker import (MultipleLocator, AutoMinorLocator,FormatStrFormatter)
+# import math
+# from scipy.optimize import curve_fit
+# import warnings
+# from scipy.optimize import OptimizeWarning
+# warnings.filterwarnings("ignore", category=OptimizeWarning)
 
 def Modelado_mitigación_UHLIG(rho, ph, pot_off):
     ph if ph != 7 else ph+.00001  # Asegurar que el pH no sea menor a 3

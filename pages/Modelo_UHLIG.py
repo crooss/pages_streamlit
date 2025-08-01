@@ -6,8 +6,6 @@ from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 import math
 from funciones import graficar, texto, radianes_a_horas, Modelado_mitigación_UHLIG
 matplotlib.use('agg')
-import pandas as pd
-import matplotlib.pyplot as plt
 from scipy.interpolate import RegularGridInterpolator # type: ignore
 from matplotlib.ticker import MultipleLocator, FuncFormatter # type: ignore
 import matplotlib.ticker as ticker
