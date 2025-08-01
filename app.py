@@ -15,6 +15,13 @@ def main():
         "Prediccion mpy": "pages/Modelo_UHLIG"
     }
     
+    
+    hide_github_icon = """
+    #GithubIcon {
+    visibility: hidden;
+    }
+    """
+    st.markdown(hide_github_icon, unsafe_allow_html=True)
     # selection = st.sidebar.radio("Go to", list(pages.keys()), index=None)
     # page = None
 
