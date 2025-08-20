@@ -14,8 +14,7 @@ def main():
         "Geometry": "pages/Geometry_Dimension_Class",
         "Prediccion mpy": "pages/Modelo_UHLIG"
     }
-    
-    
+        
     hide_streamlit_style = """
                 <style>
                 #MainMenu {visibility: hidden;}
