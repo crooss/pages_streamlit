@@ -75,7 +75,7 @@ def xls_a_shp():
             st.download_button(
                 label="Descargar archivo",
                 data=archivo,
-                file_name=nombre_archivo,
+                file_name=nombre_archivo.split('images/')[1],
                 mime="application/zip"
             )
 
