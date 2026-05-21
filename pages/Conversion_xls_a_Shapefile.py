@@ -1,4 +1,5 @@
 import streamlit as st
+import pandas as pd
 import matplotlib
 import numpy as np
 import matplotlib.pyplot as plt
@@ -9,7 +10,25 @@ matplotlib.use('agg')
 
 
 def xls_a_shp():
-    st.title("Realizar gráfico de posición horaria de una anomalía")
+    st.title("Convertir xls a shapefile")
+    
+    # Widget para subir el archivo .xls o .xlsx
+    uploaded_file = st.file_uploader("Sube tu archivo Excel", type=["xls", "xlsx"])
+
+    if uploaded_file is not None:
+        try:
+            # Leemos el archivo cargado
+            df = pd.read_excel(uploaded_file)
+            
+            st.success("¡Archivo cargado con éxito!")
+            
+            # Mostramos los datos en una tabla interactiva
+            st.write("Vista previa de los datos:")
+            st.dataframe(df)
+            
+        except Exception as e:
+            st.error(f"Hubo un error al procesar el archivo: {e}")
+    
     nombre=st.text_input("Nombre de la anomalía", value="#1")
     angulo_inicio=st.number_input("Ángulo inicial [°]", min_value=0.0, max_value=360.0, format="%.4f", step=0.0001)
     angulo_final=st.number_input("Ángulo final [°]",min_value=0.0, max_value=360.0, format="%.4f", step=0.0001)
