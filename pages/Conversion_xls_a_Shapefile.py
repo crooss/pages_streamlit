@@ -77,6 +77,7 @@ def xls_a_shp():
             data=resultado,
             file_name="datos_generados.zip",
             mime="application/zip"
+            key="download-zip"
         )        
             
     # seleccion_X = st.selectbox("Elige una opción:", opciones_X)
