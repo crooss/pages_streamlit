@@ -70,7 +70,7 @@ def xls_a_shp():
             else:
                 st.warning("Por favor, sube un archivo Excel antes de intentar convertirlo.")
         
-        st.divider()
+        # st.divider()
 
         if creado==1:
             nombre_archivo =f'images/{shape_name}.shp.zip'
@@ -85,7 +85,6 @@ def xls_a_shp():
         
     if creado==1:
         graf= st.checkbox("Mostrar shapefile en mapa")
-        st.write(seleccion_X, seleccion_Y)
         # dataframe_gdf = gdf[gdf[seleccion_X, seleccion_Y]]
         dataframe_gdf = gdf.rename(columns={seleccion_X: "longitude", seleccion_Y: "latitude"})
         
