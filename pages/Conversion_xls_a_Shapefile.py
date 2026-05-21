@@ -74,7 +74,7 @@ def xls_a_shp():
     if "file_zip" in st.session_state:
         st.download_button(
             label="Descargar datos en zip",
-            data=st.session_state.file_zip,
+            data=resultado,
             file_name="datos_generados.zip",
             mime="application/zip"
         )        
