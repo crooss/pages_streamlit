@@ -2,6 +2,10 @@ def texto(texto):
     return texto.upper()
 
 import math
+import shutil
+import os
+import tempfile
+from pathlib import Path
 
 
 def radianes_a_horas(radianes):
@@ -546,8 +550,21 @@ def df_to_shp(df, lat_col='Latitud', lon_col='Longitud', EPSG_code=None, shape_n
         gdf = gpd.GeoDataFrame(df, geometry=geometry, crs=epsg_code)
 
     # Save the GeoDataFrame as a Shapefile
-    shapefile_path = f'images/{shape_name}.zip'
+    shapefile_path = f'images/{shape_name}.shp.zip'
     archivo_shp=gdf.to_file(shapefile_path, driver='ESRI Shapefile')
+    
+    with tempfile.TemporaryDirectory() as temp_dir:
+        temp_dir_path = Path(temp_dir)
+        
+        # Export to the temporary directory
+        # (Use driver='GPKG' if exporting to a GeoPackage instead of a Shapefile)
+        gdf.to_file(filename=temp_dir_path, driver='ESRI Shapefile')
+        
+        # Compress the temporary folder into a zip file
+        # This creates 'my_spatial_data.zip' in your current directory
+        shutil.make_archive('my_spatial_data', 'zip', temp_dir_path)
+    
+    
 
     print(f'Shapefile saved to {shapefile_path}')
     

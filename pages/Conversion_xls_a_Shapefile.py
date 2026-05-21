@@ -60,9 +60,9 @@ def xls_a_shp():
     if st.button("Convertir a Shapefile"):
         if uploaded_file is not None:
             try:
-                file_zip= df_to_shp(df, lat_col=seleccion_Y, lon_col=seleccion_X, EPSG_code=diccionario_crs[opc_CRS], shape_name=uploaded_file.name.split('.')[0])
+                resultado= df_to_shp(df, lat_col=seleccion_Y, lon_col=seleccion_X, EPSG_code=diccionario_crs[opc_CRS], shape_name=uploaded_file.name.split('.')[0])
                 st.success("¡Archivo convertido a Shapefile con éxito!")
-                st.session_state.file_zip = file_zip
+                st.session_state.file_zip = resultado
                 
             except Exception as e:
                 st.error(f"Hubo un error al convertir el archivo: {e}")
