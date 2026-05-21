@@ -82,6 +82,7 @@ def xls_a_shp():
                     mime="application/zip"
                 )
         
+    if creado==1:
         graf= st.checkbox("Mostrar shapefile en mapa")
         dataframe_gdf = gdf[seleccion_X, seleccion_Y]
         dataframe_gdf = gdf.rename(columns={seleccion_X: "longitude", seleccion_Y: "latitude"})
