@@ -77,21 +77,24 @@ def xls_a_shp():
         # Crear un archivo ZIP en memoria
         zip_buffer = io.BytesIO()
         
-        with zipfile.ZipFile(zip_buffer, 'w', zipfile.ZIP_DEFLATED) as zip_file:
-            # Guardar el shapefile temporalmente
-            import tempfile
-            with tempfile.TemporaryDirectory() as tmpdir:
-                # Guardar el shapefile en el directorio temporal
-                shapefile_path = f"{tmpdir}/mi_shapefile"
-                gdf.to_file(shapefile_path, driver='ESRI Shapefile')
+    with zipfile.ZipFile(zip_buffer, 'w', zipfile.ZIP_DEFLATED) as zip_file:
+        # Guardar el shapefile temporalmente
+    #         import tempfile
+    #         with tempfile.TemporaryDirectory() as tmpdir:
+    #             # Guardar el shapefile en el directorio temporal
+    #             shapefile_path = f"{tmpdir}/mi_shapefile"
+    #             gdf.to_file(shapefile_path, driver='ESRI Shapefile')
                 
-                # Agregar los archivos al ZIP
-                import os
-                for file in os.listdir(tmpdir):
-                    file_path = os.path.join(tmpdir, file)
-                    zip_file.write(file_path, arcname=file)
+        # Agregar los archivos al ZIP
+        for file in os.listdir('images'):
+            file_path = os.path.join('images', file)
+            zip_file.write(file_path, arcname=file)
         
-        zip_buffer.seek(0)
+        for file in os.listdir('images'):
+            if file.endswith(".shp.zip"):
+                os.remove(os.path.join('images', file))
+        
+        
         
         # Botón de descarga
         st.download_button(
