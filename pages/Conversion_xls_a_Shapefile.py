@@ -69,12 +69,13 @@ def xls_a_shp():
     
     st.divider()
     st.write(f"{file_zip}")
-    st.download_button(
-        label="Descargar datos en zip",
-        data= file_zip,
-        file_name=f"datos_generados.zip",
-        mime="application/zip"
-        )        
+    
+    # st.download_button(
+    #     label="Descargar datos en zip",
+    #     data= file_zip,
+    #     file_name=f"datos_generados.zip",
+    #     mime="application/zip"
+    #     )        
             
     # seleccion_X = st.selectbox("Elige una opción:", opciones_X)
     # seleccion_Y = st.selectbox("Elige una opción:", opciones_Y)
