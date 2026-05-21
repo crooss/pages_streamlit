@@ -83,7 +83,7 @@ def xls_a_shp():
                 )
         
         graf= st.checkbox("Mostrar shapefile en mapa")
-        dataframe_gdf = pd.DataFrame(gdf)
+        dataframe_gdf = gdf[seleccion_X, seleccion_Y]
         if graf and creado==1:
             
             st.map(dataframe_gdf)  # Mostrar el shapefile en un mapa interactivo
