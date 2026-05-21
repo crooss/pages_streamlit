@@ -61,7 +61,7 @@ def xls_a_shp():
     if st.button("Convertir a Shapefile"):
         if uploaded_file is not None:
             try:
-                gdf = df_to_shp(df, lat_col=seleccion_Y, lon_col=seleccion_X, EPSG_code=diccionario_crs[opc_CRS], shape_name=uploaded_file.name.split('.xlsx')[0])
+                datos = df_to_shp(df, lat_col=seleccion_Y, lon_col=seleccion_X, EPSG_code=diccionario_crs[opc_CRS], shape_name=uploaded_file.name.split('.xlsx')[0])
                 st.success("¡Archivo convertido a Shapefile con éxito!")   
             except Exception as e:
                 st.error(f"Hubo un error al convertir el archivo: {e}")
@@ -98,7 +98,7 @@ def xls_a_shp():
     
     st.download_button(
         label="📥 Descargar como ZIP",
-        data=descargar_shapefile(gdf, "mi_mapa"),
+        data=descargar_shapefile(datos, "mi_mapa"),
         file_name="mi_mapa.zip",
         mime="application/zip",
         key="descargar_shape"
