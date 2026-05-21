@@ -23,7 +23,7 @@ def xls_a_shp():
             # Leemos el archivo cargado
             df = pd.read_excel(uploaded_file, sheet_name=hoja_seleccionada)
             
-            st.success("¡Archivo cargado con éxito! {uploaded_file.name}")
+            st.success(f"¡Archivo cargado con éxito! {uploaded_file.name}")
             
             # # Mostramos los datos en una tabla interactiva
             # st.write("Vista previa de los datos:")
