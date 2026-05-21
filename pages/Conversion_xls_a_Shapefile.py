@@ -68,7 +68,7 @@ def xls_a_shp():
             else:
                 st.warning("Por favor, sube un archivo Excel antes de intentar convertirlo.")
         
-        # st.divider()
+        st.divider()
         
         if creado==1:
             nombre_archivo =f'images/{shape_name}.shp.zip'
