@@ -569,4 +569,4 @@ def df_to_shp(df, lat_col='Latitud', lon_col='Longitud', EPSG_code=None, shape_n
 
     print(f'Shapefile saved to {shapefile_path}')
     
-    return gdf, shapefile_path
+    return gdf
