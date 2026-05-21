@@ -81,7 +81,12 @@ def xls_a_shp():
                     file_name=nombre_archivo.split('images/')[1],
                     mime="application/zip"
                 )
-        st.map(gdf['geometry'])  # Mostrar el shapefile en un mapa interactivo
+        
+        graf= st.checkbox("Mostrar shapefile en mapa")
+        dataframe_gdf = pd.DataFrame(gdf)
+        if graf and creado==1:
+            
+            st.map(dataframe_gdf)  # Mostrar el shapefile en un mapa interactivo
 
             
     
