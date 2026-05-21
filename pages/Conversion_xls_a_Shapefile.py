@@ -5,6 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 import math
+import os
 from funciones import graficar, texto, radianes_a_horas, df_to_shp
 matplotlib.use('agg')
 
@@ -60,10 +61,8 @@ def xls_a_shp():
     if st.button("Convertir a Shapefile"):
         if uploaded_file is not None:
             try:
-                resultado= df_to_shp(df, lat_col=seleccion_Y, lon_col=seleccion_X, EPSG_code=diccionario_crs[opc_CRS], shape_name=uploaded_file.name.split('.xlsx')[0])
-                st.success("¡Archivo convertido a Shapefile con éxito!")
-                st.session_state.file_zip = resultado
-                
+                gdf, shapefile_path= df_to_shp(df, lat_col=seleccion_Y, lon_col=seleccion_X, EPSG_code=diccionario_crs[opc_CRS], shape_name=uploaded_file.name.split('.xlsx')[0])
+                st.success("¡Archivo convertido a Shapefile con éxito!")   
             except Exception as e:
                 st.error(f"Hubo un error al convertir el archivo: {e}")
         else:
@@ -71,14 +70,39 @@ def xls_a_shp():
     
     st.divider()
     
-    if "file_zip" in st.session_state:
-        st.download_button(
-            label="Descargar datos en zip",
-            data=resultado,
-            file_name="datos_generados.zip",
-            mime="application/zip"
-            key="download-zip"
-        )        
+    def descargar_shapefile(gdf, nombre="shapefile"):
+        """
+        Genera un ZIP con los archivos del shapefile
+        """
+        import zipfile
+        import tempfile
+        import io
+        
+        zip_buffer = io.BytesIO()
+        
+        with zipfile.ZipFile(zip_buffer, 'w', zipfile.ZIP_DEFLATED) as zip_file:
+            with tempfile.TemporaryDirectory() as tmpdir:
+                # Guardar shapefile
+                output_path = os.path.join(tmpdir, nombre)
+                gdf.to_file(output_path, driver='ESRI Shapefile')
+                
+                # Agregar archivos al ZIP
+                for filename in os.listdir(tmpdir):
+                    file_path = os.path.join(tmpdir, filename)
+                    if os.path.isfile(file_path):
+                        zip_file.write(file_path, arcname=filename)
+        
+        zip_buffer.seek(0)
+        return zip_buffer.getvalue()
+    
+    
+    st.download_button(
+        label="📥 Descargar como ZIP",
+        data=descargar_shapefile(gdf, "mi_mapa"),
+        file_name="mi_mapa.zip",
+        mime="application/zip",
+        key="descargar_shape"
+    )      
             
     # seleccion_X = st.selectbox("Elige una opción:", opciones_X)
     # seleccion_Y = st.selectbox("Elige una opción:", opciones_Y)

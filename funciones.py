@@ -530,30 +530,7 @@ def Modelado_mitigación_UHLIG(rho, ph, pot_off):
     # fig.tight_layout()
     return fig
 
-def descargar_shapefile(gdf, nombre="shapefile"):
-    """
-    Genera un ZIP con los archivos del shapefile
-    """
-    import zipfile
-    import tempfile
-    import io
-    
-    zip_buffer = io.BytesIO()
-    
-    with zipfile.ZipFile(zip_buffer, 'w', zipfile.ZIP_DEFLATED) as zip_file:
-        with tempfile.TemporaryDirectory() as tmpdir:
-            # Guardar shapefile
-            output_path = os.path.join(tmpdir, nombre)
-            gdf.to_file(output_path, driver='ESRI Shapefile')
-            
-            # Agregar archivos al ZIP
-            for filename in os.listdir(tmpdir):
-                file_path = os.path.join(tmpdir, filename)
-                if os.path.isfile(file_path):
-                    zip_file.write(file_path, arcname=filename)
-    
-    zip_buffer.seek(0)
-    return zip_buffer.getvalue()
+
 
 def df_to_shp(df, lat_col='Latitud', lon_col='Longitud', EPSG_code=None, shape_name='output_shapefile'):
     import utm
@@ -576,7 +553,6 @@ def df_to_shp(df, lat_col='Latitud', lon_col='Longitud', EPSG_code=None, shape_n
     # Save the GeoDataFrame as a Shapefile
     shapefile_path = f'images/{shape_name}.shp.zip'
     archivo_shp=gdf.to_file(shapefile_path, driver='ESRI Shapefile')
-    zip=descargar_shapefile(gdf, nombre=shape_name)
     
     # with tempfile.TemporaryDirectory() as temp_dir:
     #     temp_dir_path = Path(temp_dir)
@@ -593,4 +569,4 @@ def df_to_shp(df, lat_col='Latitud', lon_col='Longitud', EPSG_code=None, shape_n
 
     print(f'Shapefile saved to {shapefile_path}')
     
-    return zip
+    return gdf, shapefile_path
