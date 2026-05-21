@@ -12,7 +12,8 @@ def main():
         "Grafica Horaria": "pages/Grafica_horaria",
         "Conductancia específica": "pages/Conductancia_específica",
         "Geometry": "pages/Geometry_Dimension_Class",
-        "Prediccion mpy": "pages/Modelo_UHLIG"
+        "Prediccion mpy": "pages/Modelo_UHLIG",
+        "Conversion xls a Shapefile": "pages/Conversion_xls_a_Shapefile"
     }
         
     hide_streamlit_style = """
