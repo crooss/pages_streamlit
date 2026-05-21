@@ -45,13 +45,17 @@ def xls_a_shp():
     if seleccion_X and seleccion_Y:
         st.write(f"Coordenada X: {seleccion_X}")
         st.write(f"Coordenada Y: {seleccion_Y}")
-        opc_CRS= st.selectbox("Selecciona el sistema de referencia de coordenadas (CRS)", {"WGS 84": "EPSG:4326",
-                                                                                       "UTM Zona 12N": "EPSG:32612",
-                                                                                       "UTM Zona 13N": "EPSG:32613", 
-                                                                                       "UTM Zona 14N": "EPSG:32614", 
-                                                                                       "UTM Zona 15N": "EPSG:32615"})
+        
+        diccionario_crs = {"WGS 84": "EPSG:4326",
+                            "UTM Zona 12N": "EPSG:32612",
+                            "UTM Zona 13N": "EPSG:32613",
+                            "UTM Zona 14N": "EPSG:32614",
+                            "UTM Zona 15N": "EPSG:32615"
+                            }
+        
+        opc_CRS= st.selectbox("Selecciona el sistema de referencia de coordenadas (CRS)", list(diccionario_crs.keys()))
     
-        st.write(f"CRS: {opc_CRS}")
+        st.write(f"CRS: {diccionario_crs[opc_CRS]}")
     
     if st.button("Convertir a Shapefile"):
         if uploaded_file is not None:
