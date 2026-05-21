@@ -524,4 +524,24 @@ def Modelado_mitigación_UHLIG(rho, ph, pot_off):
     # fig.tight_layout()
     return fig
 
+def df_to_shp(hoja, shape_name, lat_col='Latitud', lon_col='Longitud'):
+    warnings.filterwarnings("ignore")
+    
+    df = pd.read_excel(excel_file, sheet_name=hoja)
+    
+    if lat_col!= 'Latitud' or lon_col != 'Longitud':
+        zona=utm.from_latlon(df['Latitud'][0], df['Longitud'][0])[2]
+        epsg_code =int(f'326{zona}')  # Para el hemisferio norte, usar 326; para el sur, usar 327
+        geometry = [Point(xy) for xy in zip(df[lon_col], df[lat_col])]
+        gdf = gpd.GeoDataFrame(df, geometry=geometry, crs=epsg_code)
+    else:
+        epsg_code = 'EPSG:4326'  # Coordenadas geográficas (latitud/longitud)    
+        # Create a GeoDataFrame
+        geometry = [Point(xy) for xy in zip(df[lon_col], df[lat_col])]
+        gdf = gpd.GeoDataFrame(df, geometry=geometry, crs=epsg_code)
 
+    # Save the GeoDataFrame as a Shapefile
+    shapefile_path = f'shapefile/{shape_name}.shp'
+    gdf.to_file(shapefile_path, driver='ESRI Shapefile')
+
+    print(f'Shapefile saved to {shapefile_path}')

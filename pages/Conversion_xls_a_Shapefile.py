@@ -17,8 +17,11 @@ def xls_a_shp():
 
     if uploaded_file is not None:
         try:
+            hojas=pd.ExcelFile(uploaded_file).sheet_names
+            st.write("Hojas disponibles en el archivo:")
+            hoja_seleccionada = st.selectbox("Selecciona la hoja de datos", hojas)
             # Leemos el archivo cargado
-            df = pd.read_excel(uploaded_file)
+            df = pd.read_excel(uploaded_file, sheet_name=hoja_seleccionada)
             
             st.success("¡Archivo cargado con éxito!")
             
@@ -31,11 +34,11 @@ def xls_a_shp():
     
     c1, c2= st.columns([1, 1])
     with c1:
-        st.write("coordenadas X")
+        # st.write("coordenadas X")
         opciones_X = df.columns.tolist() if uploaded_file is not None else ["Opción 1", "Opción 2", "Opción 3"]
         seleccion_X = st.selectbox("coordenadas X:", opciones_X)
     with c2:
-        st.write("coordenadas Y")
+        # st.write("coordenadas Y")
         opciones_Y = df.columns.tolist() if uploaded_file is not None else ["Opción 1", "Opción 2", "Opción 3"]
         seleccion_Y = st.selectbox("coordenadas Y:", opciones_Y)
 
