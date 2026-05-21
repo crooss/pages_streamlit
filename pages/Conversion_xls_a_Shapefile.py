@@ -9,6 +9,11 @@ matplotlib.use('agg')
 def xls_a_shp():
     st.title("Convertir xls a shapefile")
     
+    df = None
+    seleccion_X = None
+    seleccion_Y = None
+    opc_CRS = None
+
     # Widget para subir el archivo .xls o .xlsx
     uploaded_file = st.file_uploader("Sube tu archivo Excel", type=["xls", "xlsx"])
 
@@ -57,24 +62,25 @@ def xls_a_shp():
             st.write(f"CRS: {diccionario_crs[opc_CRS]}")
     
     if uploaded_file is not None and seleccion_X and seleccion_Y and opc_CRS:
-        creado=""
         if st.button("Convertir a Shapefile"):
             if uploaded_file is not None:
                 try:
-                    shape_name=f"{opc_CRS}_{uploaded_file.name.split('.xlsx')[0]}"
-                    shapefile_path,gdf = df_to_shp(df, lat_col=seleccion_Y, lon_col=seleccion_X, EPSG_code=diccionario_crs[opc_CRS], shape_name=shape_name)
-                    creado=1
+                    shape_name = f"{opc_CRS}_{uploaded_file.name.rsplit('.', 1)[0]}"
+                    shapefile_path, gdf = df_to_shp(df, lat_col=seleccion_Y, lon_col=seleccion_X, EPSG_code=diccionario_crs[opc_CRS], shape_name=shape_name)
+                    st.session_state['conversion_success'] = True
+                    st.session_state['gdf'] = gdf
+                    st.session_state['shape_name'] = shape_name
+                    st.session_state['shapefile_path'] = shapefile_path
+                    st.session_state['seleccion_X'] = seleccion_X
+                    st.session_state['seleccion_Y'] = seleccion_Y
                     st.success("¡Archivo convertido a Shapefile con éxito!")   
                 except Exception as e:
                     st.error(f"Hubo un error al convertir el archivo: {e}")
             else:
                 st.warning("Por favor, sube un archivo Excel antes de intentar convertirlo.")
         
-        # st.divider()
-
-        if creado==1:
-            nombre_archivo =f'images/{shape_name}.shp.zip'
-
+        if st.session_state.get('conversion_success'):
+            nombre_archivo = f"images/{st.session_state['shape_name']}.shp.zip"
             with open(nombre_archivo, "rb") as archivo:
                 st.download_button(
                     label="Descargar archivo",
@@ -82,15 +88,18 @@ def xls_a_shp():
                     file_name=nombre_archivo.split('images/')[1],
                     mime="application/zip"
                 )
-        
-    if creado==1:
-        graf= st.checkbox("Mostrar shapefile en mapa")
-        dataframe_gdf = gdf[gdf[seleccion_X, seleccion_Y]]
+
+    if st.session_state.get('conversion_success'):
+        graf = st.checkbox("Mostrar shapefile en mapa")
+        gdf = st.session_state['gdf']
+        seleccion_X = st.session_state['seleccion_X']
+        seleccion_Y = st.session_state['seleccion_Y']
+
         dataframe_gdf = gdf.rename(columns={seleccion_X: "longitude", seleccion_Y: "latitude"})
         
-        if graf==1:
+        if graf:
             st.header("Visualización del Shapefile en un mapa interactivo")
-            st.map(dataframe_gdf, width='stretch' )  # Mostrar el shapefile en un mapa interactivo
+            st.map(dataframe_gdf, width='stretch')  # Mostrar el shapefile en un mapa interactivo
 
             
     
