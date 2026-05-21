@@ -437,11 +437,11 @@ warnings.filterwarnings("ignore", category=OptimizeWarning)
 
 def Modelado_mitigación_UHLIG(rho, ph, pot_off):
     ph if ph != 7 else ph+.00001  # Asegurar que el pH no sea menor a 3
-    if ph>14:
+    if ph>14.0:
         print("El pH no puede ser mayor a 14")
         return 
     # mpy_uhlig = mpy_UGLIH(rho, ph)  # Cálculo de mpy según UHLIG
-    mpy_uhlig = mpy_UGLIH(rho, ph)  if mpy_UGLIH(rho, ph)>1.5 else 1.5 # limitar a 1.5, evitar error
+    mpy_uhlig = mpy_UGLIH(rho, ph)  if mpy_UGLIH(rho, ph)>1.5 else 1.5 # type: ignore # limitar a 1.5, evitar error
     x=np.linspace(10,50000,100)
     y=np.linspace(3,14)
     x,y=np.meshgrid(x,y)
@@ -480,7 +480,7 @@ def Modelado_mitigación_UHLIG(rho, ph, pot_off):
     # Ajuste de parámetros
     params, _ = curve_fit(log_asymptotic, x_data, y_data)
     A, B = params
-    x = np.linspace(.1+.01, mpy_uhlig, 500)  # evitar x=0.1 por la singularidad
+    x = np.linspace(.1+.01, mpy_uhlig, 500)  # type: ignore # evitar x=0.1 por la singularidad
     y = log_asymptotic(x, A, B)
     mpy_predict=x[np.where(y>=pot_off)[0][0]]
 
@@ -518,7 +518,7 @@ def Modelado_mitigación_UHLIG(rho, ph, pot_off):
     ax[1].add_artist(leyenda3)
 
 
-    ax[1].set_xlim(0,mpy_uhlig*1.1)
+    ax[1].set_xlim(0,mpy_uhlig*1.1) # type: ignore
     ax[1].set_ylim(-.4,-1.6)
     ax[1].grid(True)
     # fig.tight_layout()
