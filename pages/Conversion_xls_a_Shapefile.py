@@ -5,7 +5,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 import math
-from funciones import graficar, texto, radianes_a_horas
+from funciones import graficar, texto, radianes_a_horas, df_to_shp
 matplotlib.use('agg')
 
 
@@ -47,6 +47,18 @@ def xls_a_shp():
                                                                                        "UTM Zona 13N": "EPSG:32613", 
                                                                                        "UTM Zona 14N": "EPSG:32614", 
                                                                                        "UTM Zona 15N": "EPSG:32615"})
+    st.write(f"Has seleccionado: {seleccion_X} para coordenadas X, {seleccion_Y} para coordenadas Y, y el CRS: {opc_CRS}")
+    if st.button("Convertir a Shapefile"):
+        if uploaded_file is not None:
+            try:
+                df_to_shp(df, "shapefile_output", lat_col=seleccion_Y, lon_col=seleccion_X)
+                st.success("¡Archivo convertido a Shapefile con éxito!")
+            except Exception as e:
+                st.error(f"Hubo un error al convertir el archivo: {e}")
+        else:
+            st.warning("Por favor, sube un archivo Excel antes de intentar convertirlo.")
+            
+            
     # seleccion_X = st.selectbox("Elige una opción:", opciones_X)
     # seleccion_Y = st.selectbox("Elige una opción:", opciones_Y)
    
