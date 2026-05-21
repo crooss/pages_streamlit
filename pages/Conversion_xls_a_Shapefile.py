@@ -48,7 +48,7 @@ def xls_a_shp():
                                                                                        "UTM Zona 14N": "EPSG:32614", 
                                                                                        "UTM Zona 15N": "EPSG:32615"})
     
-    st.write(f"Has seleccionado: {seleccion_X} para X, "\n" {seleccion_Y} para Y, y el CRS: {opc_CRS}")
+    st.write(f"Has seleccionado: {seleccion_X} para X, {"\n"} {seleccion_Y} para Y, y el CRS: {opc_CRS}")
     
     if st.button("Convertir a Shapefile"):
         if uploaded_file is not None:
