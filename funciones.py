@@ -535,10 +535,10 @@ def df_to_shp(df, lat_col='Latitud', lon_col='Longitud', EPSG_code=None, shape_n
     warnings.filterwarnings("ignore")
         
     if lat_col!= 'Latitud' or lon_col != 'Longitud':
-        zona=utm.from_latlon(df['Latitud'][0], df['Longitud'][0])[2]
-        epsg_code =EPSG_code if EPSG_code else f'EPSG:{32600+zona}'  # UTM zona correspondiente
+        # zona=utm.from_latlon(df['Latitud'][0], df['Longitud'][0])[2]
+        # epsg_code =EPSG_code if EPSG_code else f'EPSG:{32600+zona}'  # UTM zona correspondiente
         geometry = [Point(xy) for xy in zip(df[lon_col], df[lat_col])]
-        gdf = gpd.GeoDataFrame(df, geometry=geometry, crs=epsg_code)
+        gdf = gpd.GeoDataFrame(df, geometry=geometry, crs=EPSG_code)
     else:
         epsg_code = EPSG_code if EPSG_code else 'EPSG:4326'  # Coordenadas geográficas (latitud/longitud)
         # Create a GeoDataFrame
