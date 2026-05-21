@@ -12,11 +12,9 @@ def main():
         "Grafica Horaria": "pages/Grafica_horaria",
         "Conductancia específica": "pages/Conductancia_específica",
         "Geometry": "pages/Geometry_Dimension_Class",
-        "Prediccion mpy": "pages/Modelo_UHLIG",
-        "Conversion xls a Shapefile": "pages/Conversion_xls_a_Shapefile"
+        "Prediccion mpy": "pages/Modelo_UHLIG"
     }
-    
-    
+        
     hide_streamlit_style = """
                 <style>
                 #MainMenu {visibility: hidden;}
