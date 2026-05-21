@@ -68,7 +68,7 @@ def xls_a_shp():
     # st.divider()
     
     if creado==1:
-        nombre_archivo =shapefile_path
+        nombre_archivo =shapefile_path.split('images/')[1]
 
 
         st.download_button(
