@@ -29,9 +29,13 @@ def xls_a_shp():
         except Exception as e:
             st.error(f"Hubo un error al procesar el archivo: {e}")
     
-    
-    # Tu lista de opciones
-    opciones = df.columns.tolist() if uploaded_file is not None else ["Opción 1", "Opción 2", "Opción 3"]
+    c1, c2, c3 = st.columns([1, 1, 1])
+    with c1:
+        st.write("coordenadas X")
+        opciones_X = df.columns.tolist() if uploaded_file is not None else ["Opción 1", "Opción 2", "Opción 3"]
+    with c2:
+        st.write("coordenadas Y")
+        opciones_Y = df.columns.tolist() if uploaded_file is not None else ["Opción 1", "Opción 2", "Opción 3"]
 
     # Crear el combobox
     seleccion = st.selectbox("Elige una opción:", opciones)
