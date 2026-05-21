@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import matplotlib
+
 from funciones import df_to_shp
 matplotlib.use('agg')
 
@@ -88,7 +89,9 @@ def xls_a_shp():
         # dataframe_gdf = gdf[gdf[seleccion_X, seleccion_Y]]
         dataframe_gdf = gdf.rename(columns={seleccion_X: "longitude", seleccion_Y: "latitude"})
         
-            
+        st.header("Visualización del Shapefile en un mapa interactivo")
+        for idx, reg in dataframe_gdf.itertuples():
+            st.write(f"Registro: {reg}") 
         st.map(dataframe_gdf)  # Mostrar el shapefile en un mapa interactivo
 
             
