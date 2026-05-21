@@ -57,8 +57,8 @@ def xls_a_shp():
     if st.button("Convertir a Shapefile"):
         if uploaded_file is not None:
             try:
-                shape_name=uploaded_file.name.split('.xlsx')[0]
-                shapefile_path = df_to_shp(df, lat_col=seleccion_Y, lon_col=seleccion_X, EPSG_code=diccionario_crs[opc_CRS], shape_name=uploaded_file.name.split('.xlsx')[0])
+                shape_name=f"{opc_CRS}_{uploaded_file.name.split('.xlsx')[0]}"
+                shapefile_path = df_to_shp(df, lat_col=seleccion_Y, lon_col=seleccion_X, EPSG_code=diccionario_crs[opc_CRS], shape_name=shape_name)
                 creado=1
                 st.success("¡Archivo convertido a Shapefile con éxito!")   
             except Exception as e:
