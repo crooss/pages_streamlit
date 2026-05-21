@@ -29,6 +29,13 @@ def xls_a_shp():
         except Exception as e:
             st.error(f"Hubo un error al procesar el archivo: {e}")
     
+    
+    # Tu lista de opciones
+    opciones = df.columns.tolist() if uploaded_file is not None else ["Opción 1", "Opción 2", "Opción 3"]
+
+    # Crear el combobox
+    seleccion = st.selectbox("Elige una opción:", opciones)
+    
     nombre=st.text_input("Nombre de la anomalía", value="#1")
     angulo_inicio=st.number_input("Ángulo inicial [°]", min_value=0.0, max_value=360.0, format="%.4f", step=0.0001)
     angulo_final=st.number_input("Ángulo final [°]",min_value=0.0, max_value=360.0, format="%.4f", step=0.0001)
