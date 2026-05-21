@@ -63,7 +63,7 @@ def xls_a_shp():
     if st.button("Convertir a Shapefile"):
         if uploaded_file is not None:
             try:
-                gdf = df_to_shp(df, lat_col=seleccion_Y, lon_col=seleccion_X, EPSG_code=diccionario_crs[opc_CRS], shape_name=uploaded_file.name.split('.xlsx')[0])
+                shapefile_path = df_to_shp(df, lat_col=seleccion_Y, lon_col=seleccion_X, EPSG_code=diccionario_crs[opc_CRS], shape_name=uploaded_file.name.split('.xlsx')[0])
                 st.success("¡Archivo convertido a Shapefile con éxito!")   
             except Exception as e:
                 st.error(f"Hubo un error al convertir el archivo: {e}")
@@ -72,36 +72,6 @@ def xls_a_shp():
     
     st.divider()
     
-    
-    if st.button("Descargar Shapefile"):
-        # Crear un archivo ZIP en memoria
-        zip_buffer = io.BytesIO()
-        
-    with zipfile.ZipFile(zip_buffer, 'w', zipfile.ZIP_DEFLATED) as zip_file:
-        # Guardar el shapefile temporalmente
-    #         import tempfile
-    #         with tempfile.TemporaryDirectory() as tmpdir:
-    #             # Guardar el shapefile en el directorio temporal
-    #             shapefile_path = f"{tmpdir}/mi_shapefile"
-    #             gdf.to_file(shapefile_path, driver='ESRI Shapefile')
-                
-        # Agregar los archivos al ZIP
-        for file in os.listdir('images'):
-            file_path = os.path.join('images', file)
-            zip_file.write(file_path, arcname=file)
-        
-        for file in os.listdir('images'):
-            if file.endswith(".shp.zip"):
-                os.remove(os.path.join('images', file))
-        
-        
-        
-        # Botón de descarga
-        st.download_button(
-            label="📥 Descargar Shapefile",
-            data=zip_buffer.getvalue(),
-            file_name="mi_shapefile.zip",
-            mime="application/zip"
-        )
+    st.write(f"Path del shapefile generado: {shapefile_path}")
 if __name__ == "__main__":
     xls_a_shp()
