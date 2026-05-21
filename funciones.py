@@ -527,7 +527,7 @@ def Modelado_mitigación_UHLIG(rho, ph, pot_off):
     return fig
 
 
-def df_to_shp(df, shape_name, lat_col='Latitud', lon_col='Longitud'):
+def df_to_shp(df, lat_col='Latitud', lon_col='Longitud', EPSG_code=None, shape_name='output_shapefile'):
     import utm
     from shapely.geometry import Point
     import geopandas as gpd
@@ -536,17 +536,19 @@ def df_to_shp(df, shape_name, lat_col='Latitud', lon_col='Longitud'):
         
     if lat_col!= 'Latitud' or lon_col != 'Longitud':
         zona=utm.from_latlon(df['Latitud'][0], df['Longitud'][0])[2]
-        epsg_code =int(f'326{zona}')  # Para el hemisferio norte, usar 326; para el sur, usar 327
+        epsg_code =EPSG_code if EPSG_code else f'EPSG:{32600+zona}'  # UTM zona correspondiente
         geometry = [Point(xy) for xy in zip(df[lon_col], df[lat_col])]
         gdf = gpd.GeoDataFrame(df, geometry=geometry, crs=epsg_code)
     else:
-        epsg_code = 'EPSG:4326'  # Coordenadas geográficas (latitud/longitud)    
+        epsg_code = EPSG_code if EPSG_code else 'EPSG:4326'  # Coordenadas geográficas (latitud/longitud)
         # Create a GeoDataFrame
         geometry = [Point(xy) for xy in zip(df[lon_col], df[lat_col])]
         gdf = gpd.GeoDataFrame(df, geometry=geometry, crs=epsg_code)
 
     # Save the GeoDataFrame as a Shapefile
-    shapefile_path = f'shapefile/{shape_name}.shp'
-    gdf.to_file(shapefile_path, driver='ESRI Shapefile')
+    shapefile_path = f'images/{shape_name}.shp.zip'
+    archivo_shp=gdf.to_file(shapefile_path, driver='ESRI Shapefile')
 
     print(f'Shapefile saved to {shapefile_path}')
+    
+    return shapefile_path

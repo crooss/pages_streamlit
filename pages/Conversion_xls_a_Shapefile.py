@@ -60,13 +60,20 @@ def xls_a_shp():
     if st.button("Convertir a Shapefile"):
         if uploaded_file is not None:
             try:
-                df_to_shp(df, "shapefile_output", lat_col=seleccion_Y, lon_col=seleccion_X)
+                file_zip= df_to_shp(df, lat_col=seleccion_Y, lon_col=seleccion_X, EPSG_code=diccionario_crs[opc_CRS], shape_name=uploaded_file.name.split('.')[0])
                 st.success("¡Archivo convertido a Shapefile con éxito!")
             except Exception as e:
                 st.error(f"Hubo un error al convertir el archivo: {e}")
         else:
             st.warning("Por favor, sube un archivo Excel antes de intentar convertirlo.")
-            
+    
+    
+    st.download_button(
+        label="Descargar datos en zip",
+        data= file_zip,
+        # file_name=f"datos_generados.zip",
+        mime="application/zip"
+        )        
             
     # seleccion_X = st.selectbox("Elige una opción:", opciones_X)
     # seleccion_Y = st.selectbox("Elige una opción:", opciones_Y)
