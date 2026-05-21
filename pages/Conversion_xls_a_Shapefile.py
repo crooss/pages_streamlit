@@ -33,14 +33,14 @@ def xls_a_shp():
     with c1:
         st.write("coordenadas X")
         opciones_X = df.columns.tolist() if uploaded_file is not None else ["Opción 1", "Opción 2", "Opción 3"]
-    seleccion_X = st.selectbox("Elige una opción:", opciones_X)
+        seleccion_X = st.selectbox("coordenadas X:", opciones_X)
     with c2:
         st.write("coordenadas Y")
         opciones_Y = df.columns.tolist() if uploaded_file is not None else ["Opción 1", "Opción 2", "Opción 3"]
-        
+        seleccion_Y = st.selectbox("coordenadas Y:", opciones_Y)
 
-    seleccion_X = st.selectbox("Elige una opción:", opciones_X)
-    seleccion_Y = st.selectbox("Elige una opción:", opciones_Y)
+    # seleccion_X = st.selectbox("Elige una opción:", opciones_X)
+    # seleccion_Y = st.selectbox("Elige una opción:", opciones_Y)
    
     nombre=st.text_input("Nombre de la anomalía", value="#1")
     angulo_inicio=st.number_input("Ángulo inicial [°]", min_value=0.0, max_value=360.0, format="%.4f", step=0.0001)
