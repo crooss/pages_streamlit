@@ -66,8 +66,13 @@ def xls_a_shp():
             if uploaded_file is not None:
                 try:
                     shape_name = f"{opc_CRS}_{uploaded_file.name.rsplit('.', 1)[0]}"
-                    shapefile_path, gdf = df_to_shp(df, lat_col=seleccion_Y, lon_col=seleccion_X, EPSG_code=diccionario_crs[opc_CRS], shape_name=shape_name)
+                    shapefile_path, gdf = df_to_shp(df, 
+                                                    lat_col=seleccion_Y, 
+                                                    lon_col=seleccion_X, 
+                                                    EPSG_code=diccionario_crs[opc_CRS], 
+                                                    shape_name=shape_name)
                     st.session_state['conversion_success'] = True
+                    st.success("¡Archivo convertido a Shapefile con éxito!")
                     st.session_state['gdf'] = gdf
                     st.session_state['shape_name'] = shape_name
                     st.session_state['shapefile_path'] = shapefile_path
