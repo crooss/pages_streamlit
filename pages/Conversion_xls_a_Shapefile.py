@@ -70,7 +70,7 @@ def xls_a_shp():
                 st.warning("Por favor, sube un archivo Excel antes de intentar convertirlo.")
         
         st.divider()
-        mapa=0
+
         if creado==1:
             nombre_archivo =f'images/{shape_name}.shp.zip'
 
@@ -81,10 +81,8 @@ def xls_a_shp():
                     file_name=nombre_archivo.split('images/')[1],
                     mime="application/zip"
                 )
-            mapa=1
+            st.map(gdf.to_crs(epsg=4326))  # Mostrar el shapefile en un mapa interactivo
 
-    if mapa==1:
-        st.map(gdf.geometry)
             
     
     # st.write(f"Path del shapefile generado: {shapefile_path}")
