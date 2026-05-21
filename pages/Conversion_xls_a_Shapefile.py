@@ -60,17 +60,32 @@ def xls_a_shp():
     
         st.write(f"CRS: {diccionario_crs[opc_CRS]}")
     
+    creado=""
     if st.button("Convertir a Shapefile"):
         if uploaded_file is not None:
             try:
                 shapefile_path = df_to_shp(df, lat_col=seleccion_Y, lon_col=seleccion_X, EPSG_code=diccionario_crs[opc_CRS], shape_name=uploaded_file.name.split('.xlsx')[0])
+                creado=1
                 st.success("¡Archivo convertido a Shapefile con éxito!")   
             except Exception as e:
                 st.error(f"Hubo un error al convertir el archivo: {e}")
         else:
             st.warning("Por favor, sube un archivo Excel antes de intentar convertirlo.")
     
-    st.divider()
+    # st.divider()
+    
+    if creado==1:
+        nombre_archivo =f"{uploaded_file.name.split('.xlsx')[0]}.shp.zip" # type: ignore
+
+        # Abrimos el archivo en modo lectura binaria
+        with open(nombre_archivo, "rb") as archivo:
+            st.download_button(
+                label="Descargar archivo",
+                data=archivo,
+                file_name=nombre_archivo,
+                mime="application/zip" # Cambia el MIME type según tu archivo (ej. 'application/pdf', 'text/csv')
+            )
+            
     
     st.write(f"Path del shapefile generado: {shapefile_path}")
 if __name__ == "__main__":
