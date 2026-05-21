@@ -28,30 +28,31 @@ def xls_a_shp():
         except Exception as e:
             st.error(f"Hubo un error al procesar el archivo: {e}")
     
-    c1, c2= st.columns([1, 1])
-    with c1:
-        # st.write("coordenadas X")
-        opciones_X = df.columns.tolist() if uploaded_file is not None else ["Opción 1", "Opción 2", "Opción 3"]
-        seleccion_X = st.selectbox("coordenadas X:", opciones_X)
-    with c2:
-        # st.write("coordenadas Y")
-        opciones_Y = df.columns.tolist() if uploaded_file is not None else ["Opción 1", "Opción 2", "Opción 3"]
-        seleccion_Y = st.selectbox("coordenadas Y:", opciones_Y)
+    if uploaded_file and df is not None:
+        c1, c2= st.columns([1, 1])
+        with c1:
+            # st.write("coordenadas X")
+            opciones_X = df.columns.tolist() if uploaded_file is not None else ["Opción 1", "Opción 2", "Opción 3"]
+            seleccion_X = st.selectbox("coordenadas X:", opciones_X)
+        with c2:
+            # st.write("coordenadas Y")
+            opciones_Y = df.columns.tolist() if uploaded_file is not None else ["Opción 1", "Opción 2", "Opción 3"]
+            seleccion_Y = st.selectbox("coordenadas Y:", opciones_Y)
 
-    if seleccion_X and seleccion_Y:
-        st.write(f"Coordenada X: {seleccion_X}")
-        st.write(f"Coordenada Y: {seleccion_Y}")
+        if seleccion_X and seleccion_Y:
+            st.write(f"Coordenada X: {seleccion_X}")
+            st.write(f"Coordenada Y: {seleccion_Y}")
+            
+            diccionario_crs = {"WGS 84": "EPSG:4326",
+                                "UTM Zona 12N": "EPSG:32612",
+                                "UTM Zona 13N": "EPSG:32613",
+                                "UTM Zona 14N": "EPSG:32614",
+                                "UTM Zona 15N": "EPSG:32615"
+                                }
+            
+            opc_CRS= st.selectbox("Selecciona el sistema de referencia de coordenadas (CRS)", list(diccionario_crs.keys()))
         
-        diccionario_crs = {"WGS 84": "EPSG:4326",
-                            "UTM Zona 12N": "EPSG:32612",
-                            "UTM Zona 13N": "EPSG:32613",
-                            "UTM Zona 14N": "EPSG:32614",
-                            "UTM Zona 15N": "EPSG:32615"
-                            }
-        
-        opc_CRS= st.selectbox("Selecciona el sistema de referencia de coordenadas (CRS)", list(diccionario_crs.keys()))
-    
-        st.write(f"CRS: {diccionario_crs[opc_CRS]}")
+            st.write(f"CRS: {diccionario_crs[opc_CRS]}")
     
     creado=""
     if st.button("Convertir a Shapefile"):
