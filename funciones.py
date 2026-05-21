@@ -32,7 +32,7 @@ def graficar(angulo_inicio,angulo_final,nombre,PM):
         # fig, ax = plt.subplot(111, polar=True)
         fig,ax=plt.figure(figsize=(6,6)), plt.subplot(111, polar=True) 
         bars = ax.bar(theta, radii, width=width, bottom=6.5, color='red')
-        ax.set_theta_direction(-1)
+        ax.set_theta_direction(-1) # type: ignore
         ax.set_theta_offset(np.pi / 2)
         ax.set_yticklabels([])
         ax.yaxis.grid(False)
