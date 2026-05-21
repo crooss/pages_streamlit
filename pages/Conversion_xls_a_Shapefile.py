@@ -103,7 +103,7 @@ def xls_a_shp():
         
         if graf:
             st.header("Visualización del Shapefile en un mapa interactivo")
-            st.map(dataframe_gdf, width='stretch', size=6)  # Mostrar el shapefile en un mapa interactivo
+            st.map(dataframe_gdf, width='stretch', size=3)  # Mostrar el shapefile en un mapa interactivo
 
             
     
