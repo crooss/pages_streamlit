@@ -42,13 +42,15 @@ def xls_a_shp():
         opciones_Y = df.columns.tolist() if uploaded_file is not None else ["Opción 1", "Opción 2", "Opción 3"]
         seleccion_Y = st.selectbox("coordenadas Y:", opciones_Y)
 
-    opc_CRS= st.selectbox("Selecciona el sistema de referencia de coordenadas (CRS)", {"WGS 84": "EPSG:4326",
+    if seleccion_X and seleccion_Y:
+        st.write(f"Has seleccionado: {seleccion_X} para X, {"\n"} {seleccion_Y} para Y")
+        opc_CRS= st.selectbox("Selecciona el sistema de referencia de coordenadas (CRS)", {"WGS 84": "EPSG:4326",
                                                                                        "UTM Zona 12N": "EPSG:32612",
                                                                                        "UTM Zona 13N": "EPSG:32613", 
                                                                                        "UTM Zona 14N": "EPSG:32614", 
                                                                                        "UTM Zona 15N": "EPSG:32615"})
     
-    st.write(f"Has seleccionado: {seleccion_X} para X, {"\n"} {seleccion_Y} para Y, y el CRS: {opc_CRS}")
+    # st.write(f"Has seleccionado: {seleccion_X} para X, {"\n"} {seleccion_Y} para Y, y el CRS: {opc_CRS}")
     
     if st.button("Convertir a Shapefile"):
         if uploaded_file is not None:
