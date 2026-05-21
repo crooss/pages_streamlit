@@ -2,6 +2,8 @@ def texto(texto):
     return texto.upper()
 
 import math
+
+
 def radianes_a_horas(radianes):
         radianes = radianes % (2 * math.pi) # Normalizar los radianes para estar en el rango de 0 a 2π
         horas = (radianes / (2 * math.pi)) * 12 # Convertir radianes a horas   
@@ -524,11 +526,14 @@ def Modelado_mitigación_UHLIG(rho, ph, pot_off):
     # fig.tight_layout()
     return fig
 
-def df_to_shp(hoja, shape_name, lat_col='Latitud', lon_col='Longitud'):
+
+def df_to_shp(df, shape_name, lat_col='Latitud', lon_col='Longitud'):
+    import utm
+    from shapely.geometry import Point
+    import geopandas as gpd
+    
     warnings.filterwarnings("ignore")
-    
-    df = pd.read_excel(excel_file, sheet_name=hoja)
-    
+        
     if lat_col!= 'Latitud' or lon_col != 'Longitud':
         zona=utm.from_latlon(df['Latitud'][0], df['Longitud'][0])[2]
         epsg_code =int(f'326{zona}')  # Para el hemisferio norte, usar 326; para el sur, usar 327
