@@ -1,14 +1,7 @@
 import streamlit as st
 import pandas as pd
 import matplotlib
-import numpy as np
-import matplotlib.pyplot as plt
-from matplotlib.offsetbox import OffsetImage, AnnotationBbox
-import math
-import os
-import zipfile
-import io
-from funciones import graficar, texto, radianes_a_horas, df_to_shp
+from funciones import df_to_shp
 matplotlib.use('agg')
 
 
@@ -77,14 +70,13 @@ def xls_a_shp():
     if creado==1:
         nombre_archivo =f"{uploaded_file.name.split('.xlsx')[0]}.shp.zip" # type: ignore
 
-        # Abrimos el archivo en modo lectura binaria
-        with open(nombre_archivo, "rb") as archivo:
-            st.download_button(
-                label="Descargar archivo",
-                data=archivo,
-                file_name=nombre_archivo,
-                mime="application/zip" # Cambia el MIME type según tu archivo (ej. 'application/pdf', 'text/csv')
-            )
+
+        st.download_button(
+            label="Descargar archivo",
+            data=nombre_archivo,
+            file_name=nombre_archivo,
+            mime="application/zip" # Cambia el MIME type según tu archivo (ej. 'application/pdf', 'text/csv')
+        )
             
     
     st.write(f"Path del shapefile generado: {shapefile_path}")
