@@ -102,8 +102,8 @@ def xls_a_shp():
         dataframe_gdf = gdf.rename(columns={seleccion_X: "longitude", seleccion_Y: "latitude"})
         
         if graf:
-            st.header("Visualización del Shapefile en un mapa interactivo")
-            st.map(dataframe_gdf, width='stretch', size=1.5)  # Mostrar el shapefile en un mapa interactivo
+            st.header("Visualización en mapa interactivo")
+            st.map(dataframe_gdf, width='stretch', size=1)  # Mostrar el shapefile en un mapa interactivo
 
             
     
