@@ -81,6 +81,6 @@ def xls_a_shp():
 
             
     
-    st.write(f"Path del shapefile generado: {shapefile_path}")
+    # st.write(f"Path del shapefile generado: {shapefile_path}")
 if __name__ == "__main__":
     xls_a_shp()
