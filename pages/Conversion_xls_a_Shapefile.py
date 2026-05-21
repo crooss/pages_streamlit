@@ -81,7 +81,7 @@ def xls_a_shp():
                     file_name=nombre_archivo.split('images/')[1],
                     mime="application/zip"
                 )
-            st.map(gdf['geometry'])  # Mostrar el shapefile en un mapa interactivo
+        st.map(gdf['geometry'])  # Mostrar el shapefile en un mapa interactivo
 
             
     
