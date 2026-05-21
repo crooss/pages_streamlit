@@ -6,3 +6,5 @@ plotly
 openpyxl
 scipy
 utm
+shapely
+geopandas
