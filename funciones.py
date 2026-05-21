@@ -546,7 +546,7 @@ def df_to_shp(df, lat_col='Latitud', lon_col='Longitud', EPSG_code=None, shape_n
         gdf = gpd.GeoDataFrame(df, geometry=geometry, crs=epsg_code)
 
     # Save the GeoDataFrame as a Shapefile
-    shapefile_path = f'images/{shape_name}.shp.zip'
+    shapefile_path = f'images/{shape_name}.zip'
     archivo_shp=gdf.to_file(shapefile_path, driver='ESRI Shapefile')
 
     print(f'Shapefile saved to {shapefile_path}')
