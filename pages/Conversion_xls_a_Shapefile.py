@@ -57,6 +57,7 @@ def xls_a_shp():
     if st.button("Convertir a Shapefile"):
         if uploaded_file is not None:
             try:
+                shape_name=uploaded_file.name.split('.xlsx')[0]
                 shapefile_path = df_to_shp(df, lat_col=seleccion_Y, lon_col=seleccion_X, EPSG_code=diccionario_crs[opc_CRS], shape_name=uploaded_file.name.split('.xlsx')[0])
                 creado=1
                 st.success("¡Archivo convertido a Shapefile con éxito!")   
@@ -68,15 +69,16 @@ def xls_a_shp():
     # st.divider()
     
     if creado==1:
-        nombre_archivo =shapefile_path.split('images/')[1]
+        nombre_archivo =f'images/{shape_name}.shp.zip'
 
+        with open(nombre_archivo, "rb") as archivo:
+            st.download_button(
+                label="Descargar archivo",
+                data=archivo,
+                file_name=nombre_archivo,
+                mime="application/zip"
+            )
 
-        st.download_button(
-            label="Descargar archivo",
-            data=nombre_archivo,
-            file_name=nombre_archivo,
-            mime="application/zip" # Cambia el MIME type según tu archivo (ej. 'application/pdf', 'text/csv')
-        )
             
     
     st.write(f"Path del shapefile generado: {shapefile_path}")
