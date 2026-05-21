@@ -68,7 +68,7 @@ def xls_a_shp():
     # st.divider()
     
     if creado==1:
-        nombre_archivo =f"{uploaded_file.name.split('.xlsx')[0]}.shp.zip" # type: ignore
+        nombre_archivo =shapefile_path
 
 
         st.download_button(
