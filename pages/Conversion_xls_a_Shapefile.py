@@ -56,7 +56,7 @@ def xls_a_shp():
     
     if uploaded_file is not None and seleccion_X and seleccion_Y and opc_CRS:
         creado=""
-        st.button("Convertir a Shapefile"):
+        st.button("Convertir a Shapefile")
 
         try:
             shape_name=f"{opc_CRS}_{uploaded_file.name.split('.xlsx')[0]}"
