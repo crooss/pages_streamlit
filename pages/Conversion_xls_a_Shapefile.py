@@ -83,7 +83,7 @@ def xls_a_shp():
                 )
 
     if st.download_button:
-        st.map(gdf)
+        st.map(gdf.geometry)
             
     
     # st.write(f"Path del shapefile generado: {shapefile_path}")
