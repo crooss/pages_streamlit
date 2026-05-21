@@ -72,7 +72,6 @@ def xls_a_shp():
                                                     EPSG_code=diccionario_crs[opc_CRS], 
                                                     shape_name=shape_name)
                     st.session_state['conversion_success'] = True
-                    st.success("¡Archivo convertido a Shapefile con éxito!")
                     st.session_state['gdf'] = gdf
                     st.session_state['shape_name'] = shape_name
                     st.session_state['shapefile_path'] = shapefile_path
