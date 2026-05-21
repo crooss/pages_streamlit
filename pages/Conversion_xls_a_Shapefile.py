@@ -25,9 +25,9 @@ def xls_a_shp():
             
             st.success("¡Archivo cargado con éxito!")
             
-            # Mostramos los datos en una tabla interactiva
-            st.write("Vista previa de los datos:")
-            st.dataframe(df)
+            # # Mostramos los datos en una tabla interactiva
+            # st.write("Vista previa de los datos:")
+            # st.dataframe(df)
             
         except Exception as e:
             st.error(f"Hubo un error al procesar el archivo: {e}")
