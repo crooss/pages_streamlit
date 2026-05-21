@@ -70,16 +70,16 @@ def xls_a_shp():
     
     # st.divider()
     
-    if creado==1:
-        nombre_archivo =f'images/{shape_name}.shp.zip'
+        if creado==1: # type: ignore
+            nombre_archivo =f'images/{shape_name}.shp.zip'
 
-        with open(nombre_archivo, "rb") as archivo:
-            st.download_button(
-                label="Descargar archivo",
-                data=archivo,
-                file_name=nombre_archivo.split('images/')[1],
-                mime="application/zip"
-            )
+            with open(nombre_archivo, "rb") as archivo:
+                st.download_button(
+                    label="Descargar archivo",
+                    data=archivo,
+                    file_name=nombre_archivo.split('images/')[1],
+                    mime="application/zip"
+                )
 
             
     
