@@ -44,6 +44,7 @@ def xls_a_shp():
             st.write(f"Coordenada Y: {seleccion_Y}")
             
             diccionario_crs = {"WGS 84": "EPSG:4326",
+                                "UTM Zona 11N": "EPSG:32611",
                                 "UTM Zona 12N": "EPSG:32612",
                                 "UTM Zona 13N": "EPSG:32613",
                                 "UTM Zona 14N": "EPSG:32614",
