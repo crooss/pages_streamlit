@@ -68,7 +68,7 @@ def xls_a_shp():
             st.warning("Por favor, sube un archivo Excel antes de intentar convertirlo.")
     
     st.divider()
-    st.write(f"{file_zip}")
+    # st.write(f"{file_zip}")
     
     # st.download_button(
     #     label="Descargar datos en zip",
