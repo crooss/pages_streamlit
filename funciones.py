@@ -546,8 +546,6 @@ def df_to_shp(df, lat_col='Latitud', lon_col='Longitud', EPSG_code=None, shape_n
             # Listas para almacenar las coordenadas UTM
         lon = []
         lat = []
-
-        
         # Calcular UTM para cada fila
         for idx, row in df1.iterrows(): # type: ignore
             try:
