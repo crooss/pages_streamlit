@@ -104,11 +104,6 @@ def xls_a_shp():
         seleccion_Y = st.session_state['seleccion_Y']
 
         if graf:
-            if opc_CRS!="EPSG:4326":
-                # gdf = gdf.to_crs(epsg=ref.split(':')[1])
-                st.write(gdf.crs)
-                st.dataframe(gdf)
-                # dataframe_gdf = gdf #.rename(columns={seleccion_X: "longitude", seleccion_Y: "latitude"})
             st.header("Visualización en mapa interactivo")
             st.map(gdf, width='stretch', size=1)  # Mostrar el shapefile en un mapa interactivo
 
