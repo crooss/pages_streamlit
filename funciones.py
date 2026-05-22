@@ -553,7 +553,6 @@ def df_to_shp(df, lat_col='Latitud', lon_col='Longitud', EPSG_code=None, shape_n
 
         for idx, row in df.iterrows(): # type: ignore
             try:
-                
                 latitude, longitude = utm.to_latlon(easting=row[lat_col],northing=row[lon_col], zone_number=zone, zone_letter=letter, northern=True, strict=True) # type: ignore
                 lat.append(latitude)
                 lon.append(longitude)
@@ -562,11 +561,13 @@ def df_to_shp(df, lat_col='Latitud', lon_col='Longitud', EPSG_code=None, shape_n
                 lat.append(None)
                 lon.append(None)
 
+        df['latitude'] = lat
+        df['longitude'] = lon
+        
         geometry = [Point(xy) for xy in zip(df[lon_col], df[lat_col])]
         gdf = gpd.GeoDataFrame(df, geometry=geometry, crs=EPSG_code)
         
-        gdf['latitude'] = lat
-        gdf['longitude'] = lon
+
     else:
         epsg_code = EPSG_code if EPSG_code else 'EPSG:4326'  # Coordenadas geográficas (latitud/longitud)
         # Create a GeoDataFrame
