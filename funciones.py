@@ -553,7 +553,7 @@ def df_to_shp(df, lat_col='Latitud', lon_col='Longitud', EPSG_code=None, shape_n
 
         for idx, row in df.iterrows(): # type: ignore
             try:
-                latitude, longitude = utm.to_latlon(easting=row[lon_col],northing=row[lat_col], zone_number=zone, zone_letter=letter, northern=True, strict=True) # type: ignore
+                latitude, longitude = utm.to_latlon(easting=row[lon_col],northing=row[lat_col], zone_number=zone, zone_letter=letter, northern=True) # type: ignore
                 lat.append(latitude)
                 lon.append(longitude)
             except Exception as e:
