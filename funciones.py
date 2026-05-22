@@ -550,11 +550,11 @@ def df_to_shp(df, lat_col='Latitud', lon_col='Longitud', EPSG_code=None, shape_n
         lat = []
         # Calcular UTM para cada fila
         x,y,zone,letter=utm.from_latlon(df['Latitud'][0], df['Longitud'][0]) # type: ignore
-        st.write(f'Zona UTM: {zone}{letter}')
+
         for idx, row in df.iterrows(): # type: ignore
             try:
                 
-                latitude, longitude = utm.to_latlon(row[lat_col], row[lon_col], int(EPSG_code[-2:]), zone_letter=None, northern=None, strict=True) # type: ignore
+                latitude, longitude = utm.to_latlon(row[lat_col], row[lon_col], int(EPSG_code[-2:]), zone_letter=None, northern=True, strict=True) # type: ignore
                 lat.append(latitude)
                 lon.append(longitude)
             except Exception as e:
