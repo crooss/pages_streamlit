@@ -100,7 +100,7 @@ def xls_a_shp():
         seleccion_X = st.session_state['seleccion_X']
         seleccion_Y = st.session_state['seleccion_Y']
         if opc_CRS!="EPSG:4326":
-            gdf = gdf.to_crs(epsg=int(ref.split(':')[1]))
+            gdf = gdf.to_crs(epsg=ref)
         dataframe_gdf = gdf.rename(columns={seleccion_X: "longitude", seleccion_Y: "latitude"})
         
         if graf:
