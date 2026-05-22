@@ -537,6 +537,7 @@ def df_to_shp(df, lat_col='Latitud', lon_col='Longitud', EPSG_code=None, shape_n
     import utm
     from shapely.geometry import Point
     import geopandas as gpd
+    import streamlit as st
     
     warnings.filterwarnings("ignore")
         
@@ -548,8 +549,11 @@ def df_to_shp(df, lat_col='Latitud', lon_col='Longitud', EPSG_code=None, shape_n
         lon = []
         lat = []
         # Calcular UTM para cada fila
+        x,y,zone,letter=utm.from_latlon(df[lat_col][0], df[lon_col][0]) # type: ignore
+        st.write(f'Zona UTM: {zone}{letter}')
         for idx, row in df.iterrows(): # type: ignore
             try:
+                
                 latitude, longitude = utm.to_latlon(row[lat_col], row[lon_col], int(EPSG_code[-2:]), zone_letter=None, northern=None, strict=True) # type: ignore
                 lat.append(latitude)
                 lon.append(longitude)
