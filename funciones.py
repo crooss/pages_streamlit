@@ -542,8 +542,28 @@ def df_to_shp(df, lat_col='Latitud', lon_col='Longitud', EPSG_code=None, shape_n
     if lat_col!= 'Latitud' or lon_col != 'Longitud':
         # zona=utm.from_latlon(df['Latitud'][0], df['Longitud'][0])[2]
         # epsg_code =EPSG_code if EPSG_code else f'EPSG:{32600+zona}'  # UTM zona correspondiente
+        
+            # Listas para almacenar las coordenadas UTM
+        lon = []
+        lat = []
+
+        
+        # Calcular UTM para cada fila
+        for idx, row in df1.iterrows(): # type: ignore
+            try:
+                latitude, longitude = utm.to_latlon(row[lon_col], row[lat_col], int(EPSG_code[-2:]), zone_letter=None, northern=None, strict=True) # type: ignore
+                lat.append(latitude)
+                lon.append(longitude)
+            except Exception as e:
+                print(f"Error en fila {idx}: {e}")
+                lat.append(None)
+                lon.append(None)
+
         geometry = [Point(xy) for xy in zip(df[lon_col], df[lat_col])]
         gdf = gpd.GeoDataFrame(df, geometry=geometry, crs=EPSG_code)
+        
+        gdf['Latitude'] = lat
+        gdf['Longitude'] = lon
     else:
         epsg_code = EPSG_code if EPSG_code else 'EPSG:4326'  # Coordenadas geográficas (latitud/longitud)
         # Create a GeoDataFrame
