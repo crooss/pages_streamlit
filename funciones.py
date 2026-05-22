@@ -562,7 +562,7 @@ def df_to_shp(df, lat_col='Latitud', lon_col='Longitud', EPSG_code=None, shape_n
                 lon.append(None)
 
         df['longitude'] = lon
-        df['latitude'] = lat       
+        df['latitude'] = lat
          
         geometry = [Point(xy) for xy in zip(df[lon_col], df[lat_col])]
         gdf = gpd.GeoDataFrame(df, geometry=geometry, crs=EPSG_code)
@@ -573,6 +573,8 @@ def df_to_shp(df, lat_col='Latitud', lon_col='Longitud', EPSG_code=None, shape_n
         # Create a GeoDataFrame
         geometry = [Point(xy) for xy in zip(df[lon_col], df[lat_col])]
         gdf = gpd.GeoDataFrame(df, geometry=geometry, crs=epsg_code)
+        gdf['latitude'] = gdf[lat_col]
+        gdf['longitude'] = gdf[lon_col]
 
     # Save the GeoDataFrame as a Shapefile
     shapefile_path = f'images/{shape_name}.shp.zip'
