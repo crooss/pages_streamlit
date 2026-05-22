@@ -67,7 +67,7 @@ def xls_a_shp():
         if st.button("Convertir a Shapefile"):
             if uploaded_file is not None:
                 try:
-                    shape_name = f"{opc_CRS}_{uploaded_file.name.split('.', 1)[0]}"
+                    shape_name = f"{opc_CRS}_{uploaded_file.name.split('.xlsx', 1)[0]}"
                     shapefile_path, gdf = df_to_shp(df, 
                                                     lat_col=seleccion_Y, 
                                                     lon_col=seleccion_X, 
