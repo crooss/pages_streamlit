@@ -66,7 +66,7 @@ def xls_a_shp():
         if st.button("Convertir a Shapefile"):
             if uploaded_file is not None:
                 try:
-                    shape_name = f"{opc_CRS}_{uploaded_file.name.rsplit('.', 1)[0]}"
+                    shape_name = f"{opc_CRS}_{uploaded_file.name.split('.', 1)[0]}"
                     shapefile_path, gdf = df_to_shp(df, 
                                                     lat_col=seleccion_Y, 
                                                     lon_col=seleccion_X, 
@@ -100,7 +100,7 @@ def xls_a_shp():
         seleccion_X = st.session_state['seleccion_X']
         seleccion_Y = st.session_state['seleccion_Y']
         if opc_CRS!="EPSG:4326":
-            gdf = gdf.to_crs(epsg=ref)
+            gdf = gdf.to_crs(epsg=ref.split(':')[1])
         dataframe_gdf = gdf.rename(columns={seleccion_X: "longitude", seleccion_Y: "latitude"})
         
         if graf:
