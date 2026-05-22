@@ -69,12 +69,11 @@ def xls_a_shp():
             if uploaded_file is not None:
                 try:
                     shape_name = f"{opc_CRS}_{uploaded_file.name.split('.xlsx', 1)[0]}"
-                    shapefile_path, gdf, zone = df_to_shp(df, 
+                    shapefile_path, gdf = df_to_shp(df, 
                                                     lat_col=seleccion_Y, 
                                                     lon_col=seleccion_X, 
                                                     EPSG_code=diccionario_crs[opc_CRS], 
                                                     shape_name=shape_name)
-                    st.write(zone)
                     st.session_state['conversion_success'] = True
                     st.session_state['gdf'] = gdf
                     st.session_state['shape_name'] = shape_name
