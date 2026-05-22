@@ -552,14 +552,14 @@ def df_to_shp(df, lat_col='Latitud', lon_col='Longitud', EPSG_code=None, shape_n
         x,y,zone,letter=utm.from_latlon(df['Latitud'][0], df['Longitud'][0]) # type: ignore
 
         for idx, row in df.iterrows(): # type: ignore
-            # try:
-            latitude, longitude = utm.to_latlon(easting=row[lon_col],northing=row[lat_col], zone_number=zone, zone_letter=letter, northern=True) # type: ignore
-            lat.append(latitude)
-            lon.append(longitude)
-            # except Exception as e:
-            #     print(f"Error en fila {idx}: {e}")
-            #     lat.append(None)
-            #     lon.append(None)
+            try:
+                latitude, longitude = utm.to_latlon(easting=row[lon_col],northing=row[lat_col], zone_number=zone, northern=True) # type: ignore
+                lat.append(latitude)
+                lon.append(longitude)
+            except Exception as e:
+                print(f"Error en fila {idx}: {e}")
+                lat.append(None)
+                lon.append(None)
 
         df['longitude'] = lon
         df['latitude'] = lat       
