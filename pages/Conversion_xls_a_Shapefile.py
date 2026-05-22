@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import matplotlib
+import geopandas as gpd
 
 from funciones import df_to_shp
 matplotlib.use('agg')
