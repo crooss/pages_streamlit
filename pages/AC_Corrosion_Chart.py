@@ -3,7 +3,6 @@ import matplotlib.pyplot as plt
 import numpy as np
 import matplotlib.ticker as mtick
 import math
-from modulos import num2station
 import matplotlib.image as mpimg
 from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 from funciones import Graficos_Densidad_AC_custom
