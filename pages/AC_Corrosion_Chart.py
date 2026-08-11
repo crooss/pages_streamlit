@@ -33,8 +33,13 @@ def AC_Corrosion():
     c1, c2 = st.columns([2, 1])
     
     st.divider()
-    
-    st.write(Graficos_Densidad_AC_custom(Voltaje_AC,RESISTIVIDAD, km , 20), use_container_width=True) # type: ignore
+    if Voltaje_AC and km and RESISTIVIDAD:
+        fig, ruta=Graficos_Densidad_AC_custom(km, Voltaje_AC, RESISTIVIDAD) # type: ignore
+        st.image(ruta, caption='AC Corrosion', use_container_width=True)
+        # Display the saved figure in Streamlit
+        # st.pyplot(fig)
+        # st.image('images/AC_Corrosion.png', caption='AC Corrosion', use_container_width=True)
+    # st.image('images/AC_Corrosion.png', caption='AC Corrosion', use_container_width=True)
     # with c1:
     #     if (RESISTIVIDAD_1)>0 and (RESISTIVIDAD_2)>0:
     #         resistividad_avg=round(((RESISTIVIDAD_1)+(RESISTIVIDAD_2))/2,0)

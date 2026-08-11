@@ -42,11 +42,11 @@ def graficar(angulo_inicio,angulo_final,nombre,PM):
         fig,ax=plt.figure(figsize=(6,6)), plt.subplot(111, polar=True) 
         bars = ax.bar(theta, radii, width=width, bottom=6.5, color='red')
         ax.set_theta_direction(-1) # type: ignore
-        ax.set_theta_offset(np.pi / 2)
+        ax.set_theta_offset(np.pi / 2) # type: ignore
         ax.set_yticklabels([])
         ax.yaxis.grid(False)
         ax.xaxis.grid(False)
-        ax.set_ylim(0,ax.get_rmax())
+        ax.set_ylim(0,ax.get_rmax()) # type: ignore
         ax.tick_params(axis='x', which='major', pad=7)
         ax.axhline(y=6, color='black', linestyle='-', linewidth=3)
         ax.axhline(y=7, color='black', linestyle='-', linewidth=3)
@@ -62,7 +62,7 @@ def graficar(angulo_inicio,angulo_final,nombre,PM):
             # print(label.get_text(),angle )
             x,y = label.get_position()
             lab = ax.text(x,y, label.get_text(), transform=label.get_transform(),
-                        ha=label.get_ha(), va=label.get_va())
+                        ha=label.get_ha(), va=label.get_va()) # type: ignore
             if angle<180 or angle==360:
                 lab.set_rotation(90-angle)
             else:
@@ -91,7 +91,7 @@ def graficar(angulo_inicio,angulo_final,nombre,PM):
             fontsize=7, 
             color='blue')
         ax.text(0, 0, f'{round(width * 180 / np.pi, 2)}°', ha='center', va='center', fontsize=10, color='black')
-        tick = [ax.get_rmax(),ax.get_rmax()*0.86]
+        tick = [ax.get_rmax(),ax.get_rmax()*0.86] # type: ignore
         for t  in np.deg2rad(np.arange(0,360,15)):
             ax.plot([t,t], tick, lw=0.72, color="black")
             
@@ -171,11 +171,11 @@ def grafica_conductancia(valor, seleccion_tuberia):
             ax.set_ylim(5, 1000000)
             additional_yticks = [200000,40000,5000, 500]    
     ax.set_yscale('log')
-    ax.get_yaxis().set_major_formatter(plt.FuncFormatter(lambda x, loc: "{:,}".format(int(x))))
+    ax.get_yaxis().set_major_formatter(plt.FuncFormatter(lambda x, loc: "{:,}".format(int(x)))) # type: ignore
     # Crear el mapa de colores
     cmap = ListedColormap(['green', 'limegreen', 'yellow', 'red', 'gray'])
     norm_bins = np.array([0, 1, 2, 3, 4,5])
-    norm = matplotlib.colors.BoundaryNorm(norm_bins, cmap.N)
+    norm = matplotlib.colors.BoundaryNorm(norm_bins, cmap.N) # type: ignore
     sm = plt.cm.ScalarMappable(cmap=cmap, norm=norm)
     sm.set_array([])
     cbar = plt.colorbar(sm, ticks=[0.5, 1.5, 2.5, 3.5, 4.5], ax=ax, fraction=0.2, pad=0.5)
@@ -186,7 +186,7 @@ def grafica_conductancia(valor, seleccion_tuberia):
     ax.set_ylabel('Conductancia a 1,000 Ω-cm [μS/m$^2$]')
     ax.get_xaxis().set_visible(False)
     ax.set_yticks(list(ax.get_yticks()) + additional_yticks)
-    ax.get_yaxis().set_major_formatter(plt.FuncFormatter(lambda x, loc: "{:,}".format(int(x))))
+    ax.get_yaxis().set_major_formatter(plt.FuncFormatter(lambda x, loc: "{:,}".format(int(x)))) # type: ignore
     ax.text(2.5, .05, f'Conductancia [μS/m$^2$]:\n{valor:,.0f} μS/m$^2$', ha='left', va='bottom', fontsize=8, color='black', transform=ax.transAxes)
     ax.text(10, .5, 'Table 2.6 CP 4–Cathodic Protection Specialist Course Manual', ha='center', va='center', transform=ax.transAxes, fontsize=8, color='gray', rotation=90)
     ax.set_ylim(1, 1000000)
@@ -205,26 +205,26 @@ def tuberias_largas(valor_conductancia):
 
     # Colorear áreas de calidad
     transparencia=1
-    ax.fill_between(x, 0, y, where=(y >= 0) & (y <= 100), facecolor='green', alpha=transparencia, label='Excelente', zorder=1)
-    ax.fill_betweenx(y, 0, x, where=(y >= 0) & (y <= 100), facecolor='green', alpha=transparencia, zorder=1)
+    ax.fill_between(x, 0, y, where=(y >= 0) & (y <= 100), facecolor='green', alpha=transparencia, label='Excelente', zorder=1) # type: ignore
+    ax.fill_betweenx(y, 0, x, where=(y >= 0) & (y <= 100), facecolor='green', alpha=transparencia, zorder=1) # type: ignore
 
-    ax.fill_between(x, 0, y, where=(y >= 100-.1) & (y <= 500), facecolor='limegreen', alpha=transparencia, label='Buena', zorder=0)    
-    ax.fill_betweenx(y, 0, x, where=(y >= 100-.1) & (y <= 500), facecolor='limegreen', alpha=transparencia, zorder=0)    
+    ax.fill_between(x, 0, y, where=(y >= 100-.1) & (y <= 500), facecolor='limegreen', alpha=transparencia, label='Buena', zorder=0)     # type: ignore
+    ax.fill_betweenx(y, 0, x, where=(y >= 100-.1) & (y <= 500), facecolor='limegreen', alpha=transparencia, zorder=0)     # type: ignore
     
-    ax.fill_between(x, 0, y, where=(y >= 500) & (y <= 1000), facecolor='yellow', alpha=transparencia, label='Regular')    
-    ax.fill_betweenx(y, 0, x, where=(y >= 500) & (y <= 1000), facecolor='yellow', alpha=transparencia)    
+    ax.fill_between(x, 0, y, where=(y >= 500) & (y <= 1000), facecolor='yellow', alpha=transparencia, label='Regular')     # type: ignore
+    ax.fill_betweenx(y, 0, x, where=(y >= 500) & (y <= 1000), facecolor='yellow', alpha=transparencia)     # type: ignore
 
-    ax.fill_between(x, 0, y, where=(y >= 1000) & (y <= 40000), facecolor='red', alpha=transparencia, label='Pobre')
-    ax.fill_betweenx(y, 0, x, where=(y >= 1000) & (y <= 40000), facecolor='red', alpha=transparencia)
+    ax.fill_between(x, 0, y, where=(y >= 1000) & (y <= 40000), facecolor='red', alpha=transparencia, label='Pobre') # type: ignore
+    ax.fill_betweenx(y, 0, x, where=(y >= 1000) & (y <= 40000), facecolor='red', alpha=transparencia) # type: ignore
     
-    ax.fill_between(x, 0, y, where=(y >= 40000), facecolor='gray', alpha=transparencia, label='Bare')
-    ax.fill_betweenx(y, 0, x, where=(y >= 40000) & (y <= 1000000), facecolor='gray', alpha=transparencia)
+    ax.fill_between(x, 0, y, where=(y >= 40000), facecolor='gray', alpha=transparencia, label='Bare') # type: ignore
+    ax.fill_betweenx(y, 0, x, where=(y >= 40000) & (y <= 1000000), facecolor='gray', alpha=transparencia) # type: ignore
 
     x_value = x[np.where(y >= valor_conductancia)[0][0]]
     ax.scatter(x_value, valor_conductancia, color='black', zorder=5)  # Coordenadas del punto
     # Anotación de un punto específico con recuadro de fondo blanco
     ax.annotate(f'{valor_conductancia:,.0f} μS/m²\n{x_value:.3f}% bare\n{100-x_value:.3f}% coated', 
-            xy=(x_value, valor_conductancia), 
+            xy=(x_value, valor_conductancia),  # type: ignore
             # arrowprops=dict(facecolor='black', arrowstyle='->'),
             xytext=(7, 70),
             bbox=dict(facecolor='white', edgecolor='black', boxstyle='round,pad=0.5'),
@@ -246,12 +246,12 @@ def tuberias_largas(valor_conductancia):
         else:
             return f'{num/10:.3f}%'
         
-    ax.xaxis.set_major_formatter(plt.FuncFormatter(lambda x, ti: ty(x)))
-    ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, loc: "{:,}".format(int(x))))
+    ax.xaxis.set_major_formatter(plt.FuncFormatter(lambda x, ti: ty(x))) # type: ignore
+    ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, loc: "{:,}".format(int(x)))) # type: ignore
         # Agregar etiquetas adicionales en el eje y
     additional_yticks = [ 40000, 500]
     ax.set_yticks(list(ax.get_yticks()) + additional_yticks)
-    ax.get_yaxis().set_major_formatter(plt.FuncFormatter(lambda x, loc: "{:,}".format(int(x))))
+    ax.get_yaxis().set_major_formatter(plt.FuncFormatter(lambda x, loc: "{:,}".format(int(x)))) # type: ignore
     ax.grid(True, which='both', linestyle='-', linewidth=0.5, color='black')
     ax.legend(loc='best')
     ax.set_ylim(1,1000000)
@@ -353,12 +353,12 @@ def tuberias_TM0102(valor):
         ax.set_ylim(5, 1000000)
         additional_yticks = [2000,500]
     
-    ax.get_yaxis().set_major_formatter(plt.FuncFormatter(lambda x, loc: "{:,}".format(int(x))))
+    ax.get_yaxis().set_major_formatter(plt.FuncFormatter(lambda x, loc: "{:,}".format(int(x)))) # type: ignore
 
     # Crear el mapa de colores
     cmap = ListedColormap(['green', 'limegreen', 'yellow', 'red'])
     norm_bins = np.array([0, 1, 2, 3, 4])
-    norm = matplotlib.colors.BoundaryNorm(norm_bins, cmap.N)
+    norm = matplotlib.colors.BoundaryNorm(norm_bins, cmap.N) # type: ignore
     sm = plt.cm.ScalarMappable(cmap=cmap, norm=norm)
     sm.set_array([])
     cbar = plt.colorbar(sm, ticks=[0.5, 1.5, 2.5, 3.5], ax=ax, fraction=0.2, pad=0.5)
@@ -375,7 +375,7 @@ def tuberias_TM0102(valor):
     else:
         ax.set_ylim(5, 10000000)
         additional_yticks = [2000,500]  
-    ax.get_yaxis().set_major_formatter(plt.FuncFormatter(lambda x, loc: "{:,}".format(int(x))))
+    ax.get_yaxis().set_major_formatter(plt.FuncFormatter(lambda x, loc: "{:,}".format(int(x)))) # type: ignore
     ax.text(2.5, .05, f'Conductancia [μS/m$^2$]:\n{valor:,.0f} μS/m$^2$', ha='left', va='bottom', fontsize=8, color='black', transform=ax.transAxes)
     ax.text(8.5, .5, 'NACE TM0102-2023\nMeasurement of Protective Coating Electrical Conductance on Underground Pipelines\nTable 5 Table of Specific Coating Conductance vs Coating Quality for 1,000 Ω-cm Soil', ha='center', va='center', transform=ax.transAxes, fontsize=8, color='gray', rotation=90)
     plt.savefig('images/barras_TM0102.png', dpi=300, bbox_inches='tight')
@@ -719,7 +719,8 @@ def Graficos_Densidad_AC_custom( VAC1,RHO1, km , i_ac_inferior):
     ab = AnnotationBbox(imagebox, (.81, .17), frameon=False, xycoords='axes fraction', boxcoords="axes fraction", pad=0.1)
     ax.add_artist(ab)      
     
-    plt.show()
+    # plt.show()
+    plt.savefig('images/AC_Corrosion.png', dpi=300, bbox_inches='tight')
     # fig.savefig(f'Plots/Densidad_AC_{km}.png', dpi=300)
-    return fig
+    return fig,'images/AC_Corrosion.png'
 
