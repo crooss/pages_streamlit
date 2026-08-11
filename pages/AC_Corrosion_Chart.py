@@ -22,12 +22,12 @@ def AC_Corrosion():
 
     with c2:
         Voltaje_AC=st.number_input("Voltaje AC [V]:", format="%.4f")
-        if Voltaje_AC and km:
+        if Voltaje_AC:
             st.markdown(f"\nVoltaje AC: {Voltaje_AC:,.3f} V")
         
     with c3:
         RESISTIVIDAD=st.number_input("Resistividad [Ω-cm]:", format="%.2f")
-        if RESISTIVIDAD and km:
+        if RESISTIVIDAD:
             st.markdown(f"\nResistividad: {RESISTIVIDAD:,.0f} Ω-cm")
         # Voltaje_AC=st.number_input("Voltaje AC [V]:", format="%.4f")
         # if Voltaje_AC and km:
@@ -35,7 +35,7 @@ def AC_Corrosion():
     c1, c2 = st.columns([2, 1])
     
     st.divider()
-    if Voltaje_AC and km and RESISTIVIDAD:
+    if Voltaje_AC and RESISTIVIDAD:
         ruta=Graficos_Densidad_AC_custom(Voltaje_AC, RESISTIVIDAD, km , 20) # type: ignore
         st.image(ruta, caption='AC Corrosion', use_container_width=True) # type: ignore
         # Display the saved figure in Streamlit
