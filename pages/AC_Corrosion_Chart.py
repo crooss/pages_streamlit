@@ -16,7 +16,7 @@ def AC_Corrosion():
     st.header("1.-Datos de entrada")
     c1, c2, c3 = st.columns([1, 1, 1])
     with c1:
-        km=st.number_input("Km [m]:", value=0, format="%.1f") # type: ignore
+        km=st.number_input("Km [m]:", step=1, value=0, min_value=0) # type: ignore
         if km or km==0:
             st.markdown(f"\nKm: {km:,.1f} m")
 
