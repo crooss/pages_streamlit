@@ -38,7 +38,7 @@ def AC_Corrosion():
         st.image(ruta, caption='AC Corrosion', use_container_width=True)
         # Display the saved figure in Streamlit
         # st.pyplot(fig)
-        # st.image('images/AC_Corrosion.png', caption='AC Corrosion', use_container_width=True)
+        st.image('images/AC_Corrosion.png', caption='AC Corrosion', use_container_width=True)
     # st.image('images/AC_Corrosion.png', caption='AC Corrosion', use_container_width=True)
     # with c1:
     #     if (RESISTIVIDAD_1)>0 and (RESISTIVIDAD_2)>0:
