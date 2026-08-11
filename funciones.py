@@ -596,6 +596,29 @@ def A_cm2_20_30(VAC1,RHO1, i_ac_inferior):
     A=math.pi*(d_cm/2)*(d_cm/2)
     return A
 
+def num2station(cadnum, decimales=1):
+    if cadnum==0:
+        cadtxt='0+000.0'
+        return cadtxt
+    if decimales==0:
+        cadtxt=f'{int(cadnum // 1000)}+{int(cadnum % 1000):03d}'
+        return cadtxt
+    if 0<cadnum<10:
+        cadnumk = int(cadnum // 1000)
+        cadnumu = cadnum % 1000
+        cadtxt=f'{cadnumk}+00{cadnumu:03.{decimales}f}'
+        return cadtxt
+    elif 10<=cadnum<100:
+        cadnumk = int(cadnum // 1000)
+        cadnumu = cadnum % 1000
+        cadtxt=f'{cadnumk}+0{cadnumu:03.{decimales}f}'
+        return cadtxt
+    else:
+        cadnumk = int(cadnum // 1000)
+        cadnumu = cadnum % 1000
+        cadtxt=f'{cadnumk}+{cadnumu:03.{decimales}f}'
+        return cadtxt
+
 def Graficos_Densidad_AC_custom( VAC1,RHO1, km , i_ac_inferior=20):
     if not np.isfinite(VAC1) or not np.isfinite(RHO1) or float(VAC1) <= 0 or float(RHO1) <= 0:
         fig, ax = plt.subplots()
@@ -704,7 +727,7 @@ def Graficos_Densidad_AC_custom( VAC1,RHO1, km , i_ac_inferior=20):
     plt.xlabel('Superficie del Holiday ($cm^2$)')
     plt.ylabel('Voltaje AC (Volts)')
     print(km)
-    # km=num2station(km)
+    km=num2station(km, decimales=1)
     plt.title('Voltaje AC vs Tamaño del Holiday para $i_{ac}$='+str(int(i_ac_inferior))+'-'+str(i_ac_100)+' A/$m^2$'+'\n'+str(km), size=12)
     # plt.grid()
     plt.ylim([0.1,1000])
