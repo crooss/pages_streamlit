@@ -598,7 +598,7 @@ def A_cm2_20_30(VAC1,RHO1, i_ac_inferior):
 
 def num2station(cadnum, decimales=0):
     if cadnum==0:
-        cadtxt='0+000.0'
+        cadtxt='0+000'
         return cadtxt
     if decimales==0:
         cadtxt=f'{int(cadnum // 1000)}+{int(cadnum % 1000):03d}'
