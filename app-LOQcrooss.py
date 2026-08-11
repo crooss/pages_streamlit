@@ -13,7 +13,8 @@ def main():
         "Conductancia específica": "pages/Conductancia_específica",
         "Geometry": "pages/Geometry_Dimension_Class",
         "Prediccion mpy": "pages/Modelo_UHLIG",
-        "Conversion xls a Shapefile": "pages/Conversion_xls_a_Shapefile"
+        "Conversion xls a Shapefile": "pages/Conversion_xls_a_Shapefile",
+        "AC Corrosion Chart": "pages/AC_Corrosion_Chart"
     }
         
     hide_streamlit_style = """
