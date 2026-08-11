@@ -533,8 +533,6 @@ def Modelado_mitigación_UHLIG(rho, ph, pot_off):
     # fig.tight_layout()
     return fig
 
-
-
 def df_to_shp(df, lat_col='Latitud', lon_col='Longitud', EPSG_code=None, shape_name='output_shapefile'):
     import utm
     from shapely.geometry import Point
@@ -585,7 +583,6 @@ def df_to_shp(df, lat_col='Latitud', lon_col='Longitud', EPSG_code=None, shape_n
     print(f'Shapefile saved to {shapefile_path}')
     
     return shapefile_path, gdf
-
 
 def A_cm2(VAC1,RHO1):
     d_metros=8*VAC1/(100*(RHO1/100)*(math.pi))
@@ -721,8 +718,6 @@ def Graficos_Densidad_AC_custom( VAC1,RHO1, km , i_ac_inferior):
     imagebox = OffsetImage(logo_img, zoom=0.15, alpha=0.9)
     ab = AnnotationBbox(imagebox, (.81, .17), frameon=False, xycoords='axes fraction', boxcoords="axes fraction", pad=0.1)
     ax.add_artist(ab)      
-    
-    
     
     plt.show()
     # fig.savefig(f'Plots/Densidad_AC_{km}.png', dpi=300)
