@@ -9,7 +9,7 @@ from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 from funciones import Graficos_Densidad_AC_custom
 
 def AC_Corrosion():
-    st.title("Calculo de conductancia específica de recubrimiento")
+    st.title("Grafico de riesgo de corrosión AC")
     # st.write("Welcome to the second page of the Streamlit application!")
     # st.write("Here you can add different components and functionalities tailored to this page.")
 
