@@ -596,7 +596,7 @@ def A_cm2_20_30(VAC1,RHO1, i_ac_inferior):
     A=math.pi*(d_cm/2)*(d_cm/2)
     return A
 
-def num2station(cadnum, decimales=1):
+def num2station(cadnum, decimales=0):
     if cadnum==0:
         cadtxt='0+000.0'
         return cadtxt
@@ -727,7 +727,7 @@ def Graficos_Densidad_AC_custom( VAC1,RHO1, km , i_ac_inferior=20):
     plt.xlabel('Superficie del Holiday ($cm^2$)')
     plt.ylabel('Voltaje AC (Volts)')
     print(km)
-    km=num2station(km, decimales=0)
+    km=num2station(km)
     plt.title('Voltaje AC vs Tamaño del Holiday para $i_{ac}$='+str(int(i_ac_inferior))+'-'+str(i_ac_100)+' A/$m^2$'+'\n'+str(km), size=12)
     # plt.grid()
     plt.ylim([0.1,1000])
