@@ -166,10 +166,10 @@ def AC_Corrosion():
         if Voltaje_AC and km:
             st.markdown(f"\nVoltaje AC: {Voltaje_AC:,.0f} V")
     c1, c2 = st.columns([2, 1])
-    with c1:
-        if (RESISTIVIDAD_1)>0 and (RESISTIVIDAD_2)>0:
-            resistividad_avg=round(((RESISTIVIDAD_1)+(RESISTIVIDAD_2))/2,0)
-            st.markdown(f"\nResistividad promedio: {resistividad_avg:,.2f} Ω-cm",)
+    # with c1:
+    #     if (RESISTIVIDAD_1)>0 and (RESISTIVIDAD_2)>0:
+    #         resistividad_avg=round(((RESISTIVIDAD_1)+(RESISTIVIDAD_2))/2,0)
+    #         st.markdown(f"\nResistividad promedio: {resistividad_avg:,.2f} Ω-cm",)
 
 
 if __name__ == "__main__":
