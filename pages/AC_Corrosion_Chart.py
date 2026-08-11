@@ -16,12 +16,13 @@ def AC_Corrosion():
     st.header("1.-Datos de entrada")
     c1, c2, c3 = st.columns([1, 1, 1])
     with c1:
-        # resistencia1, d1 = st.number_input("resistencia #1:", format="%.4f"), st.number_input("Distancia #1 [cm]:")
         km=st.number_input("Km [m]:", step=1)
+        if km:
+            st.markdown(f"\nKm: {km:,.0f} m")
     with c2:
         Voltaje_AC=st.number_input("Voltaje AC [V]:", format="%.4f")
         if Voltaje_AC and km:
-            st.markdown(f"\nVoltaje AC: {Voltaje_AC:,.0f} V")
+            st.markdown(f"\nVoltaje AC: {Voltaje_AC:,.3f} V")
         
     with c3:
         RESISTIVIDAD=st.number_input("Resistividad [Ω-cm]:", format="%.2f")
@@ -38,7 +39,7 @@ def AC_Corrosion():
         st.image(ruta, caption='AC Corrosion', use_container_width=True) # type: ignore
         # Display the saved figure in Streamlit
         # st.pyplot(fig)
-        st.image('images/AC_Corrosion.png', caption='AC Corrosion', use_container_width=True)
+        # st.image('images/AC_Corrosion.png', caption='AC Corrosion', use_container_width=True)
     # st.image('images/AC_Corrosion.png', caption='AC Corrosion', use_container_width=True)
     # with c1:
     #     if (RESISTIVIDAD_1)>0 and (RESISTIVIDAD_2)>0:
