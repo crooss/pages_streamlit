@@ -23,12 +23,12 @@ def AC_Corrosion():
             km=0.0000001
     with c2:
         Voltaje_AC=st.number_input("Voltaje AC [V]:", format="%.4f")
-        if Voltaje_AC and km:
+        if Voltaje_AC and km or km==0:
             st.markdown(f"\nVoltaje AC: {Voltaje_AC:,.3f} V")
         
     with c3:
         RESISTIVIDAD=st.number_input("Resistividad [Ω-cm]:", format="%.2f")
-        if RESISTIVIDAD and km:
+        if RESISTIVIDAD and km or km==0:
             st.markdown(f"\nResistividad: {RESISTIVIDAD:,.0f} Ω-cm")
         # Voltaje_AC=st.number_input("Voltaje AC [V]:", format="%.4f")
         # if Voltaje_AC and km:
