@@ -18,7 +18,7 @@ def AC_Corrosion():
     with c1:
         km=st.number_input("Km [m]:", step=0.1, value=0) # type: ignore
         if km or km==0:
-            st.markdown(f"\nKm: {km:,.0f} m")
+            st.markdown(f"\nKm: {km:,.1f} m")
 
     with c2:
         Voltaje_AC=st.number_input("Voltaje AC [V]:", format="%.4f")
