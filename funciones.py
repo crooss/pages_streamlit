@@ -735,7 +735,7 @@ def Graficos_Densidad_AC_custom( VAC1,RHO1, km , i_ac_inferior=20):
     # plt.grid()
     # plt.tight_layout()
     
-    logo_path = "images\logo.png" # type: ignore
+    logo_path = "images/logo.png" # type: ignore
     logo_img = mpimg.imread(logo_path)
     logo_img_rotated = np.rot90(logo_img)
     imagebox = OffsetImage(logo_img, zoom=0.15, alpha=0.9)
