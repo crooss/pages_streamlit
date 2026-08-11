@@ -158,13 +158,15 @@ def AC_Corrosion():
     with c1:
         # resistencia1, d1 = st.number_input("resistencia #1:", format="%.4f"), st.number_input("Distancia #1 [cm]:")
         km=st.number_input("Km [m]:", step=1)
+    with c2:
         Voltaje_AC=st.number_input("Voltaje AC [V]:", format="%.4f")
         if Voltaje_AC and km:
             st.markdown(f"\nVoltaje AC: {Voltaje_AC:,.0f} V")
-    with c2:
-        RESISTIVIDAD_2=st.number_input("Resistividad #2 [Ω-cm]:", format="%.4f")
-        if RESISTIVIDAD_2 and km:
-            st.markdown(f"\nResistividad: {RESISTIVIDAD_2:,.0f} Ω-cm")
+        
+    with c3:
+        RESISTIVIDAD=st.number_input("Resistividad [Ω-cm]:", format="%.4f")
+        if RESISTIVIDAD and km:
+            st.markdown(f"\nResistividad: {RESISTIVIDAD:,.0f} Ω-cm")
         # Voltaje_AC=st.number_input("Voltaje AC [V]:", format="%.4f")
         # if Voltaje_AC and km:
         #     st.markdown(f"\nVoltaje AC: {Voltaje_AC:,.0f} V")
