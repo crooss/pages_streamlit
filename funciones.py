@@ -654,14 +654,14 @@ def Graficos_Densidad_AC_custom( VAC1,RHO1, km , i_ac_inferior=20):
 
     #===================================fill between=========================================
     tranparencia=0.7
-    T_cm2__v2=np.linspace(0.1,1,num=10000)
-    
-    ax.fill_between([0.1,1], 1000      , color='lime', interpolate=True, zorder=1, edgecolor='lime')
-    ax.fill_between([0.1,1.01], 15   ,1000, color='red' , interpolate=True, zorder=1, edgecolor='red')
-    
-    ax.fill_between(T_cm2, Vect_VAC_100  , 1000        , where=Vect_VAC_100>=V_ac(i_ac_100, RHO1, Acm2_to_dcm(1)) , color='red'   , interpolate=True, zorder=0, edgecolor='red')
-    ax.fill_between(T_cm2, Vect_VAC_20_30, Vect_VAC_100, where=Vect_VAC_100>=V_ac(i_ac_100, RHO1, Acm2_to_dcm(1)) , color='orange', interpolate=True, zorder=0, edgecolor='orange')
-    ax.fill_between(T_cm2, Vect_VAC_20_30  ,             where=Vect_VAC_100>=V_ac(i_ac_100, RHO1, Acm2_to_dcm(1)) , color='lime'  , interpolate=True, zorder=0, edgecolor='lime')
+    ax.fill_between([0.1,1], 1000, color='lime', interpolate=True, zorder=1, alpha=1)
+    ax.fill_between([0.1,101], 15,1000, color='red', interpolate=True, zorder=1, alpha=1)
+    ax.fill_between(T_cm2, Vect_VAC_100  , 1000        , where=Vect_VAC_100>=V_ac(i_ac_100, RHO1, Acm2_to_dcm(1)) , color='red'   , 
+                    interpolate=True, zorder=0, alpha=1, label='AC Corrosion')
+    ax.fill_between(T_cm2, Vect_VAC_20_30, Vect_VAC_100, where=Vect_VAC_100>=V_ac(i_ac_100, RHO1, Acm2_to_dcm(1)) , color='orange', 
+                    interpolate=True, zorder=0, alpha=1, label='Upredictable AC Corrosion')
+    ax.fill_between(T_cm2, Vect_VAC_20_30  ,             where=Vect_VAC_100>=V_ac(i_ac_100, RHO1, Acm2_to_dcm(1)) , color='lime'  , 
+                    interpolate=True, zorder=0, alpha=1, label='No AC Corrosion')
     #===================================fill between=========================================
 
 
