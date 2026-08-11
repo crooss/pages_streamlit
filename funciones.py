@@ -596,7 +596,7 @@ def A_cm2_20_30(VAC1,RHO1, i_ac_inferior):
     A=math.pi*(d_cm/2)*(d_cm/2)
     return A
 
-def Graficos_Densidad_AC_custom( VAC1,RHO1, km , i_ac_inferior):
+def Graficos_Densidad_AC_custom( VAC1,RHO1, km , i_ac_inferior=20):
     if not np.isfinite(VAC1) or not np.isfinite(RHO1) or float(VAC1) <= 0 or float(RHO1) <= 0:
         fig, ax = plt.subplots()
         ax.text(0.5, 0.5, 'Datos no válidos para VAC/RHO', ha='center', va='center')
@@ -722,5 +722,5 @@ def Graficos_Densidad_AC_custom( VAC1,RHO1, km , i_ac_inferior):
     # plt.show()
     plt.savefig('images/AC_Corrosion.png', dpi=300, bbox_inches='tight')
     # fig.savefig(f'Plots/Densidad_AC_{km}.png', dpi=300)
-    return fig,'images/AC_Corrosion.png'
+    return 'images/AC_Corrosion.png'
 
