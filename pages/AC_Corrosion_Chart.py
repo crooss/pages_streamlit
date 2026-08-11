@@ -153,8 +153,26 @@ def AC_Corrosion():
     # st.write("Welcome to the second page of the Streamlit application!")
     # st.write("Here you can add different components and functionalities tailored to this page.")
 
-    st.header("1.-Resistividad de suelos")
+    st.header("1.-Datos de entrada")
     c1, c2, c3 = st.columns([1, 1, 1])
+    with c1:
+        # resistencia1, d1 = st.number_input("resistencia #1:", format="%.4f"), st.number_input("Distancia #1 [cm]:")
+        km_1=st.number_input("Km #1 [m]:", step=1)
+        RESISTIVIDAD_1=st.number_input("Resistividad #1 [Ω-cm]:", format="%.4f")
+        if RESISTIVIDAD_1 and km_1:
+            st.markdown(f"\nResistividad: {RESISTIVIDAD_1:,.0f} Ω-cm")
+    with c2:
+        # resistencia2, d2 = st.number_input("resistencia #2:", format="%.4f"), st.number_input("Distancia #2 [cm]:")
+        km_2=st.number_input("Km #2 [m]:", step=1)
+        RESISTIVIDAD_2=st.number_input("Resistividad #2 [Ω-cm]:", format="%.4f")
+        if RESISTIVIDAD_2 and km_2:
+            st.markdown(f"\nResistividad: {RESISTIVIDAD_2:,.0f} Ω-cm")
+    c1, c2 = st.columns([2, 1])
+    with c1:
+        if (RESISTIVIDAD_1)>0 and (RESISTIVIDAD_2)>0:
+            resistividad_avg=round(((RESISTIVIDAD_1)+(RESISTIVIDAD_2))/2,0)
+            st.markdown(f"\nResistividad promedio: {resistividad_avg:,.2f} Ω-cm",)
+
 
 if __name__ == "__main__":
     AC_Corrosion()
