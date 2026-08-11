@@ -34,7 +34,7 @@ def AC_Corrosion():
     
     st.divider()
     
-    st.altair_chart(Graficos_Densidad_AC_custom(Voltaje_AC,RESISTIVIDAD, km , 20), use_container_width=True) # type: ignore
+    st.write(Graficos_Densidad_AC_custom(Voltaje_AC,RESISTIVIDAD, km , 20), use_container_width=True) # type: ignore
     # with c1:
     #     if (RESISTIVIDAD_1)>0 and (RESISTIVIDAD_2)>0:
     #         resistividad_avg=round(((RESISTIVIDAD_1)+(RESISTIVIDAD_2))/2,0)
