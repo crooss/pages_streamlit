@@ -157,16 +157,14 @@ def AC_Corrosion():
     c1, c2, c3 = st.columns([1, 1, 1])
     with c1:
         # resistencia1, d1 = st.number_input("resistencia #1:", format="%.4f"), st.number_input("Distancia #1 [cm]:")
-        km_1=st.number_input("Km #1 [m]:", step=1)
-        RESISTIVIDAD_1=st.number_input("Resistividad #1 [Ω-cm]:", format="%.4f")
-        if RESISTIVIDAD_1 and km_1:
-            st.markdown(f"\nResistividad: {RESISTIVIDAD_1:,.0f} Ω-cm")
+        km=st.number_input("Km [m]:", step=1)
+        Voltaje_AC=st.number_input("Voltaje AC [V]:", format="%.4f")
+        if Voltaje_AC and km:
+            st.markdown(f"\nVoltaje AC: {Voltaje_AC:,.0f} V")
     with c2:
-        # resistencia2, d2 = st.number_input("resistencia #2:", format="%.4f"), st.number_input("Distancia #2 [cm]:")
-        km_2=st.number_input("Km #2 [m]:", step=1)
-        RESISTIVIDAD_2=st.number_input("Resistividad #2 [Ω-cm]:", format="%.4f")
-        if RESISTIVIDAD_2 and km_2:
-            st.markdown(f"\nResistividad: {RESISTIVIDAD_2:,.0f} Ω-cm")
+        Voltaje_AC=st.number_input("Voltaje AC [V]:", format="%.4f")
+        if Voltaje_AC and km:
+            st.markdown(f"\nVoltaje AC: {Voltaje_AC:,.0f} V")
     c1, c2 = st.columns([2, 1])
     with c1:
         if (RESISTIVIDAD_1)>0 and (RESISTIVIDAD_2)>0:
