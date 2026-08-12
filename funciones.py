@@ -8,7 +8,7 @@ import matplotlib
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 import matplotlib.patheffects as patheffects
-from matplotlib.ticker import MultipleLocator, FuncFormatter # type: ignore
+from matplotlib.ticker import MultipleLocator, FuncFormatter, FormatStrFormatter # type: ignore
 import matplotlib.ticker as mtick
 from matplotlib.colors import ListedColormap
 import matplotlib.image as mpimg
