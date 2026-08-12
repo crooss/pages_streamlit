@@ -1,26 +1,23 @@
-import numpy as np
 import math
+import numpy as np
 
-from scipy.interpolate import RegularGridInterpolator # type: ignore
-from scipy.interpolate import RegularGridInterpolator # type: ignore
+from scipy.interpolate import RegularGridInterpolator
+from scipy.interpolate import RegularGridInterpolator
 
 import matplotlib
 import matplotlib.pyplot as plt
 import matplotlib.ticker as ticker
 import matplotlib.patheffects as patheffects
-from matplotlib.ticker import MultipleLocator, FuncFormatter, FormatStrFormatter # type: ignore
+from matplotlib.ticker import MultipleLocator, FuncFormatter, FormatStrFormatter
 import matplotlib.ticker as mtick
 from matplotlib.colors import ListedColormap
-import matplotlib.image as mpimg
 import matplotlib.image as mpimg
 from matplotlib.offsetbox import OffsetImage, AnnotationBbox
 matplotlib.use('agg')
 
 import warnings
 from scipy.optimize import OptimizeWarning, curve_fit
-warnings.filterwarnings("ignore", category=OptimizeWarning) # type: ignore
-
-
+warnings.filterwarnings("ignore", category=OptimizeWarning)
 
 def texto(texto):
     return texto.upper()
