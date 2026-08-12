@@ -732,4 +732,3 @@ def Graficos_Densidad_AC_custom( VAC1,RHO1, km , i_ac_inferior=20):
     plt.savefig('images/AC_Corrosion.png', dpi=300, bbox_inches='tight')
     # fig.savefig(f'Plots/Densidad_AC_{km}.png', dpi=300)
     return 'images/AC_Corrosion.png'
-
