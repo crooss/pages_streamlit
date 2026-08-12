@@ -1,10 +1,29 @@
+import numpy as np
+import math
+
+from scipy.interpolate import RegularGridInterpolator # type: ignore
+from scipy.interpolate import RegularGridInterpolator # type: ignore
+
+import matplotlib
+import matplotlib.pyplot as plt
+import matplotlib.ticker as ticker
+import matplotlib.patheffects as patheffects
+from matplotlib.ticker import MultipleLocator, FuncFormatter # type: ignore
+import matplotlib.ticker as mtick
+from matplotlib.colors import ListedColormap
+import matplotlib.image as mpimg
+import matplotlib.image as mpimg
+from matplotlib.offsetbox import OffsetImage, AnnotationBbox
+matplotlib.use('agg')
+
+import warnings
+from scipy.optimize import OptimizeWarning, curve_fit
+warnings.filterwarnings("ignore", category=OptimizeWarning) # type: ignore
+
+
+
 def texto(texto):
     return texto.upper()
-
-import math
-import matplotlib.ticker as mtick
-import matplotlib.image as mpimg
-
 
 def radianes_a_horas(radianes):
         radianes = radianes % (2 * math.pi) # Normalizar los radianes para estar en el rango de 0 a 2π
@@ -15,13 +34,7 @@ def radianes_a_horas(radianes):
         segundos = (minutos - minutos_completos) * 60 # Convertir el resto a segundos
         segundos_completos = int(round(segundos,0))
         return horas_completas, minutos_completos, segundos_completos
-
-import numpy as np
-import matplotlib
-import matplotlib.pyplot as plt
-from matplotlib.offsetbox import OffsetImage, AnnotationBbox
-from matplotlib.colors import ListedColormap
-matplotlib.use('agg')
+# print(radianes_a_horas(2.103121749))
 
 def graficar(angulo_inicio,angulo_final,nombre,PM):
         nombre=nombre.upper()
@@ -266,26 +279,26 @@ def tuberias_distribucion(valor_conductancia):
 
     # Colorear áreas de calidad
     transparencia=1
-    ax.fill_between(x, 0, y, where=(y >= 0) & (y <= 500), facecolor='green', alpha=transparencia, label='Excelente', zorder=1)
-    ax.fill_betweenx(y, 0, x, where=(y >= 0) & (y <= 500), facecolor='green', alpha=transparencia, zorder=1)
+    ax.fill_between(x, 0, y, where=(y >= 0) & (y <= 500), facecolor='green', alpha=transparencia, label='Excelente', zorder=1) # type: ignore
+    ax.fill_betweenx(y, 0, x, where=(y >= 0) & (y <= 500), facecolor='green', alpha=transparencia, zorder=1) # type: ignore
 
-    ax.fill_between(x, 0, y, where=(y >= 500-.1) & (y <= 1000), facecolor='limegreen', alpha=transparencia, label='Buena', zorder=0)    
-    ax.fill_betweenx(y, 0, x, where=(y >= 500-.1) & (y <= 1000), facecolor='limegreen', alpha=transparencia, zorder=0)    
+    ax.fill_between(x, 0, y, where=(y >= 500-.1) & (y <= 1000), facecolor='limegreen', alpha=transparencia, label='Buena', zorder=0)     # type: ignore
+    ax.fill_betweenx(y, 0, x, where=(y >= 500-.1) & (y <= 1000), facecolor='limegreen', alpha=transparencia, zorder=0)     # type: ignore
     
-    ax.fill_between(x, 0, y, where=(y >= 1000) & (y <= 5000), facecolor='yellow', alpha=transparencia, label='Regular')    
-    ax.fill_betweenx(y, 0, x, where=(y >= 1000) & (y <= 5000), facecolor='yellow', alpha=transparencia)    
+    ax.fill_between(x, 0, y, where=(y >= 1000) & (y <= 5000), facecolor='yellow', alpha=transparencia, label='Regular')     # type: ignore
+    ax.fill_betweenx(y, 0, x, where=(y >= 1000) & (y <= 5000), facecolor='yellow', alpha=transparencia)     # type: ignore
 
-    ax.fill_between(x, 0, y, where=(y >= 5000) & (y <= 40000), facecolor='red', alpha=transparencia, label='Pobre')
-    ax.fill_betweenx(y, 0, x, where=(y >= 5000) & (y <= 40000), facecolor='red', alpha=transparencia)
+    ax.fill_between(x, 0, y, where=(y >= 5000) & (y <= 40000), facecolor='red', alpha=transparencia, label='Pobre') # type: ignore
+    ax.fill_betweenx(y, 0, x, where=(y >= 5000) & (y <= 40000), facecolor='red', alpha=transparencia) # type: ignore
     
-    ax.fill_between(x, 0, y, where=(y >= 40000), facecolor='gray', alpha=transparencia, label='Bare')
-    ax.fill_betweenx(y, 0, x, where=(y >= 40000) & (y <= 1000000), facecolor='gray', alpha=transparencia)
+    ax.fill_between(x, 0, y, where=(y >= 40000), facecolor='gray', alpha=transparencia, label='Bare') # type: ignore
+    ax.fill_betweenx(y, 0, x, where=(y >= 40000) & (y <= 1000000), facecolor='gray', alpha=transparencia) # type: ignore
 
     x_value = x[np.where(y >= valor_conductancia)[0][0]]
     ax.scatter(x_value, valor_conductancia, color='black', zorder=5)  # Coordenadas del punto
     # Anotación de un punto específico con recuadro de fondo blanco
     ax.annotate(f'{valor_conductancia:,.0f} μS/m²\n{x_value:.3f}% bare\n{100-x_value:.3f}% coated', 
-            xy=(x_value, valor_conductancia), 
+            xy=(x_value, valor_conductancia),  # type: ignore
             # arrowprops=dict(facecolor='black', arrowstyle='->'),
             xytext=(7, 70),
             bbox=dict(facecolor='white', edgecolor='black', boxstyle='round,pad=0.5'),
@@ -306,12 +319,12 @@ def tuberias_distribucion(valor_conductancia):
         else:
             return f'{num/10:.3f}%'
         
-    ax.xaxis.set_major_formatter(plt.FuncFormatter(lambda x, ti: ty(x)))
-    ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, loc: "{:,}".format(int(x))))
+    ax.xaxis.set_major_formatter(plt.FuncFormatter(lambda x, ti: ty(x))) # type: ignore
+    ax.yaxis.set_major_formatter(plt.FuncFormatter(lambda x, loc: "{:,}".format(int(x)))) # type: ignore
         # Agregar etiquetas adicionales en el eje y
     additional_yticks = [ 40000, 5000,500]
     ax.set_yticks(list(ax.get_yticks()) + additional_yticks)
-    ax.get_yaxis().set_major_formatter(plt.FuncFormatter(lambda x, loc: "{:,}".format(int(x))))
+    ax.get_yaxis().set_major_formatter(plt.FuncFormatter(lambda x, loc: "{:,}".format(int(x)))) # type: ignore
     ax.grid(True, which='both', linestyle='-', linewidth=0.5, color='black')
     ax.legend(loc='best')
     ax.set_ylim(1,1000000)
@@ -377,9 +390,7 @@ def tuberias_TM0102(valor):
     return 'images/barras_TM0102.png'
    
 #%%
-from scipy.interpolate import RegularGridInterpolator # type: ignore
-from matplotlib.ticker import MultipleLocator, FuncFormatter # type: ignore
-import numpy as np # type: ignore
+
 def mpy_UGLIH(rho,ph):
     if rho>0 and ph>0:
         # Definición de la tabla de valores rho y ph
@@ -420,24 +431,7 @@ def mpy_UGLIH(rho,ph):
         valor_interpolado = interpolador((rho, ph))
         return round(valor_interpolado+0,3)
 
-
-# print(radianes_a_horas(2.103121749))
-
-
 #%%
-import matplotlib.pyplot as plt
-import matplotlib.patheffects as patheffects
-import numpy as np
-from scipy.interpolate import RegularGridInterpolator # type: ignore
-from matplotlib.ticker import MultipleLocator, FuncFormatter # type: ignore
-import matplotlib.ticker as ticker
-from matplotlib.ticker import (MultipleLocator, FormatStrFormatter)
-import math
-from scipy.optimize import curve_fit
-import warnings
-from scipy.optimize import OptimizeWarning
-warnings.filterwarnings("ignore", category=OptimizeWarning)
-
 def Modelado_mitigación_UHLIG(rho, ph, pot_off):
     ph if ph != 7 else ph+.00001  # Asegurar que el pH no sea menor a 3
     if ph>14.0:
