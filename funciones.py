@@ -701,11 +701,14 @@ def Graficos_Densidad_AC_custom( VAC1,RHO1, km , i_ac_inferior=20):
         ax.fill_between(T_cm2, y1=alto_barra, where=T_cm2>=xs20_30, color='limegreen', interpolate=True, zorder=0, edgecolor='black')
         ax.fill_between(T_cm2, y1=alto_barra, where= T_cm2<=1, color='limegreen', interpolate=True, zorder=1, edgecolor='black') # type: ignore
 
-    ax.text(1,alto_barra+.02,f'1.0 $cm^2$',ha='center', va='bottom', color='blue',size=6, zorder=3, rotation=90)
+    ax.text(1,alto_barra+.02,f'1.0 $cm^2$',ha='center', va='bottom', color='blue',size=6, zorder=7, rotation=90,
+                bbox=dict(facecolor='white', alpha=1, pad=0.1, edgecolor=None, boxstyle='round,pad=0.2'))
     if xs20_30>0.1 and xs20_30<100:
-        ax.text(xs20_30,alto_barra+.02,f'{round(xs20_30,2)} $cm^2$',ha='center', va='bottom', color='blue',size=6, zorder=3, rotation=90)
+        ax.text(xs20_30,alto_barra+.02,f'{round(xs20_30,2)} $cm^2$',ha='center', va='bottom', color='blue',size=6, zorder=5, rotation=90,
+                bbox=dict(facecolor='white', alpha=1, pad=0.1, edgecolor=None, boxstyle='round,pad=0.2'))
     if xs>0.1 and xs<100:
-        ax.text(xs     ,alto_barra+.02,f'{round(xs,2)} $cm^2$'     ,ha='center', va='bottom', color='blue',size=6, zorder=3, rotation=90)
+        ax.text(xs     ,alto_barra+.02,f'{round(xs,2)} $cm^2$'     ,ha='center', va='bottom', color='blue',size=6, zorder=5, rotation=90,
+                bbox=dict(facecolor='white', alpha=1, pad=0.1, edgecolor=None, boxstyle='round,pad=0.2'))
 
     ax.set_yscale('log')
     ax.set_xscale('log')
