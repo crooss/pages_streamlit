@@ -28,24 +28,13 @@ def AC_Corrosion():
         RESISTIVIDAD=st.number_input("Resistividad [Ω-cm]:", format="%.2f")
         if RESISTIVIDAD:
             st.markdown(f"\nResistividad: {RESISTIVIDAD:,.0f} Ω-cm")
-        # Voltaje_AC=st.number_input("Voltaje AC [V]:", format="%.4f")
-        # if Voltaje_AC and km:
-        #     st.markdown(f"\nVoltaje AC: {Voltaje_AC:,.0f} V")
+
     c1, c2 = st.columns([2, 1])
     
     st.divider()
     if Voltaje_AC and RESISTIVIDAD:
         ruta=Graficos_Densidad_AC_custom(Voltaje_AC, RESISTIVIDAD, km , 20) # type: ignore
         st.image(ruta, caption='AC Corrosion', use_container_width=True) # type: ignore
-        # Display the saved figure in Streamlit
-        # st.pyplot(fig)
-        # st.image('images/AC_Corrosion.png', caption='AC Corrosion', use_container_width=True)
-    # st.image('images/AC_Corrosion.png', caption='AC Corrosion', use_container_width=True)
-    # with c1:
-    #     if (RESISTIVIDAD_1)>0 and (RESISTIVIDAD_2)>0:
-    #         resistividad_avg=round(((RESISTIVIDAD_1)+(RESISTIVIDAD_2))/2,0)
-    #         st.markdown(f"\nResistividad promedio: {resistividad_avg:,.2f} Ω-cm",)
-
 
 if __name__ == "__main__":
     AC_Corrosion()
