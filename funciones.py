@@ -499,14 +499,14 @@ def Modelado_mitigación_UHLIG(rho, ph, pot_off):
     # mpy_predict=x[np.where(y>=pot_off)[0][0]]
     mpy_predict=Mitigated
 
-    etiqueta=f'y = {A:.3f}  ln(x - 0.1) - {-1*B:.3f}' if B<0 else f'y = {A:.3f}  ln(x - 0.1) + {B:.3f}'
+    etiqueta=f'y = {A:.3f}  ln(x - {asyntotic:.1f}) - {-1*B:.3f}' if B<0 else f'y = {A:.3f}  ln(x - {asyntotic:.1f}) + {B:.3f}'
     curva_plot=ax[1].plot(x, y, label=etiqueta)
     ax[1].invert_yaxis()
     puntos_ajuste=ax[1].scatter(x_data, y_data, color='maroon', zorder=5, s=12,label="Puntos de ajuste")
     punto_predict=ax[1].scatter(mpy_predict, pot_off, color='blue', zorder=5, label=f"Predicción mpy = {mpy_predict:.2f} mpy \n $\\rho$ = {rho:,} $\u03A9$ cm \n pH = {ph:.1f} \n Potencial off= {pot_off:.3f} V")
     ax[1].vlines(mpy_predict, -.4, pot_off, color='blue', linestyle='--', lw=1, label=f"mpy predicción {mpy_predict:.2f} mpy")
     ax[1].hlines(pot_off, 0, mpy_predict, color='blue', linestyle='--', lw=1)
-    asintota=ax[1].axvline(0.1, color='gray', linestyle='--', lw=1, label="Asíntota en $x = 0.1$ mpy")
+    asintota=ax[1].axvline(asyntotic, color='gray', linestyle='--', lw=1, label="Asíntota en $x = {asyntotic:.1f}$ mpy")
     Linea_pot_nat=ax[1].axhline(-.500, color='maroon', linestyle='--', lw=1,label='Pot Natural')
     Linea_criterio=ax[1].axhline(-.850, color='red', linestyle='--', lw=1,label='Criterio -0.850 V')
     ax[1].set_xlabel("mpy")
