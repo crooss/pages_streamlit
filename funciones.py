@@ -509,7 +509,7 @@ def Modelado_mitigación_UHLIG(rho, ph, pot_off):
     asintota=ax[1].axvline(asyntotic, color='gray', linestyle='--', lw=1, label="Asíntota en $x = {asyntotic:.1f}$ mpy")
     Linea_pot_nat=ax[1].axhline(-.500, color='maroon', linestyle='--', lw=1,label='Pot Natural')
     Linea_criterio=ax[1].axhline(-.850, color='red', linestyle='--', lw=1,label='Criterio -0.850 V')
-    ax[1].set_xlabel("mpy")
+    ax[1].set_xlabel("Corrosion rate (mpy)")
     ax[1].set_ylabel("Potencial (V)")
     ax[1].set_yticks(np.arange(-2, np.max(y)+0.1, 0.1))
     # ax[1].set_xticks(np.arange(0, math.ceil(mpy_uhlig*1.1),1), rotation=90)
@@ -522,7 +522,7 @@ def Modelado_mitigación_UHLIG(rho, ph, pot_off):
     ax[1].yaxis.set_minor_locator(ticker.MultipleLocator(.05))
     # .set_major_formatter(FormatStrFormatter('%.3f'))
 
-    ax[1].set_title(f"Curva de predicción con $\\rho$={rho:,} $\u03A9$ cm y pH={ph:.1f} a un pot_off:{pot_off:.3f} V", fontsize=8)
+    ax[1].set_title(f"Curva de predicción con $\\rho$={rho:,} $\u03A9$-cm y pH={ph:.1f} a un pot_off:{pot_off:.3f} V", fontsize=8)
     leyenda1=ax[1].legend(handles=[ puntos_ajuste, Linea_criterio,Linea_pot_nat, asintota], loc='upper right',fontsize=6)
     ax[1].add_artist(leyenda1)
 
