@@ -430,10 +430,27 @@ def mpy_UGLIH(rho,ph):
 
 #%%
 def Modelado_mitigación_UHLIG(rho, ph, pot_off):
+    def Mitigate(UnMitigated,mpy_en_850,asyntotic, pot_off):
+        mpy_en_850=mpy_en_850 if UnMitigated>1 else UnMitigated/2
+        tabla_log={"E":[-0.500, -.850], "CR":[math.log(UnMitigated-asyntotic), math.log(mpy_en_850-asyntotic)]}
+        A= (tabla_log["E"][1]-tabla_log["E"][0])/(tabla_log["CR"][1]-tabla_log["CR"][0])
+        B=-0.850-A*math.log(mpy_en_850-asyntotic)
+        Mitigated = asyntotic + math.exp((pot_off - B) / A)
+        print(f'{A=:4.4f} {B=:4.4f}\n  UnMitigated= {UnMitigated:.2f} mpy \n  Mitigated=   {Mitigated:.2f} mpy @ {pot_off=:.3f} V')
+        print(f"Pot = A Ln(CR-{asyntotic}) + B")
+        print(f"Pot={A:.4f} Ln(CR-{asyntotic}){'+' if B>0 else ''}{B:.4f}")  
+        print(f"mpy_en_850 = {mpy_en_850:.2f}") 
+        return A,B, Mitigated
+    
+    mpy_en_850=1
+    asyntotic=0.1
+    A,B, Mitigated=Mitigate(mpy_UGLIH(rho, ph),mpy_en_850,asyntotic, pot_off)
+    
     ph if ph != 7 else ph+.00001  # Asegurar que el pH no sea menor a 3
     if ph>14.0:
         print("El pH no puede ser mayor a 14")
         return 
+    
     # mpy_uhlig = mpy_UGLIH(rho, ph)  # Cálculo de mpy según UHLIG
     mpy_uhlig = mpy_UGLIH(rho, ph)  if mpy_UGLIH(rho, ph)>1.5 else 1.5 # type: ignore # limitar a 1.5, evitar error
     x=np.linspace(10,50000,100)
@@ -474,9 +491,12 @@ def Modelado_mitigación_UHLIG(rho, ph, pot_off):
     # Ajuste de parámetros
     params, _ = curve_fit(log_asymptotic, x_data, y_data)
     A, B = params
-    x = np.linspace(.1+.01, mpy_uhlig, 500)  # type: ignore # evitar x=0.1 por la singularidad
-    y = log_asymptotic(x, A, B)
-    mpy_predict=x[np.where(y>=pot_off)[0][0]]
+    
+    
+    x = np.linspace(asyntotic+.01, mpy_uhlig, 500)  # type: ignore # evitar x=0.1 por la singularidad
+    y = A * np.log( x - asyntotic) + B
+    # mpy_predict=x[np.where(y>=pot_off)[0][0]]
+    mpy_predict=Mitigated
 
     etiqueta=f'y = {A:.3f}  ln(x - 0.1) - {-1*B:.3f}' if B<0 else f'y = {A:.3f}  ln(x - 0.1) + {B:.3f}'
     curva_plot=ax[1].plot(x, y, label=etiqueta)
