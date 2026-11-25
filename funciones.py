@@ -511,7 +511,7 @@ def Modelado_mitigación_UHLIG(rho, ph, pot_off):
     Linea_criterio=ax[1].axhline(-.850, color='red', linestyle='--', lw=1,label='Criterio -0.850 V')
     ax[1].set_xlabel("Corrosion rate (mpy)")
     ax[1].set_ylabel("Potencial (V)")
-    ax[1].set_yticks(np.arange(-2, np.max(y)+0.1, 0.1))
+    ax[1].set_yticks(np.arange(-2, np.max(y)+0.2, 0.1))
     # ax[1].set_xticks(np.arange(0, math.ceil(mpy_uhlig*1.1),1), rotation=90)
     # ax[1].xaxis.set_major_locator(ticker.MaxNLocator(20,integer=True))
     ax[1].xaxis.set_major_locator(ticker.MaxNLocator(10))
