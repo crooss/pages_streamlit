@@ -491,7 +491,7 @@ def Modelado_mitigación_UHLIG(rho, ph, pot_off):
         return A * np.log(x - 0.1) + B
     # Ajuste de parámetros
     params, _ = curve_fit(log_asymptotic, x_data, y_data)
-    A, B = params
+    # A, B = params
     
     
     x = np.linspace(asyntotic+.01, mpy_uhlig, 500)  # type: ignore # evitar x=0.1 por la singularidad
