@@ -13,7 +13,7 @@ import matplotlib.ticker as mtick
 from matplotlib.colors import ListedColormap
 import matplotlib.image as mpimg
 from matplotlib.offsetbox import OffsetImage, AnnotationBbox
-import math
+
 matplotlib.use('agg')
 
 import warnings
@@ -433,10 +433,10 @@ def mpy_UGLIH(rho,ph):
 def Modelado_mitigación_UHLIG(rho, ph, pot_off):
     def Mitigate(UnMitigated,mpy_en_850,asyntotic, pot_off):
         mpy_en_850=mpy_en_850 if UnMitigated>1 else UnMitigated/2
-        tabla_log={"E":[-0.500, -.850], "CR":[math.log(UnMitigated-asyntotic), math.log(mpy_en_850-asyntotic)]}
+        tabla_log={"E":[-0.500, -.850], "CR":[np.log(UnMitigated-asyntotic), np.log(mpy_en_850-asyntotic)]}
         A= (tabla_log["E"][1]-tabla_log["E"][0])/(tabla_log["CR"][1]-tabla_log["CR"][0])
-        B=-0.850-A*math.log(mpy_en_850-asyntotic)
-        Mitigated = asyntotic + math.exp((pot_off - B) / A)
+        B=-0.850-A*np.log(mpy_en_850-asyntotic)
+        Mitigated = asyntotic + np.exp((pot_off - B) / A)
         print(f'{A=:4.4f} {B=:4.4f}\n  UnMitigated= {UnMitigated:.2f} mpy \n  Mitigated=   {Mitigated:.2f} mpy @ {pot_off=:.3f} V')
         print(f"Pot = A Ln(CR-{asyntotic}) + B")
         print(f"Pot={A:.4f} Ln(CR-{asyntotic}){'+' if B>0 else ''}{B:.4f}")  
