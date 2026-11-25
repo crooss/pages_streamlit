@@ -506,7 +506,7 @@ def Modelado_mitigación_UHLIG(rho, ph, pot_off):
     punto_predict=ax[1].scatter(mpy_predict, pot_off, color='blue', zorder=5, label=f"Predicción mpy = {mpy_predict:.2f} mpy \n $\\rho$ = {rho:,} $\u03A9$ cm \n pH = {ph:.1f} \n Potencial off= {pot_off:.3f} V")
     ax[1].vlines(mpy_predict, -.4, pot_off, color='blue', linestyle='--', lw=1, label=f"mpy predicción {mpy_predict:.2f} mpy")
     ax[1].hlines(pot_off, 0, mpy_predict, color='blue', linestyle='--', lw=1)
-    asintota=ax[1].axvline(asyntotic, color='gray', linestyle='--', lw=1, label="Asíntota en $x = {asyntotic:.1f}$ mpy")
+    asintota=ax[1].axvline(asyntotic, color='gray', linestyle='--', lw=1, label=f"Asíntota en $x = {asyntotic:.1f}$ mpy")
     Linea_pot_nat=ax[1].axhline(-.500, color='maroon', linestyle='--', lw=1,label='Pot Natural')
     Linea_criterio=ax[1].axhline(-.850, color='red', linestyle='--', lw=1,label='Criterio -0.850 V')
     ax[1].set_xlabel("Corrosion rate (mpy)")
