@@ -432,7 +432,7 @@ def mpy_UGLIH(rho,ph):
 
 #%%
 def Modelado_mitigación_UHLIG(rho, ph, pot_off):
-    
+    pot_off=-0.500 if pot_off<-0.5 else pot_off
     ph if ph != 7 else ph+.00001  # Asegurar que el pH no sea menor a 3
     if ph>14.0:
         print("El pH no puede ser mayor a 14")
