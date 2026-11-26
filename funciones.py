@@ -427,33 +427,41 @@ def mpy_UGLIH(rho,ph):
 
         # Interpolación
         valor_interpolado = interpolador((rho, ph))
+        
         return round(valor_interpolado+0,3)
 
 #%%
 def Modelado_mitigación_UHLIG(rho, ph, pot_off):
-    def Mitigate(UnMitigated,mpy_en_850,asyntotic, pot_off):
-        mpy_en_850=mpy_en_850 if UnMitigated>1 else UnMitigated/2
-        tabla_log={"E":[-0.500, -.850], "CR":[np.log(UnMitigated-asyntotic), np.log(mpy_en_850-asyntotic)]}
-        A= (tabla_log["E"][1]-tabla_log["E"][0])/(tabla_log["CR"][1]-tabla_log["CR"][0])
-        B=-0.850-A*np.log(mpy_en_850-asyntotic)
-        Mitigated = asyntotic + np.exp((pot_off - B) / A)
-        print(f'{A=:4.4f} {B=:4.4f}\n  UnMitigated= {UnMitigated:.2f} mpy \n  Mitigated=   {Mitigated:.2f} mpy @ {pot_off=:.3f} V')
-        print(f"Pot = A Ln(CR-{asyntotic}) + B")
-        print(f"Pot={A:.4f} Ln(CR-{asyntotic}){'+' if B>0 else ''}{B:.4f}")  
-        print(f"mpy_en_850 = {mpy_en_850:.2f}") 
-        return A,B, Mitigated
-    
-    mpy_en_850=1
-    asyntotic=0.1
-    A,B, Mitigated=Mitigate(mpy_UGLIH(rho, ph),mpy_en_850,asyntotic, pot_off)
     
     ph if ph != 7 else ph+.00001  # Asegurar que el pH no sea menor a 3
     if ph>14.0:
         print("El pH no puede ser mayor a 14")
         return 
     
-    # mpy_uhlig = mpy_UGLIH(rho, ph)  # Cálculo de mpy según UHLIG
-    mpy_uhlig = mpy_UGLIH(rho, ph)  if mpy_UGLIH(rho, ph)>1.5 else 1.5 # type: ignore # limitar a 1.5, evitar error
+    mpy_uhlig = mpy_UGLIH(rho, ph)  # Cálculo de mpy según UHLIG
+    # mpy_uhlig = mpy_UGLIH(rho, ph)  if mpy_UGLIH(rho, ph)>1.5 else 1.5 # type: ignore # limitar a 1.5, evitar error
+    
+    def recalc_UnMitigated(UnMitigated): # type: ignore
+        if 0.02<UnMitigated<=0.5:
+            UnMitigated=0.7
+            mpy_en_850=0.3
+            asyntotic=0.01
+        elif 0.5<UnMitigated<=0.8:
+            UnMitigated=1
+            mpy_en_850=0.4
+            asyntotic=0.1
+        elif 0.8<UnMitigated<=1.4:
+            UnMitigated=1.5
+            mpy_en_850=0.5
+            asyntotic=0.1
+        else:
+            UnMitigated=UnMitigated
+            mpy_en_850=1
+            asyntotic=0.1
+        return UnMitigated,mpy_en_850,asyntotic
+
+    mpy_uhlig,mpy_en_850,asyntotic=recalc_UnMitigated(mpy_uhlig)
+    
     x=np.linspace(10,50000,100)
     y=np.linspace(3,14)
     x,y=np.meshgrid(x,y)
@@ -484,8 +492,27 @@ def Modelado_mitigación_UHLIG(rho, ph, pot_off):
     ax[0].grid(True, color='black')
 
 # Ajuste de curva logarítmica para mpy Unmitigated
-    x_data = np.array([mpy_uhlig, 1])
-    y_data = np.array([-0.5, -0.85])
+    def Mitigate(UnMitigated,mpy_en_850,asyntotic, pot_off):
+        # mpy_en_850=mpy_en_850 if UnMitigated>1 else 2*UnMitigated/3
+        tabla_log={"E":[-0.500, -.850], "CR":[np.log(UnMitigated-asyntotic), np.log(mpy_en_850-asyntotic)]}
+        A= (tabla_log["E"][1]-tabla_log["E"][0])/(tabla_log["CR"][1]-tabla_log["CR"][0])
+        B=-0.850-A*np.log(mpy_en_850-asyntotic)
+        Mitigated = asyntotic + np.exp((pot_off - B) / A)
+        print()
+        print(f'{A=:4.4f} {B=:4.4f}\n  UnMitigated= {UnMitigated:.2f} mpy \n  Mitigated=   {Mitigated:.2f} mpy @ {pot_off=:.3f} V')
+        print(f"Pot = A Ln(CR-{asyntotic}) + B")
+        print(f"Pot={A:.4f} Ln(CR-{asyntotic}){'+' if B>0 else ''}{B:.4f}")  
+        print(f"mpy_en_850 = {mpy_en_850:.2f}") 
+        return A,B, Mitigated, mpy_en_850
+        
+    # mpy_uhlig,mpy_en_850,asyntotic=recalc_UnMitigated(mpy_UGLIH(rho, ph))
+    print(f"mpy_uhlig={mpy_uhlig}, mpy_en_850={mpy_en_850}, asyntotic={asyntotic}")
+
+    A,B, Mitigated, mpy_en_850=Mitigate(mpy_uhlig,mpy_en_850,asyntotic, pot_off)
+    # print(f"mpy_uhlig={mpy_uhlig}, mpy_en_850={mpy_en_850}, asyntotic={asyntotic}")
+
+    x_data = np.array([mpy_uhlig, mpy_en_850])
+    y_data = np.array([-0.500, -0.85])
     # Función con asíntota en x=0.1
     def log_asymptotic(x, A, B):
         return A * np.log(x - 0.1) + B
@@ -494,24 +521,33 @@ def Modelado_mitigación_UHLIG(rho, ph, pot_off):
     # A, B = params
     
     
-    x = np.linspace(asyntotic+.01, mpy_uhlig, 500)  # type: ignore # evitar x=0.1 por la singularidad
+    x = np.linspace(asyntotic+.01, mpy_uhlig, 200)  # type: ignore # evitar x=0.1 por la singularidad
     y = A * np.log( x - asyntotic) + B
     # mpy_predict=x[np.where(y>=pot_off)[0][0]]
     mpy_predict=Mitigated
 
-    etiqueta=f'y = {A:.3f}  ln(x - {asyntotic:.1f}) - {-1*B:.3f}' if B<0 else f'y = {A:.3f}  ln(x - {asyntotic:.1f}) + {B:.3f}'
+    etiqueta=f'y = {A:.3f}  ln(x - {asyntotic:.2f}) - {-1*B:.3f}' if B<0 else f'y = {A:.3f}  ln(x - {asyntotic:.2f}) + {B:.3f}'
     curva_plot=ax[1].plot(x, y, label=etiqueta)
+    
+    XN=np.linspace(mpy_en_850,mpy_uhlig,100) # type: ignore
+    YN=A * np.log(XN - asyntotic) + B
+    ax[1].plot(XN,YN,color='red', lw=3, zorder=4)
+
+    XN=np.linspace(asyntotic,mpy_en_850,100)
+    YN=A * np.log(XN - asyntotic) + B
+    ax[1].plot(XN,YN,color='limegreen', lw=3, zorder=4)
+        
     ax[1].invert_yaxis()
     puntos_ajuste=ax[1].scatter(x_data, y_data, color='maroon', zorder=5, s=12,label="Puntos de ajuste")
     punto_predict=ax[1].scatter(mpy_predict, pot_off, color='blue', zorder=5, label=f"Predicción mpy = {mpy_predict:.2f} mpy \n $\\rho$ = {rho:,} $\u03A9$ cm \n pH = {ph:.1f} \n Potencial off= {pot_off:.3f} V")
     ax[1].vlines(mpy_predict, -.4, pot_off, color='blue', linestyle='--', lw=1, label=f"mpy predicción {mpy_predict:.2f} mpy")
     ax[1].hlines(pot_off, 0, mpy_predict, color='blue', linestyle='--', lw=1)
-    asintota=ax[1].axvline(asyntotic, color='gray', linestyle='--', lw=1, label=f"Asíntota en $x = {asyntotic:.1f}$ mpy")
+    asintota=ax[1].axvline(asyntotic, color='gray', linestyle='--', lw=1, label=f"Asíntota en $x = {asyntotic:.2f}$ mpy")
     Linea_pot_nat=ax[1].axhline(-.500, color='maroon', linestyle='--', lw=1,label='Pot Natural')
     Linea_criterio=ax[1].axhline(-.850, color='red', linestyle='--', lw=1,label='Criterio -0.850 V')
     ax[1].set_xlabel("Corrosion rate (mpy)")
     ax[1].set_ylabel("Potencial (V)")
-    ax[1].set_yticks(np.arange(-2, np.max(y)+0.2, 0.1))
+    ax[1].set_yticks(np.arange(-10, np.max(y)+0.2, 0.1))
     # ax[1].set_xticks(np.arange(0, math.ceil(mpy_uhlig*1.1),1), rotation=90)
     # ax[1].xaxis.set_major_locator(ticker.MaxNLocator(20,integer=True))
     ax[1].xaxis.set_major_locator(ticker.MaxNLocator(10))
@@ -523,6 +559,7 @@ def Modelado_mitigación_UHLIG(rho, ph, pot_off):
     # .set_major_formatter(FormatStrFormatter('%.3f'))
 
     ax[1].set_title(f"Curva de predicción con $\\rho$={rho:,} $\u03A9$-cm y pH={ph:.1f} a un pot_off:{pot_off:.3f} V", fontsize=8)
+    
     leyenda1=ax[1].legend(handles=[ puntos_ajuste, Linea_criterio,Linea_pot_nat, asintota], loc='upper right',fontsize=6)
     ax[1].add_artist(leyenda1)
 
@@ -535,6 +572,7 @@ def Modelado_mitigación_UHLIG(rho, ph, pot_off):
 
     ax[1].set_xlim(0,mpy_uhlig*1.1) # type: ignore
     ax[1].set_ylim(-.4,-1.6)
+    # ax[1].set_xlim(0,10) # type: ignore
     ax[1].grid(True)
     # fig.tight_layout()
     return fig
